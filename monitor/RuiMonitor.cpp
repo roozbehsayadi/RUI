@@ -33,3 +33,14 @@ RuiMonitor::~RuiMonitor() {
 void RuiMonitor::setCaption(const std::string &caption) {
   SDL_SetWindowTitle(window, caption.c_str());
 }
+
+void RuiMonitor::clear() { SDL_RenderClear(renderer); }
+
+void RuiMonitor::update() { SDL_RenderPresent(renderer); }
+
+void RuiMonitor::drawRectangle(const Rect &rect, const Color &color) {
+  SDL_SetRenderDrawColor(renderer, color.getRed(), color.getGreen(),
+                         color.getBlue(), color.getAlpha());
+  SDL_FRect temp{float(rect.x), float(rect.y), float(rect.w), float(rect.h)};
+  SDL_RenderDrawRectF(renderer, &temp);
+}

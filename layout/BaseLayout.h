@@ -4,10 +4,10 @@
 #include <vector>
 
 enum LayoutType {
-  UNKNOWN,
-  ROW,
-  COLUMN,
-  LEAF,
+  LAYOUT_UNKNOWN,
+  LAYOUT_ROW,
+  LAYOUT_COLUMN,
+  LAYOUT_LEAF,
 };
 
 class BaseLayout {
@@ -17,7 +17,7 @@ public:
              double xMargin = 0.0, double yMargin = 0.0)
       : width(width), height(height), xPad(xPad), yPad(yPad), xMargin(xMargin),
         yMargin(yMargin) {
-    type = LayoutType::UNKNOWN;
+    type = LAYOUT_UNKNOWN;
   }
 
   void addChild(const BaseLayout &child) { grid.push_back(child); };

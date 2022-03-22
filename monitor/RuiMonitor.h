@@ -6,6 +6,9 @@
 
 #include "SDL2/SDL.h"
 
+#include "utils/Rect.h"
+#include "utils/Color.h"
+
 class RuiMonitor {
 
 public:
@@ -17,6 +20,11 @@ public:
   ~RuiMonitor();
 
   void setCaption(const std::string &);
+
+  void clear();
+  void update();
+
+  void drawRectangle(const Rect &, const Color &);
 
 private:
   SDL_Window *window;

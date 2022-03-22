@@ -12,8 +12,11 @@ public:
   LeafLayout(double width, double height, double xPad = 0.0, double yPad = 0.0,
              double xMargin = 0.0, double yMargin = 0.0)
       : BaseLayout(width, height, xPad, yPad, xMargin, yMargin) {
-    type = LayoutType::LEAF;
+    type = LAYOUT_LEAF;
   }
+
+private:
+  BaseWidget *widget;
 };
 
 #endif // __LEAF_LAYOUT_H
