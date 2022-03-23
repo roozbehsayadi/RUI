@@ -34,6 +34,12 @@ void RuiMonitor::setCaption(const std::string &caption) {
   SDL_SetWindowTitle(window, caption.c_str());
 }
 
+std::pair<int, int> RuiMonitor::getMonitorSize() const {
+  int w, h;
+  SDL_GetWindowSize(window, &w, &h);
+  return std::make_pair(w, h);
+}
+
 void RuiMonitor::clear() { SDL_RenderClear(renderer); }
 
 void RuiMonitor::update() { SDL_RenderPresent(renderer); }

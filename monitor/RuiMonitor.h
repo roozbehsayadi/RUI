@@ -21,6 +21,8 @@ public:
 
   void setCaption(const std::string &);
 
+  std::pair<int, int> getMonitorSize() const;
+
   void clear();
   void update();
 
