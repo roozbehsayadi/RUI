@@ -2,6 +2,8 @@
 #define __COLUMN_LAYOUT_H
 
 #include "BaseLayout.h"
+#include "monitor/RuiMonitor.h"
+#include "utils/Rect.h"
 
 class ColumnLayout : public BaseLayout {
 public:
@@ -11,6 +13,8 @@ public:
       : BaseLayout(width, height, xPad, yPad, xMargin, yMargin) {
     type = LAYOUT_COLUMN;
   }
+
+  virtual void render(RuiMonitor &, const Rect &) const override;
 };
 
 #endif // __COLUMN_LAYOUT_H

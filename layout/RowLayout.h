@@ -2,6 +2,8 @@
 #define __ROW_LAYOUT_H
 
 #include "BaseLayout.h"
+#include "monitor/RuiMonitor.h"
+#include "utils/Rect.h"
 
 class RowLayout : public BaseLayout {
 public:
@@ -11,6 +13,8 @@ public:
       : BaseLayout(width, height, xPad, yPad, xMargin, yMargin) {
     type = LAYOUT_ROW;
   }
+
+  virtual void render(RuiMonitor &, const Rect &) const override;
 };
 
 #endif // __ROW_LAYOUT_H

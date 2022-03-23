@@ -1,7 +1,11 @@
 #ifndef __BASE_LAYOUT_H
 #define __BASE_LAYOUT_H
 
+#include <memory>
 #include <vector>
+
+#include "monitor/RuiMonitor.h"
+#include "utils/Rect.h"
 
 enum LayoutType {
   LAYOUT_UNKNOWN,
@@ -20,7 +24,9 @@ public:
     type = LAYOUT_UNKNOWN;
   }
 
-  void addChild(const BaseLayout &child) { grid.push_back(child); };
+  virtual void render(RuiMonitor &, const Rect &) const;
+
+  void addChild(BaseLayout *child) { grid.push_back(child); }
 
   void setWidth(double width) { this->width = width; }
   void setHeight(double height) { this->height = height; }
@@ -38,10 +44,10 @@ public:
 
 protected:
   LayoutType type;
-  double width, height;    // percentage inside the parent's layout
-  double xPad, yPad;       // percentage of padding of inner elements
-  double xMargin, yMargin; // percentage
-  std::vector<BaseLayout> grid;
+  double width, height; // percentage inside the parent's layout (out of 1)
+  double xPad, yPad;    // percentage of padding of inner elements ( out of 1)
+  double xMargin, yMargin; // percentage (out of 1)
+  std::vector<BaseLayout *> grid;
 };
 
 #endif // __BASE_LAYOUT_H
