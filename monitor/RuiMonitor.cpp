@@ -44,6 +44,8 @@ void RuiMonitor::clear() { SDL_RenderClear(renderer); }
 
 void RuiMonitor::update() { SDL_RenderPresent(renderer); }
 
+void RuiMonitor::delay(int milisecond) { SDL_Delay(milisecond); }
+
 void RuiMonitor::drawRectangle(const Rect &rect, const Color &color) {
   SDL_SetRenderDrawColor(renderer, color.getRed(), color.getGreen(),
                          color.getBlue(), color.getAlpha());

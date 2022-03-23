@@ -6,8 +6,8 @@
 
 #include "SDL2/SDL.h"
 
-#include "utils/Rect.h"
 #include "utils/Color.h"
+#include "utils/Rect.h"
 
 class RuiMonitor {
 
@@ -25,6 +25,7 @@ public:
 
   void clear();
   void update();
+  void delay(int);
 
   void drawRectangle(const Rect &, const Color &);
 
