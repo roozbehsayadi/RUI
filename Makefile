@@ -8,18 +8,18 @@ GeneralPage.o: GeneralPage.h GeneralPage.cpp
 	g++ -c -I. GeneralPage.cpp
 RuiMonitor.o: monitor/RuiMonitor.h monitor/RuiMonitor.cpp
 	g++ -c -I. monitor/RuiMonitor.cpp
-BaseLayout.o: layout/BaseLayout.h
-	g++ -c -I. layout/BaseLayout.h
-ColumnLayout.o: layout/ColumnLayout.h
-	g++ -c -I. layout/ColumnLayout.h
+BaseLayout.o: layout/BaseLayout.h layout/BaseLayout.cpp
+	g++ -c -I. layout/BaseLayout.cpp
+ColumnLayout.o: layout/ColumnLayout.h layout/ColumnLayout.cpp
+	g++ -c -I. layout/ColumnLayout.cpp
 LeafLayout.o: layout/LeafLayout.h
 	g++ -c -I. layout/LeafLayout.h
-RowLayout.o: layout/RowLayout.h
-	g++ -c -I. layout/RowLayout.h
+RowLayout.o: layout/RowLayout.h layout/RowLayout.cpp
+	g++ -c -I. layout/RowLayout.cpp
 Color.o: utils/Color.h utils/Color.cpp
 	g++ -c -I. utils/Color.cpp
-Rect.o: utils/Rect.h
-	g++ -c -I. utils/Rect.h
+Rect.o: utils/Rect.h utils/Rect.cpp
+	g++ -c -I. utils/Rect.cpp
 BaseWidget.o: widgets/BaseWidget.h
 	g++ -c -I. widgets/BaseWidget.h
 ButtonWidget.o: widgets/ButtonWidget.h

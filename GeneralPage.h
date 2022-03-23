@@ -5,6 +5,7 @@
 
 #include "layout/BaseLayout.h"
 #include "monitor/RuiMonitor.h"
+#include "utils/Rect.h"
 
 class GeneralPage {
 
@@ -13,6 +14,9 @@ public:
   // - Caption of the window
   GeneralPage(std::string);
 
+  void render(RuiMonitor &monitor, const Rect &rect);
+
+  RuiMonitor &getMonitor();
   BaseLayout &getGrid();
 
 private:
