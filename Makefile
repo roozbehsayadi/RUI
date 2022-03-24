@@ -1,6 +1,6 @@
 .PHONY: all run clean lines
 
-all: build/main.o build/GeneralPage.o build/RuiMonitor.o build/BaseLayout.o build/ColumnLayout.o build/LeafLayout.gch build/RowLayout.o build/Color.o build/Rect.o build/BaseWidget.gch build/ButtonWidget.gch
+all: build/main.o build/GeneralPage.o build/RuiMonitor.o build/BaseLayout.o build/ColumnLayout.o build/LeafLayout.o build/RowLayout.o build/Color.o build/Rect.o build/BaseWidget.gch build/ButtonWidget.gch
 	g++ build/*.o -o build/RUI.out -Wall -g -O2 -std=c++2a -lSDL2
 run:
 	./build/RUI.out
@@ -14,8 +14,8 @@ build/BaseLayout.o: layout/BaseLayout.h layout/BaseLayout.cpp
 	g++ -c -I. -o build/BaseLayout.o layout/BaseLayout.cpp
 build/ColumnLayout.o: layout/ColumnLayout.h layout/ColumnLayout.cpp
 	g++ -c -I. -o build/ColumnLayout.o layout/ColumnLayout.cpp
-build/LeafLayout.gch: layout/LeafLayout.h
-	g++ -c -I. -o build/LeafLayout.gch layout/LeafLayout.h
+build/LeafLayout.o: layout/LeafLayout.h layout/LeafLayout.cpp
+	g++ -c -I. -o build/LeafLayout.o layout/LeafLayout.cpp
 build/RowLayout.o: layout/RowLayout.h layout/RowLayout.cpp
 	g++ -c -I. -o build/RowLayout.o layout/RowLayout.cpp
 build/Color.o: utils/Color.h utils/Color.cpp

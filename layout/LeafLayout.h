@@ -15,6 +15,12 @@ public:
     type = LAYOUT_LEAF;
   }
 
+  virtual void render(RuiMonitor &, const Rect &) const override;
+
+  void setWidget(BaseWidget &widget) { this->widget = &widget; }
+
+  const BaseWidget &getWidget() const { return *widget; }
+
 private:
   BaseWidget *widget;
 };
