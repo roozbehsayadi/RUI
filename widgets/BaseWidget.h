@@ -6,8 +6,8 @@
 #include <vector>
 
 #include "monitor/RuiMonitor.h"
-#include "utils/Rect.h"
 #include "utils/Color.h"
+#include "utils/Rect.h"
 
 enum WidgetType {
   WIDGET_UNKNOWN,

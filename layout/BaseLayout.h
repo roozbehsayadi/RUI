@@ -44,8 +44,8 @@ public:
 
 protected:
   LayoutType type;
-  double width, height; // percentage inside the parent's layout (out of 1)
-  double xPad, yPad;    // percentage of padding of inner elements ( out of 1)
+  double width, height;    // percentage inside the parent's layout (out of 1)
+  double xPad, yPad;       // percentage of padding of inner elements (out of 1)
   double xMargin, yMargin; // percentage (out of 1)
   std::vector<BaseLayout *> grid;
 };

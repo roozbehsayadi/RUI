@@ -8,8 +8,7 @@ void BaseLayout::render(RuiMonitor &monitor, const Rect &rect) const {
   for (auto child : grid) {
     Rect temp{rect.x + rect.w * xPad + rect.w * child->getXMargin(),
               rect.y + rect.h * yPad + rect.h * child->getYMargin(),
-              rect.w * child->getWidth(),
-              rect.h * child->getHeight()};
+              rect.w * child->getWidth(), rect.h * child->getHeight()};
     child->render(monitor, temp);
   }
 }
