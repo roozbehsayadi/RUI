@@ -3,7 +3,7 @@
 
 #include <string>
 
-#include "layout/BaseLayout.h"
+#include "layout/Container.h"
 #include "monitor/RuiMonitor.h"
 #include "utils/Rect.h"
 
@@ -14,15 +14,17 @@ public:
   // - Caption of the window
   GeneralPage(std::string);
 
-  void render(RuiMonitor &monitor, const Rect &rect);
+  void render(RuiMonitor &monitor, const Rect &rect) {
+    grid.render(monitor, rect);
+  }
 
-  RuiMonitor &getMonitor();
-  BaseLayout &getGrid();
+  RuiMonitor &getMonitor() { return this->monitor; }
+  Container &getGrid() { return this->grid; }
 
 private:
   RuiMonitor monitor;
 
-  BaseLayout grid;
+  Container grid;
 };
 
 #endif //__GENERAL_PAGE_H

@@ -1,7 +1,7 @@
 .PHONY: all run clean lines
 
-all: build/main.o build/GeneralPage.o build/RuiMonitor.o build/BaseLayout.o build/ColumnLayout.o build/LeafLayout.o build/RowLayout.o build/Color.o build/Rect.o build/BaseWidget.gch build/ButtonWidget.gch
-	g++ build/*.o -o build/RUI.out -Wall -g -O2 -std=c++2a -lSDL2
+all: build/main.o build/GeneralPage.o build/RuiMonitor.o build/BaseLayout.gch build/ColumnLayout.o build/Container.o build/LeafLayout.o build/RowLayout.o build/Color.o build/Rect.o build/BaseWidget.gch build/ButtonWidget.gch
+	g++ -Ibuild build/*.o -o build/RUI.out -Wall -g -O2 -std=c++2a -lSDL2
 run:
 	./build/RUI.out
 build/main.o: main.cpp
@@ -10,10 +10,12 @@ build/GeneralPage.o: GeneralPage.h GeneralPage.cpp
 	g++ -c -I. -o build/GeneralPage.o GeneralPage.cpp
 build/RuiMonitor.o: monitor/RuiMonitor.h monitor/RuiMonitor.cpp
 	g++ -c -I. -o build/RuiMonitor.o monitor/RuiMonitor.cpp
-build/BaseLayout.o: layout/BaseLayout.h layout/BaseLayout.cpp
-	g++ -c -I. -o build/BaseLayout.o layout/BaseLayout.cpp
+build/BaseLayout.gch: layout/BaseLayout.h
+	g++ -c -I. -o build/BaseLayout.gch layout/BaseLayout.h
 build/ColumnLayout.o: layout/ColumnLayout.h layout/ColumnLayout.cpp
 	g++ -c -I. -o build/ColumnLayout.o layout/ColumnLayout.cpp
+build/Container.o: layout/Container.h layout/Container.cpp
+	g++ -c -I. -o build/Container.o layout/Container.cpp
 build/LeafLayout.o: layout/LeafLayout.h layout/LeafLayout.cpp
 	g++ -c -I. -o build/LeafLayout.o layout/LeafLayout.cpp
 build/RowLayout.o: layout/RowLayout.h layout/RowLayout.cpp

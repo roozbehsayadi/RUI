@@ -1,9 +1,7 @@
 
-#include "BaseLayout.h"
+#include "Container.h"
 
-#include <iostream>
-
-void BaseLayout::render(RuiMonitor &monitor, const Rect &rect) const {
+void Container::render(RuiMonitor &monitor, const Rect &rect) const {
   monitor.drawRectangle(rect, {255, 0, 0});
   for (auto child : grid) {
     Rect temp{rect.x + rect.w * xPad + rect.w * child->getXMargin(),

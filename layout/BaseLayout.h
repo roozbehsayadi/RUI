@@ -20,13 +20,9 @@ public:
   BaseLayout(double width, double height, double xPad = 0.0, double yPad = 0.0,
              double xMargin = 0.0, double yMargin = 0.0)
       : width(width), height(height), xPad(xPad), yPad(yPad), xMargin(xMargin),
-        yMargin(yMargin) {
-    type = LAYOUT_UNKNOWN;
-  }
+        yMargin(yMargin) {}
 
-  virtual void render(RuiMonitor &, const Rect &) const;
-
-  void addChild(BaseLayout *child) { grid.push_back(child); }
+  virtual void render(RuiMonitor &, const Rect &) const = 0;
 
   void setWidth(double width) { this->width = width; }
   void setHeight(double height) { this->height = height; }
@@ -47,7 +43,6 @@ protected:
   double width, height;    // percentage inside the parent's layout (out of 1)
   double xPad, yPad;       // percentage of padding of inner elements (out of 1)
   double xMargin, yMargin; // percentage (out of 1)
-  std::vector<BaseLayout *> grid;
 };
 
 #endif // __BASE_LAYOUT_H
