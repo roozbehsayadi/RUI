@@ -19,7 +19,7 @@ int main() {
 
   page.getMonitor().update();
 
-  page.getMonitor().delay(2000);
+  page.handleEvents();
 
   return EXIT_SUCCESS;
 }

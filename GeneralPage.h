@@ -18,6 +18,10 @@ public:
     grid.render(monitor, rect);
   }
 
+  // This function handles all SDL events
+  // and returns on SDL_QUIT event.
+  void handleEvents();
+
   RuiMonitor &getMonitor() { return this->monitor; }
   Container &getGrid() { return this->grid; }
 
