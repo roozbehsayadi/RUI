@@ -17,12 +17,12 @@ public:
 
   virtual void render(RuiMonitor &, const Rect &) const override;
 
-  void setWidget(BaseWidget &widget) { this->widget = &widget; }
+  void setWidget(std::shared_ptr<BaseWidget> widget) { this->widget = widget; }
 
   const BaseWidget &getWidget() const { return *widget; }
 
 private:
-  BaseWidget *widget;
+  std::shared_ptr<BaseWidget> widget;
 };
 
 #endif // __LEAF_LAYOUT_H

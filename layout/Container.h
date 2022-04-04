@@ -1,6 +1,8 @@
 #ifndef __CONTAINER_H
 #define __CONTAINER_H
 
+#include <memory>
+
 #include "BaseLayout.h"
 #include "monitor/RuiMonitor.h"
 
@@ -13,12 +15,14 @@ public:
     type = LAYOUT_UNKNOWN;
   }
 
-  void addChild(BaseLayout *child) { grid.push_back(child); }
+  void addChild(std::shared_ptr<BaseLayout> child) {
+    children.push_back(child);
+  }
 
   virtual void render(RuiMonitor &, const Rect &) const override;
 
 protected:
-  std::vector<BaseLayout *> grid;
+  std::vector<std::shared_ptr<BaseLayout>> children;
 };
 
 #endif // __CONTAINER_H

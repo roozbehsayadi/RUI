@@ -6,8 +6,8 @@
 void RowLayout::render(RuiMonitor &monitor, const Rect &rect) const {
   monitor.drawRectangle(rect, {255, 0, 0});
   double currentX = this->getXPad() * rect.w;
-  for (auto i = 0u; i < grid.size(); i++) {
-    auto cell = grid.at(i);
+  for (auto i = 0u; i < children.size(); i++) {
+    auto cell = children.at(i);
     const Rect cellRect = {
         rect.x + currentX + rect.w * cell->getXMargin() +
             rect.w * this->getXPad(),
