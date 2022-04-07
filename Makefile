@@ -1,7 +1,7 @@
 .PHONY: all run clean lines
 
-all: build/main.o build/GeneralPage.o build/RuiMonitor.o build/BaseLayout.gch build/ColumnLayout.o build/Container.o build/LeafLayout.o build/RowLayout.o build/Color.o build/Rect.o build/BaseWidget.gch build/ButtonWidget.gch
-	g++ -Ibuild build/*.o -o build/RUI.out -Wall -g -O2 -std=c++2a -lSDL2
+all: build/main.o build/GeneralPage.o build/RuiMonitor.o build/BaseLayout.gch build/ColumnLayout.o build/Container.o build/LeafLayout.o build/RowLayout.o build/Color.o build/Rect.o build/BaseWidget.gch build/ButtonWidget.o
+	g++ -Ibuild build/*.o -o build/RUI.out -Wall -g -O2 -std=c++2a -lSDL2 -lSDL2_ttf
 run:
 	./build/RUI.out
 build/main.o: main.cpp
@@ -26,8 +26,8 @@ build/Rect.o: utils/Rect.h utils/Rect.cpp
 	g++ -c -I. -o build/Rect.o utils/Rect.cpp
 build/BaseWidget.gch: widgets/BaseWidget.h
 	g++ -c -I. -o build/BaseWidget.gch widgets/BaseWidget.h
-build/ButtonWidget.gch: widgets/ButtonWidget.h
-	g++ -c -I. -o build/ButtonWidget.gch widgets/ButtonWidget.h
+build/ButtonWidget.o: widgets/ButtonWidget.h widgets/ButtonWidget.cpp
+	g++ -c -I. -o build/ButtonWidget.o widgets/ButtonWidget.cpp
 clean:
 	rm -rf build/*.o build/*.gch build/*.out
 lines:
