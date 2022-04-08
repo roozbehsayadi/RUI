@@ -2,12 +2,13 @@
 #include <memory>
 #include <stdlib.h>
 
-#include "GeneralPage.h"
+#include "window/GeneralPage.h"
 #include "layout/ColumnLayout.h"
 #include "layout/LeafLayout.h"
 #include "layout/RowLayout.h"
 #include "utils/Rect.h"
 #include "widgets/ButtonWidget.h"
+#include "RUI.h"
 
 void fillPage(GeneralPage &);
 
@@ -15,11 +16,15 @@ int main() {
 
   GeneralPage page("rui");
   fillPage(page);
-  page.getGrid().render(page.getMonitor(), Rect{0.0, 0.0, 1920, 1080});
 
-  page.getMonitor().update();
+  GeneralPage page2("rui2");
+  fillPage(page2);
 
-  page.handleEvents();
+  RUI rui;
+  rui.addWindow(&page);
+  rui.addWindow(&page2);
+
+  rui.start();
 
   return EXIT_SUCCESS;
 }

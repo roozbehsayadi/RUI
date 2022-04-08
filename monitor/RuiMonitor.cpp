@@ -22,8 +22,8 @@ RuiMonitor::RuiMonitor(const std::string &windowCaption) {
     return;
   }
   window = SDL_CreateWindow(windowCaption.c_str(), SDL_WINDOWPOS_UNDEFINED,
-                            SDL_WINDOWPOS_UNDEFINED, 0, 0,
-                            SDL_WINDOW_FULLSCREEN_DESKTOP);
+                            SDL_WINDOWPOS_UNDEFINED, 1024, 768,
+                            SDL_WINDOW_SHOWN);
   if (window == nullptr) {
     std::cerr << "Window could not be created. Error: " << SDL_GetError()
               << "\n";
@@ -55,6 +55,8 @@ std::pair<int, int> RuiMonitor::getMonitorSize() const {
   SDL_GetWindowSize(window, &w, &h);
   return std::make_pair(w, h);
 }
+
+void RuiMonitor::close() { SDL_DestroyWindow(window); }
 
 void RuiMonitor::clear() { SDL_RenderClear(renderer); }
 

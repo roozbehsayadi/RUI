@@ -1,13 +1,15 @@
 .PHONY: all run clean lines
 
-all: build/main.o build/GeneralPage.o build/RuiMonitor.o build/BaseLayout.gch build/ColumnLayout.o build/Container.o build/LeafLayout.o build/RowLayout.o build/Color.o build/Rect.o build/BaseWidget.gch build/ButtonWidget.o
+all: build/main.o build/RUI.o build/GeneralPage.o build/RuiMonitor.o build/BaseLayout.gch build/ColumnLayout.o build/Container.o build/LeafLayout.o build/RowLayout.o build/Color.o build/Rect.o build/BaseWidget.gch build/ButtonWidget.o
 	g++ -Ibuild build/*.o -o build/RUI.out -Wall -g -O2 -std=c++2a -lSDL2 -lSDL2_ttf
 run:
 	./build/RUI.out
 build/main.o: main.cpp
 	g++ -c -I. -o build/main.o main.cpp
-build/GeneralPage.o: GeneralPage.h GeneralPage.cpp
-	g++ -c -I. -o build/GeneralPage.o GeneralPage.cpp
+build/RUI.o: RUI.h RUI.cpp
+	g++ -c -I. -o build/RUI.o RUI.cpp
+build/GeneralPage.o: window/GeneralPage.h window/GeneralPage.cpp
+	g++ -c -I. -o build/GeneralPage.o window/GeneralPage.cpp
 build/RuiMonitor.o: monitor/RuiMonitor.h monitor/RuiMonitor.cpp
 	g++ -c -I. -o build/RuiMonitor.o monitor/RuiMonitor.cpp
 build/BaseLayout.gch: layout/BaseLayout.h

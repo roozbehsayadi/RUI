@@ -14,21 +14,29 @@ public:
   // - Caption of the window
   GeneralPage(std::string);
 
-  void render(RuiMonitor &monitor, const Rect &rect) {
-    grid.render(monitor, rect);
+  void render() {
+    auto monitorSize = monitor.getMonitorSize();
+    grid.render(monitor, {0.0, 0.0, double(monitorSize.first),
+                          double(monitorSize.second)});
   }
+
+  void update() { monitor.update(); }
 
   // This function handles all SDL events
   // and returns on SDL_QUIT event.
-  void handleEvents();
+  void handleEvents(SDL_Event &);
 
   RuiMonitor &getMonitor() { return this->monitor; }
   Container &getGrid() { return this->grid; }
+
+  bool isShown() const { return this->shown; }
 
 private:
   RuiMonitor monitor;
 
   Container grid;
+
+  bool shown;
 };
 
 #endif //__GENERAL_PAGE_H

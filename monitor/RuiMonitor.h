@@ -10,7 +10,11 @@
 #include "utils/Color.h"
 #include "utils/Rect.h"
 
+class GeneralPage;
+
 class RuiMonitor {
+
+  friend class GeneralPage;
 
 public:
   // Create a window with title "window"
@@ -23,6 +27,8 @@ public:
   void setCaption(const std::string &);
 
   std::pair<int, int> getMonitorSize() const;
+
+  void close();
 
   void clear();
   void update();
