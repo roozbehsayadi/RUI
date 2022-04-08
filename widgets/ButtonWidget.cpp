@@ -1,8 +1,14 @@
 
 #include "ButtonWidget.h"
 
-void ButtonWidget::draw(RuiMonitor &monitor, const Rect &rect,
-                        const Color &color) {
-  monitor.drawRectangle(rect, color);
-  monitor.drawText(rect, color, caption);
+#include "utils/Geometry.h"
+
+void ButtonWidget::draw(RuiMonitor &monitor, const Color &color) {
+  monitor.drawRectangle(positionPixel, color);
+  monitor.drawText(positionPixel, color, caption);
+}
+
+void ButtonWidget::handleClick(int mouseX, int mouseY) {
+  if (Geometry::isPointInsideRect(mouseX, mouseY, positionPixel))
+    std::cout << positionPixel << std::endl;
 }

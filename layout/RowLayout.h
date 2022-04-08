@@ -14,7 +14,7 @@ public:
     type = LAYOUT_ROW;
   }
 
-  virtual void render(RuiMonitor &, const Rect &) const override;
+  virtual void render(RuiMonitor &) const override;
 };
 
 #endif // __ROW_LAYOUT_H

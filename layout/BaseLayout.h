@@ -22,7 +22,13 @@ public:
       : width(width), height(height), xPad(xPad), yPad(yPad), xMargin(xMargin),
         yMargin(yMargin) {}
 
-  virtual void render(RuiMonitor &, const Rect &) const = 0;
+  virtual void render(RuiMonitor &) const = 0;
+
+  virtual void handleClick(int, int);
+
+  void setPositionPixel(const Rect &positionPixel) {
+    this->positionPixel = positionPixel;
+  }
 
   void setWidth(double width) { this->width = width; }
   void setHeight(double height) { this->height = height; }
@@ -39,10 +45,14 @@ public:
   double getYMargin() const { return yMargin; }
 
 protected:
+  Rect getRectInPixels(const Rect &, int, int) const;
+  Rect getChildRectPixels(const Rect &, std::shared_ptr<BaseLayout>) const;
+
   LayoutType type;
   double width, height;    // percentage inside the parent's layout (out of 1)
   double xPad, yPad;       // percentage of padding of inner elements (out of 1)
   double xMargin, yMargin; // percentage (out of 1)
+  Rect positionPixel;
 };
 
 #endif // __BASE_LAYOUT_H

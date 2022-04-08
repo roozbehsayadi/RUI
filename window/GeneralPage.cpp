@@ -6,15 +6,22 @@
 GeneralPage::GeneralPage(std::string caption) {
   monitor.setCaption(caption);
 
-  grid.setWidth(100.0);
-  grid.setHeight(100.0);
+  grid = std::make_shared<Container>(1.0, 1.0);
 
   shown = true;
 }
 
+void GeneralPage::render() {
+  auto monitorSize = monitor.getMonitorSize();
+  grid->setPositionPixel(
+      {0.0, 0.0, double(monitorSize.first), double(monitorSize.second)});
+  grid->render(monitor);
+}
+
 void GeneralPage::handleEvents(SDL_Event &event) {
-  if (event.type == SDL_WINDOWEVENT &&
-      event.window.windowID == SDL_GetWindowID(monitor.window)) {
+  if (event.window.windowID != SDL_GetWindowID(monitor.window))
+    return;
+  if (event.type == SDL_WINDOWEVENT) {
     switch (event.window.event) {
     case SDL_WINDOWEVENT_SHOWN:
       shown = true;
@@ -31,6 +38,11 @@ void GeneralPage::handleEvents(SDL_Event &event) {
     case SDL_WINDOWEVENT_CLOSE:
       SDL_HideWindow(monitor.window);
       break;
+
+    default:
+      break;
     }
+  } else if (event.type == SDL_MOUSEBUTTONDOWN) {
+    grid->handleClick(event.button.x, event.button.y);
   }
 }

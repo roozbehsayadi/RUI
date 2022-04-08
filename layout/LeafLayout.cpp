@@ -1,10 +1,16 @@
 
 #include "LeafLayout.h"
 
-void LeafLayout::render(RuiMonitor &monitor, const Rect &rect) const {
-  monitor.drawRectangle(rect, {255, 0, 0});
-  widget->draw(monitor,
-               {rect.x + xPad * rect.w, rect.y + yPad * rect.h,
-                rect.w - 2 * xPad * rect.w, rect.h - 2 * yPad * rect.h},
-               {0, 255, 0});
+void LeafLayout::render(RuiMonitor &monitor) const {
+  monitor.drawRectangle(positionPixel, {255, 0, 0});
+  widget->setPositionPixel({positionPixel.x + xPad * positionPixel.w,
+                            positionPixel.y + yPad * positionPixel.h,
+                            positionPixel.w - 2 * xPad * positionPixel.w,
+                            positionPixel.h - 2 * yPad * positionPixel.h});
+  widget->draw(monitor, {0, 255, 0});
+}
+
+void LeafLayout::handleClick(int mouseX, int mouseY) {
+  this->BaseLayout::handleClick(mouseX, mouseY);
+  widget->handleClick(mouseX, mouseY);
 }

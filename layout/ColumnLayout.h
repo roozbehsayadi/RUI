@@ -14,7 +14,7 @@ public:
     type = LAYOUT_COLUMN;
   }
 
-  virtual void render(RuiMonitor &, const Rect &) const override;
+  virtual void render(RuiMonitor &) const override;
 };
 
 #endif // __COLUMN_LAYOUT_H

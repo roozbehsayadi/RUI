@@ -13,8 +13,8 @@ public:
   ButtonWidget() : ButtonWidget("") {}
   ButtonWidget(std::string caption) : caption(caption) {}
 
-  virtual void draw(RuiMonitor &monitor, const Rect &rect,
-                    const Color &color) override;
+  virtual void draw(RuiMonitor &monitor, const Color &color) override;
+  virtual void handleClick(int, int) override;
 
   void setCaption(const std::string &caption) { this->caption = caption; }
 

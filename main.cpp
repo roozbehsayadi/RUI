@@ -2,13 +2,13 @@
 #include <memory>
 #include <stdlib.h>
 
-#include "window/GeneralPage.h"
+#include "RUI.h"
 #include "layout/ColumnLayout.h"
 #include "layout/LeafLayout.h"
 #include "layout/RowLayout.h"
 #include "utils/Rect.h"
 #include "widgets/ButtonWidget.h"
-#include "RUI.h"
+#include "window/GeneralPage.h"
 
 void fillPage(GeneralPage &);
 
@@ -30,7 +30,7 @@ int main() {
 }
 
 void fillPage(GeneralPage &page) {
-  auto &grid = page.getGrid();
+  auto grid = page.getGrid();
   std::shared_ptr<RowLayout> r =
       std::make_shared<RowLayout>(0.80, 0.20, 0.0, 0.10, 0.10, 0.05);
   std::shared_ptr<ColumnLayout> c =
@@ -45,5 +45,5 @@ void fillPage(GeneralPage &page) {
       std::make_shared<ButtonWidget>("Button");
   l->setWidget(button);
   r->addChild(l);
-  grid.addChild(r);
+  grid->addChild(r);
 }

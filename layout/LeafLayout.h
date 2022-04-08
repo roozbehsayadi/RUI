@@ -15,7 +15,9 @@ public:
     type = LAYOUT_LEAF;
   }
 
-  virtual void render(RuiMonitor &, const Rect &) const override;
+  virtual void render(RuiMonitor &) const override;
+
+  virtual void handleClick(int, int) override;
 
   void setWidget(std::shared_ptr<BaseWidget> widget) { this->widget = widget; }
 

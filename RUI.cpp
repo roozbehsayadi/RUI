@@ -1,6 +1,8 @@
 
 #include "RUI.h"
 
+#include <iostream>
+
 void RUI::start() {
   render();
   handleEvents();

@@ -14,11 +14,7 @@ public:
   // - Caption of the window
   GeneralPage(std::string);
 
-  void render() {
-    auto monitorSize = monitor.getMonitorSize();
-    grid.render(monitor, {0.0, 0.0, double(monitorSize.first),
-                          double(monitorSize.second)});
-  }
+  void render();
 
   void update() { monitor.update(); }
 
@@ -27,14 +23,14 @@ public:
   void handleEvents(SDL_Event &);
 
   RuiMonitor &getMonitor() { return this->monitor; }
-  Container &getGrid() { return this->grid; }
+  std::shared_ptr<Container> getGrid() { return this->grid; }
 
   bool isShown() const { return this->shown; }
 
 private:
   RuiMonitor monitor;
 
-  Container grid;
+  std::shared_ptr<Container> grid;
 
   bool shown;
 };

@@ -1,6 +1,7 @@
 #ifndef __CONTAINER_H
 #define __CONTAINER_H
 
+#include <iostream>
 #include <memory>
 
 #include "BaseLayout.h"
@@ -15,11 +16,13 @@ public:
     type = LAYOUT_UNKNOWN;
   }
 
+  virtual void handleClick(int, int) override;
+
   void addChild(std::shared_ptr<BaseLayout> child) {
     children.push_back(child);
   }
 
-  virtual void render(RuiMonitor &, const Rect &) const override;
+  virtual void render(RuiMonitor &) const override;
 
 protected:
   std::vector<std::shared_ptr<BaseLayout>> children;
