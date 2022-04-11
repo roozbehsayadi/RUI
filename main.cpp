@@ -10,26 +10,31 @@
 #include "widgets/ButtonWidget.h"
 #include "window/GeneralPage.h"
 
-void fillPage(GeneralPage &);
+void fillPage(GeneralPage &, const std::string &);
 
 int main() {
 
   GeneralPage page("rui");
-  fillPage(page);
+  fillPage(page, "button1");
 
   GeneralPage page2("rui2");
-  fillPage(page2);
+  fillPage(page2, "button2");
 
   RUI rui;
   rui.addWindow(&page);
   rui.addWindow(&page2);
 
-  rui.start();
+  rui.render();
+  bool quit = false;
+  while ( !quit ) {
+    quit = rui.handleEvents();
+    rui.render();
+  }
 
   return EXIT_SUCCESS;
 }
 
-void fillPage(GeneralPage &page) {
+void fillPage(GeneralPage &page, const std::string &buttonSlug) {
   auto grid = page.getGrid();
   std::shared_ptr<RowLayout> r =
       std::make_shared<RowLayout>(0.80, 0.20, 0.0, 0.10, 0.10, 0.05);
@@ -42,7 +47,7 @@ void fillPage(GeneralPage &page) {
   std::shared_ptr<LeafLayout> l =
       std::make_shared<LeafLayout>(0.10, 0.50, 0.1, 0.2, 0.025, 0.25);
   std::shared_ptr<ButtonWidget> button =
-      std::make_shared<ButtonWidget>("Button");
+      std::make_shared<ButtonWidget>(buttonSlug, "Button");
   l->setWidget(button);
   r->addChild(l);
   grid->addChild(r);

@@ -3,18 +3,18 @@
 
 #include <vector>
 
+#include "SDL2/SDL.h"
+
 #include "window/GeneralPage.h"
 
 class RUI {
 
 public:
   void addWindow(GeneralPage *page) { windows.push_back(page); }
-  void start();
-
-private:
-  void handleEvents();
+  bool handleEvents();
   void render();
 
+private:
   bool isAllWindowsClosed() const;
 
   // TODO handle without pointers

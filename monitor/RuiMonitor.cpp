@@ -21,9 +21,9 @@ RuiMonitor::RuiMonitor(const std::string &windowCaption) {
               << "\n";
     return;
   }
-  window = SDL_CreateWindow(windowCaption.c_str(), SDL_WINDOWPOS_UNDEFINED,
-                            SDL_WINDOWPOS_UNDEFINED, 1024, 768,
-                            SDL_WINDOW_SHOWN);
+  window =
+      SDL_CreateWindow(windowCaption.c_str(), SDL_WINDOWPOS_UNDEFINED,
+                       SDL_WINDOWPOS_UNDEFINED, 1024, 768, SDL_WINDOW_SHOWN);
   if (window == nullptr) {
     std::cerr << "Window could not be created. Error: " << SDL_GetError()
               << "\n";
@@ -98,7 +98,7 @@ bool RuiMonitor::initializeFonts() {
 
 int RuiMonitor::getFontSizeToFit(const Rect &rect, const std::string &text) {
   // TODO I don't like the way this function works.
-  for ( int i = 1; i < 100; i++ ) {
+  for (int i = 1; i < 100; i++) {
     auto f = this->font[i];
     int w, h;
     TTF_SizeText(f, text.c_str(), &w, &h);

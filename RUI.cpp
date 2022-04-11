@@ -3,26 +3,19 @@
 
 #include <iostream>
 
-void RUI::start() {
-  render();
-  handleEvents();
-}
-
-void RUI::handleEvents() {
+bool RUI::handleEvents() {
   bool quit = false;
-  SDL_Event event;
-  while (!quit) {
-    while (SDL_PollEvent(&event)) {
-      if (event.type == SDL_QUIT)
-        quit = true;
-      for (auto i = 0u; i < windows.size(); i++) {
-        windows.at(i)->handleEvents(event);
-      }
-    }
-    render();
-    if (isAllWindowsClosed())
+  static SDL_Event event;
+  if (SDL_PollEvent(&event)) {
+    if (event.type == SDL_QUIT)
       quit = true;
+    for (auto i = 0u; i < windows.size(); i++) {
+      windows.at(i)->handleEvents(event);
+    }
   }
+  if (isAllWindowsClosed())
+    quit = true;
+  return quit;
 }
 
 void RUI::render() {
