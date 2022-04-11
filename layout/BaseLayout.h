@@ -24,7 +24,8 @@ public:
 
   virtual void render(RuiMonitor &) const = 0;
 
-  virtual void handleClick(int, int);
+  virtual void handleClick(int, int) = 0;
+  virtual bool isClicked(const std::string &) = 0;
 
   void setPositionPixel(const Rect &positionPixel) {
     this->positionPixel = positionPixel;

@@ -5,10 +5,10 @@
 
 #include "utils/Geometry.h"
 
-void BaseLayout::handleClick(int mouseX, int mouseY) {
-  if (Geometry::isPointInsideRect(mouseX, mouseY, positionPixel))
-    std::cout << positionPixel << std::endl;
-}
+// void BaseLayout::handleClick(int mouseX, int mouseY) {
+//   if (Geometry::isPointInsideRect(mouseX, mouseY, positionPixel))
+//     std::cout << positionPixel << std::endl;
+// }
 
 Rect BaseLayout::getRectInPixels(const Rect &rect, int xPadParent,
                                  int yPadParent) const {

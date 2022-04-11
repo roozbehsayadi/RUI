@@ -11,6 +11,12 @@ void LeafLayout::render(RuiMonitor &monitor) const {
 }
 
 void LeafLayout::handleClick(int mouseX, int mouseY) {
-  this->BaseLayout::handleClick(mouseX, mouseY);
+  // this->BaseLayout::handleClick(mouseX, mouseY);
   widget->handleClick(mouseX, mouseY);
+}
+
+bool LeafLayout::isClicked(const std::string &slug) {
+  if (widget->getSlug() == slug)
+    return widget->isClicked();
+  return false;
 }

@@ -14,6 +14,8 @@ public:
   bool handleEvents();
   void render();
 
+  bool isClicked(const std::string &);
+
 private:
   bool isAllWindowsClosed() const;
 

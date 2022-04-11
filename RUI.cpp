@@ -25,6 +25,13 @@ void RUI::render() {
   }
 }
 
+bool RUI::isClicked(const std::string &slug) {
+  for (auto *window : windows)
+    if (window->isClicked(slug))
+      return true;
+  return false;
+}
+
 bool RUI::isAllWindowsClosed() const {
   bool allWindowsClosed = true;
   for (auto *window : windows)

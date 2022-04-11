@@ -7,10 +7,17 @@
 
 void Container::handleClick(int mouseX, int mouseY) {
   if (Geometry::isPointInsideRect(mouseX, mouseY, positionPixel))
-    std::cout << positionPixel << std::endl;
+    for (auto &child : children) {
+      child->handleClick(mouseX, mouseY);
+    }
+}
+
+bool Container::isClicked(const std::string &slug) {
   for (auto &child : children) {
-    child->handleClick(mouseX, mouseY);
+    if (child->isClicked(slug))
+      return true;
   }
+  return false;
 }
 
 void Container::render(RuiMonitor &monitor) const {

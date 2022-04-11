@@ -28,6 +28,13 @@ int main() {
   bool quit = false;
   while ( !quit ) {
     quit = rui.handleEvents();
+
+    // do your stuff here. for example:
+    if (rui.isClicked("button1"))
+      std::cout << "Button 1 is clicked!" << std::endl;
+    if (rui.isClicked("button2"))
+      std::cout << "Button 2 is clicked!" << std::endl;
+
     rui.render();
   }
 

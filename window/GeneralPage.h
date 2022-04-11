@@ -22,6 +22,8 @@ public:
   // and returns on SDL_QUIT event.
   void handleEvents(SDL_Event &);
 
+  bool isClicked(const std::string &);
+
   RuiMonitor &getMonitor() { return this->monitor; }
   std::shared_ptr<Container> getGrid() { return this->grid; }
 

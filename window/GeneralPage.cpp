@@ -46,3 +46,7 @@ void GeneralPage::handleEvents(SDL_Event &event) {
     grid->handleClick(event.button.x, event.button.y);
   }
 }
+
+bool GeneralPage::isClicked(const std::string &slug) {
+  return grid->isClicked(slug);
+}
