@@ -3,7 +3,7 @@
 
 void RowLayout::render(RuiMonitor &monitor) const {
   monitor.drawRectangle(positionPixel, {255, 0, 0});
-  double currentX = this->getXPad() * positionPixel.w;
+  double currentX = 0;
   for (auto i = 0u; i < children.size(); i++) {
     auto cell = children.at(i);
     const Rect cellRect = {
