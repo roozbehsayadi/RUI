@@ -11,12 +11,13 @@ void LeafLayout::render(RuiMonitor &monitor) const {
 }
 
 void LeafLayout::handleClick(int mouseX, int mouseY) {
-  // this->BaseLayout::handleClick(mouseX, mouseY);
   widget->handleClick(mouseX, mouseY);
 }
 
 bool LeafLayout::isClicked(const std::string &slug) {
-  if (widget->getSlug() == slug)
-    return widget->isClicked();
+  if (widget->getType() == WIDGET_BUTTON && widget->getSlug() == slug) {
+    auto button = std::dynamic_pointer_cast<ButtonWidget>(widget);
+    return button->isClicked();
+  }
   return false;
 }

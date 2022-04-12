@@ -4,7 +4,9 @@
 #include <memory>
 
 #include "BaseLayout.h"
+
 #include "widgets/BaseWidget.h"
+#include "widgets/ButtonWidget.h"
 
 class LeafLayout : public BaseLayout {
 public:
