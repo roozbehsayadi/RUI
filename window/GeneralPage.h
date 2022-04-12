@@ -3,6 +3,7 @@
 
 #include <string>
 
+#include "layout/ColumnLayout.h"
 #include "layout/Container.h"
 #include "monitor/RuiMonitor.h"
 #include "utils/Rect.h"

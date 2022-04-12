@@ -12,6 +12,7 @@
 enum WidgetType {
   WIDGET_UNKNOWN,
   WIDGET_BUTTON,
+  WIDGET_IMAGE,
 };
 
 class BaseWidget {

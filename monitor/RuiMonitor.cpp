@@ -27,6 +27,12 @@ RuiMonitor::RuiMonitor(const std::string &windowCaption) {
               << "\n";
     return;
   }
+  int imageFlags = IMG_INIT_JPG | IMG_INIT_PNG;
+  if (IMG_Init(imageFlags) != imageFlags) {
+    std::cerr << "Could not initialize SDL_image. Error: " << IMG_GetError()
+              << "\n";
+    return;
+  }
   renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
   if (renderer == nullptr) {
     std::cerr << "Renderer could not be initialized. Error: " << SDL_GetError()
@@ -41,6 +47,7 @@ RuiMonitor::~RuiMonitor() {
     TTF_CloseFont(it.second);
   }
   TTF_Quit();
+  IMG_Quit();
   SDL_Quit();
 }
 
@@ -83,6 +90,20 @@ void RuiMonitor::drawText(const Rect &rect, const Color &color,
   SDL_RenderCopy(renderer, textTexture, NULL, &targetRect);
   // TODO Do I need to SDL_DestroyTexture(textTexture)?
   SDL_FreeSurface(textSurface);
+}
+
+void RuiMonitor::drawImage(const Rect &rect, SDL_Texture *&texture,
+                           const std::string &imagePath) {
+  if (texture == nullptr) {
+    texture = IMG_LoadTexture(renderer, imagePath.c_str());
+    if (!texture) {
+      std::cerr << "Could not open image " + imagePath + ". Error: "
+                << IMG_GetError() << "\n";
+      return;
+    }
+  }
+  SDL_Rect targetRect{int(rect.x), int(rect.y), int(rect.w), int(rect.h)};
+  SDL_RenderCopy(renderer, texture, NULL, &targetRect);
 }
 
 bool RuiMonitor::initializeFonts() {

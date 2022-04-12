@@ -4,7 +4,7 @@
 GeneralPage::GeneralPage(std::string caption) {
   monitor.setCaption(caption);
 
-  grid = std::make_shared<Container>(1.0, 1.0);
+  grid = std::make_shared<ColumnLayout>(1.0, 1.0);
 
   shown = true;
 }

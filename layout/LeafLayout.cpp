@@ -3,6 +3,7 @@
 
 void LeafLayout::render(RuiMonitor &monitor) const {
   monitor.drawRectangle(positionPixel, {255, 0, 0});
+  // TODO handle if the widget was null?
   widget->setPositionPixel({positionPixel.x + xPad * positionPixel.w,
                             positionPixel.y + yPad * positionPixel.h,
                             positionPixel.w - 2 * xPad * positionPixel.w,
