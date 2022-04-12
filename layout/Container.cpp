@@ -1,8 +1,6 @@
 
 #include "Container.h"
 
-#include <iostream>
-
 #include "utils/Geometry.h"
 
 void Container::handleClick(int mouseX, int mouseY) {

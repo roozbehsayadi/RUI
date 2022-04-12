@@ -1,6 +1,7 @@
 #ifndef __RUI_MONITOR_H
 #define __RUI_MONITOR_H
 
+#include <iostream>
 #include <map>
 #include <string>
 

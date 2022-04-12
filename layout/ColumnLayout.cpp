@@ -1,8 +1,6 @@
 
 #include "ColumnLayout.h"
 
-#include <iostream>
-
 void ColumnLayout::render(RuiMonitor &monitor) const {
   monitor.drawRectangle(positionPixel, {255, 0, 0});
   double currentY = this->getYPad() * positionPixel.h;

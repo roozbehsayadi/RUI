@@ -1,8 +1,6 @@
 
 #include "GeneralPage.h"
 
-#include <iostream>
-
 GeneralPage::GeneralPage(std::string caption) {
   monitor.setCaption(caption);
 

@@ -1,8 +1,6 @@
 
 #include "RuiMonitor.h"
 
-#include <iostream>
-
 RuiMonitor::RuiMonitor() : RuiMonitor("window") {}
 
 RuiMonitor::RuiMonitor(const std::string &windowCaption) {

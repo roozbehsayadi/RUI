@@ -1,8 +1,6 @@
 
 #include "RowLayout.h"
 
-#include <iostream>
-
 void RowLayout::render(RuiMonitor &monitor) const {
   monitor.drawRectangle(positionPixel, {255, 0, 0});
   double currentX = this->getXPad() * positionPixel.w;
