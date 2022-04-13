@@ -38,12 +38,17 @@ public:
   void setXMargin(double xMargin) { this->xMargin = xMargin; }
   void setYMargin(double yMargin) { this->yMargin = yMargin; }
 
+  void hide() { this->hidden = true; }
+  void show() { this->hidden = false; }
+
   double getWidth() const { return width; }
   double getHeight() const { return height; }
   double getXPad() const { return xPad; }
   double getYPad() const { return yPad; }
   double getXMargin() const { return xMargin; }
   double getYMargin() const { return yMargin; }
+
+  bool isHidden() const { return this->hidden; }
 
 protected:
   Rect getRectInPixels(const Rect &, int, int) const;
@@ -54,6 +59,7 @@ protected:
   double xPad, yPad;       // percentage of padding of inner elements (out of 1)
   double xMargin, yMargin; // percentage (out of 1)
   Rect positionPixel;
+  bool hidden = false;
 };
 
 #endif // __BASE_LAYOUT_H

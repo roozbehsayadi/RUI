@@ -21,13 +21,15 @@ bool Container::isClicked(const std::string &slug) {
 void Container::render(RuiMonitor &monitor) const {
   monitor.drawRectangle(positionPixel, {255, 0, 0});
   for (auto child : children) {
-    Rect temp{positionPixel.x + positionPixel.w * xPad +
-                  positionPixel.w * child->getXMargin(),
-              positionPixel.y + positionPixel.h * yPad +
-                  positionPixel.h * child->getYMargin(),
-              positionPixel.w * child->getWidth(),
-              positionPixel.h * child->getHeight()};
-    child->setPositionPixel(temp);
-    child->render(monitor);
+    if (!child->isHidden()) {
+      Rect temp{positionPixel.x + positionPixel.w * xPad +
+                    positionPixel.w * child->getXMargin(),
+                positionPixel.y + positionPixel.h * yPad +
+                    positionPixel.h * child->getYMargin(),
+                positionPixel.w * child->getWidth(),
+                positionPixel.h * child->getHeight()};
+      child->setPositionPixel(temp);
+      child->render(monitor);
+    }
   }
 }

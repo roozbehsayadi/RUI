@@ -6,6 +6,8 @@ void RowLayout::render(RuiMonitor &monitor) const {
   double currentX = 0;
   for (auto i = 0u; i < children.size(); i++) {
     auto cell = children.at(i);
+    if (cell->isHidden())
+      continue;
     const Rect cellRect = {
         positionPixel.x + currentX + positionPixel.w * cell->getXMargin() +
             positionPixel.w * this->getXPad(),
