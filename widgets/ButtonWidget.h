@@ -13,9 +13,10 @@ public:
   ButtonWidget(const std::string &slug, const std::string &caption)
       : BaseWidget(slug), caption(caption) {
     type = WIDGET_BUTTON;
+    color = {0, 255, 0};
   }
 
-  virtual void draw(RuiMonitor &monitor, const Color &color) override;
+  virtual void draw(RuiMonitor &monitor) override;
   virtual void handleClick(int, int) override;
 
   // Returns whether the button was clicked or not
@@ -30,6 +31,8 @@ private:
   std::string caption;
 
   bool clicked = false;
+
+  Color color;
 };
 
 #endif

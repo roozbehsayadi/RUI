@@ -8,7 +8,7 @@ void LeafLayout::render(RuiMonitor &monitor) const {
                             positionPixel.y + yPad * positionPixel.h,
                             positionPixel.w - 2 * xPad * positionPixel.w,
                             positionPixel.h - 2 * yPad * positionPixel.h});
-  widget->draw(monitor, {0, 255, 0});
+  widget->draw(monitor);
 }
 
 void LeafLayout::handleClick(int mouseX, int mouseY) {

@@ -3,7 +3,7 @@
 
 #include "utils/Geometry.h"
 
-void ButtonWidget::draw(RuiMonitor &monitor, const Color &color) {
+void ButtonWidget::draw(RuiMonitor &monitor) {
   monitor.drawRectangle(positionPixel, color);
   monitor.drawText(positionPixel, color, caption);
 }

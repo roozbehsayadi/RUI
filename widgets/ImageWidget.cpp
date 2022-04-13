@@ -1,7 +1,7 @@
 
 #include "ImageWidget.h"
 
-void ImageWidget::draw(RuiMonitor &monitor, const Color &color) {
+void ImageWidget::draw(RuiMonitor &monitor) {
   monitor.drawImage(positionPixel, imageTexture, imagePath);
 }
 

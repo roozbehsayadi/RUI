@@ -12,8 +12,7 @@ public:
     this->type = WIDGET_IMAGE;
   }
 
-  // TODO we don't need color here...
-  virtual void draw(RuiMonitor &monitor, const Color &color) override;
+  virtual void draw(RuiMonitor &monitor) override;
   virtual void handleClick(int, int) override{};
 
   void changeImagePath(const std::string &imagePath);

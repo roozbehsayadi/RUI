@@ -19,7 +19,7 @@ class BaseWidget {
 public:
   BaseWidget(const std::string &slug) : slug(slug) { type = WIDGET_UNKNOWN; }
 
-  virtual void draw(RuiMonitor &, const Color &) = 0;
+  virtual void draw(RuiMonitor &) = 0;
   virtual void handleClick(int, int) = 0;
 
   void setPositionPixel(const Rect &positionPixel) {
