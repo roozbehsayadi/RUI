@@ -10,10 +10,11 @@
 
 class LeafLayout : public BaseLayout {
 public:
-  LeafLayout() : LeafLayout(0.0, 0.0) {}
-  LeafLayout(double width, double height, double xPad = 0.0, double yPad = 0.0,
-             double xMargin = 0.0, double yMargin = 0.0)
-      : BaseLayout(width, height, xPad, yPad, xMargin, yMargin) {
+  LeafLayout(const std::string &slug) : LeafLayout(slug, 0.0, 0.0) {}
+  LeafLayout(const std::string &slug, double width, double height,
+             double xPad = 0.0, double yPad = 0.0, double xMargin = 0.0,
+             double yMargin = 0.0)
+      : BaseLayout(slug, width, height, xPad, yPad, xMargin, yMargin) {
     type = LAYOUT_LEAF;
   }
 
@@ -21,6 +22,8 @@ public:
 
   virtual void handleClick(int, int) override;
   virtual bool isClicked(const std::string &) override;
+
+  virtual bool setEnabledWidget(const std::string &, bool) override;
 
   void setWidget(std::shared_ptr<BaseWidget> widget) { this->widget = widget; }
 

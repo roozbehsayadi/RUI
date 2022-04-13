@@ -9,6 +9,8 @@ void ButtonWidget::draw(RuiMonitor &monitor) {
 }
 
 void ButtonWidget::handleClick(int mouseX, int mouseY) {
+  if (!this->enabled)
+    return;
   if (Geometry::isPointInsideRect(mouseX, mouseY, positionPixel))
     this->clicked = true;
 }

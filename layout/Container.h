@@ -9,15 +9,19 @@
 
 class Container : public BaseLayout {
 public:
-  Container() : Container(0.0, 0.0, 0.0, 0.0) {}
-  Container(double width, double height, double xPad = 0.0, double yPad = 0.0,
-            double xMargin = 0.0, double yMargin = 0.0)
-      : BaseLayout(width, height, xPad, yPad, xMargin, yMargin) {
+  Container(const std::string &slug) : Container(slug, 0.0, 0.0, 0.0, 0.0) {}
+  Container(const std::string &slug, double width, double height,
+            double xPad = 0.0, double yPad = 0.0, double xMargin = 0.0,
+            double yMargin = 0.0)
+      : BaseLayout(slug, width, height, xPad, yPad, xMargin, yMargin) {
     type = LAYOUT_UNKNOWN;
   }
 
   virtual void handleClick(int, int) override;
   virtual bool isClicked(const std::string &) override;
+
+  virtual bool setLayoutHidden(const std::string &, bool) override;
+  virtual bool setEnabledWidget(const std::string &, bool) override;
 
   void addChild(std::shared_ptr<BaseLayout> child) {
     children.push_back(child);

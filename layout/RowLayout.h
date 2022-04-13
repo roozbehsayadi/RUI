@@ -7,10 +7,11 @@
 
 class RowLayout : public Container {
 public:
-  RowLayout() : RowLayout(0.0, 0.0) {}
-  RowLayout(double width, double height, double xPad = 0.0, double yPad = 0.0,
-            double xMargin = 0.0, double yMargin = 0.0)
-      : Container(width, height, xPad, yPad, xMargin, yMargin) {
+  RowLayout(const std::string &slug) : RowLayout(slug, 0.0, 0.0) {}
+  RowLayout(const std::string &slug, double width, double height,
+            double xPad = 0.0, double yPad = 0.0, double xMargin = 0.0,
+            double yMargin = 0.0)
+      : Container(slug, width, height, xPad, yPad, xMargin, yMargin) {
     type = LAYOUT_ROW;
   }
 

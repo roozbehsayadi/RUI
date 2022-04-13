@@ -20,6 +20,7 @@ bool RUI::handleEvents() {
 
 void RUI::render() {
   for (auto *window : windows) {
+    window->clear();
     window->render();
     window->update();
   }
@@ -30,6 +31,18 @@ bool RUI::isClicked(const std::string &slug) {
     if (window->isClicked(slug))
       return true;
   return false;
+}
+
+void RUI::setLayoutHidden(const std::string &slug, bool hidden) {
+  for (auto *window : windows)
+    if (window->setLayoutHidden(slug, hidden))
+      return;
+}
+
+void RUI::setEnabledWidget(const std::string &slug, bool enabled) {
+  for (auto *window : windows)
+    if (window->setEnabledWidget(slug, enabled))
+      return;
 }
 
 bool RUI::isAllWindowsClosed() const {

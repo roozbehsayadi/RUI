@@ -16,16 +16,20 @@ enum LayoutType {
 
 class BaseLayout {
 public:
-  BaseLayout() : BaseLayout(0.0, 0.0) {}
-  BaseLayout(double width, double height, double xPad = 0.0, double yPad = 0.0,
-             double xMargin = 0.0, double yMargin = 0.0)
-      : width(width), height(height), xPad(xPad), yPad(yPad), xMargin(xMargin),
-        yMargin(yMargin) {}
+  BaseLayout(const std::string &slug) : BaseLayout(slug, 0.0, 0.0) {}
+  BaseLayout(const std::string &slug, double width, double height,
+             double xPad = 0.0, double yPad = 0.0, double xMargin = 0.0,
+             double yMargin = 0.0)
+      : slug(slug), width(width), height(height), xPad(xPad), yPad(yPad),
+        xMargin(xMargin), yMargin(yMargin) {}
 
   virtual void render(RuiMonitor &) const = 0;
 
   virtual void handleClick(int, int) = 0;
   virtual bool isClicked(const std::string &) = 0;
+
+  virtual bool setLayoutHidden(const std::string &, bool);
+  virtual bool setEnabledWidget(const std::string &, bool) = 0;
 
   void setPositionPixel(const Rect &positionPixel) {
     this->positionPixel = positionPixel;
@@ -41,6 +45,8 @@ public:
   void hide() { this->hidden = true; }
   void show() { this->hidden = false; }
 
+  const std::string &getSlug() const { return this->slug; }
+
   double getWidth() const { return width; }
   double getHeight() const { return height; }
   double getXPad() const { return xPad; }
@@ -53,6 +59,8 @@ public:
 protected:
   Rect getRectInPixels(const Rect &, int, int) const;
   Rect getChildRectPixels(const Rect &, std::shared_ptr<BaseLayout>) const;
+
+  std::string slug;
 
   LayoutType type;
   double width, height;    // percentage inside the parent's layout (out of 1)

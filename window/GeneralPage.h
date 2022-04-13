@@ -12,11 +12,12 @@ class GeneralPage {
 
 public:
   // Arguments:
+  // - Slug of the main container
   // - Caption of the window
-  GeneralPage(std::string);
+  GeneralPage(const std::string &, const std::string &);
 
   void render();
-
+  void clear() { monitor.clear(); }
   void update() { monitor.update(); }
 
   // This function handles all SDL events
@@ -24,6 +25,8 @@ public:
   void handleEvents(SDL_Event &);
 
   bool isClicked(const std::string &);
+  bool setLayoutHidden(const std::string &, bool);
+  bool setEnabledWidget(const std::string &, bool);
 
   RuiMonitor &getMonitor() { return this->monitor; }
   std::shared_ptr<Container> getGrid() { return this->grid; }

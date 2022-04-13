@@ -7,10 +7,11 @@
 
 class ColumnLayout : public Container {
 public:
-  ColumnLayout() : ColumnLayout(0.0, 0.0) {}
-  ColumnLayout(double width, double height, double xPad = 0.0,
-               double yPad = 0.0, double xMargin = 0.0, double yMargin = 0.0)
-      : Container(width, height, xPad, yPad, xMargin, yMargin) {
+  ColumnLayout(const std::string &slug) : ColumnLayout(slug, 0.0, 0.0) {}
+  ColumnLayout(const std::string &slug, double width, double height,
+               double xPad = 0.0, double yPad = 0.0, double xMargin = 0.0,
+               double yMargin = 0.0)
+      : Container(slug, width, height, xPad, yPad, xMargin, yMargin) {
     type = LAYOUT_COLUMN;
   }
 

@@ -1,10 +1,10 @@
 
 #include "GeneralPage.h"
 
-GeneralPage::GeneralPage(std::string caption) {
+GeneralPage::GeneralPage(const std::string &slug, const std::string &caption) {
   monitor.setCaption(caption);
 
-  grid = std::make_shared<ColumnLayout>(1.0, 1.0);
+  grid = std::make_shared<ColumnLayout>(slug, 1.0, 1.0);
 
   shown = true;
 }
@@ -47,4 +47,12 @@ void GeneralPage::handleEvents(SDL_Event &event) {
 
 bool GeneralPage::isClicked(const std::string &slug) {
   return grid->isClicked(slug);
+}
+
+bool GeneralPage::setLayoutHidden(const std::string &slug, bool hidden) {
+  return grid->setLayoutHidden(slug, hidden);
+}
+
+bool GeneralPage::setEnabledWidget(const std::string &slug, bool enabled) {
+  return grid->setEnabledWidget(slug, enabled);
 }

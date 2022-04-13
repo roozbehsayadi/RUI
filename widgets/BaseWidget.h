@@ -29,9 +29,14 @@ public:
   virtual const WidgetType &getType() const { return this->type; }
   const std::string &getSlug() const { return this->slug; }
 
+  bool isEnabled() const { return this->enabled; }
+  void setEnabled(bool enabled) { this->enabled = enabled; }
+
 protected:
   WidgetType type;
   std::string slug;
+
+  bool enabled = true;
 
   Rect positionPixel;
 };

@@ -15,6 +15,8 @@ public:
   void render();
 
   bool isClicked(const std::string &);
+  void setLayoutHidden(const std::string &, bool);
+  void setEnabledWidget(const std::string &, bool);
 
 private:
   bool isAllWindowsClosed() const;

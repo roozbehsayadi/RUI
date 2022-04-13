@@ -18,10 +18,29 @@ bool Container::isClicked(const std::string &slug) {
   return false;
 }
 
+bool Container::setLayoutHidden(const std::string &slug, bool hidden) {
+  if (this->BaseLayout::setLayoutHidden(slug, hidden)) {
+    return true;
+  }
+  for (auto &child : children) {
+    if (child->setLayoutHidden(slug, hidden))
+      return true;
+  }
+  return false;
+}
+
+bool Container::setEnabledWidget(const std::string &slug, bool enabled) {
+  for (auto &child : children) {
+    if (child->setEnabledWidget(slug, enabled))
+      return true;
+  }
+  return false;
+}
+
 void Container::render(RuiMonitor &monitor) const {
-  monitor.drawRectangle(positionPixel, {255, 0, 0});
-  for (auto child : children) {
-    if (!child->isHidden()) {
+  if (!this->hidden) {
+    monitor.drawRectangle(positionPixel, {255, 0, 0});
+    for (auto child : children) {
       Rect temp{positionPixel.x + positionPixel.w * xPad +
                     positionPixel.w * child->getXMargin(),
                 positionPixel.y + positionPixel.h * yPad +
