@@ -7,14 +7,16 @@ bool RUI::handleEvents() {
   bool quit = false;
   static SDL_Event event;
   if (SDL_PollEvent(&event)) {
-    if (event.type == SDL_QUIT)
+    if (event.type == SDL_QUIT) {
       quit = true;
+    }
     for (auto i = 0u; i < windows.size(); i++) {
       windows.at(i)->handleEvents(event);
     }
   }
-  if (isAllWindowsClosed())
+  if (windows.size() > 1 && isAllWindowsClosed()) {
     quit = true;
+  }
   return quit;
 }
 
@@ -56,8 +58,7 @@ void RUI::setLayoutHidden(const std::string &slug, bool hidden) {
 bool RUI::isAllWindowsClosed() const {
   bool allWindowsClosed = true;
   for (auto *window : windows)
-    if (window->isShown()) {
+    if (window->isShown())
       return false;
-    }
   return true;
 }
