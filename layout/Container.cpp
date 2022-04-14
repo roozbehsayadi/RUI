@@ -4,6 +4,8 @@
 #include "utils/Geometry.h"
 
 void Container::handleClick(int mouseX, int mouseY) {
+  if (hidden)
+    return;
   if (Geometry::isPointInsideRect(mouseX, mouseY, positionPixel))
     for (auto &child : children) {
       child->handleClick(mouseX, mouseY);

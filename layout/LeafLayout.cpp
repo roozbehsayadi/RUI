@@ -14,6 +14,8 @@ void LeafLayout::render(RuiMonitor &monitor) const {
 }
 
 void LeafLayout::handleClick(int mouseX, int mouseY) {
+  if (hidden)
+    return;
   widget->handleClick(mouseX, mouseY);
 }
 
