@@ -91,7 +91,7 @@ void RuiMonitor::drawText(const Rect &rect, const Color &color,
                       int(rect.y + fabs(rect.h - textSurface->h) / 2),
                       textSurface->w, textSurface->h};
   SDL_RenderCopy(renderer, textTexture, NULL, &targetRect);
-  // TODO Do I need to SDL_DestroyTexture(textTexture)?
+  SDL_DestroyTexture(textTexture);
   SDL_FreeSurface(textSurface);
 }
 
