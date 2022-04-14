@@ -25,25 +25,26 @@ int main() {
   rui.addWindow(&page);
   rui.addWindow(&page2);
 
-  rui.getWidget("button2").first->setEnabled(false);
-
   rui.render();
   bool quit = false;
   while (!quit) {
     quit = rui.handleEvents();
 
     // do your stuff here. for example:
-    if (rui.getWidget("button1").first->isClicked()) {
-      rui.getWidget("button1").first->setEnabled(false);
-      rui.getWidget("button2").first->setEnabled(true);
-      rui.getLayout("big leaf1")->show();
-      rui.getLayout("big leaf2")->hide();
+    auto button1 = rui.getWidget("button1").first,
+         button2 = rui.getWidget("button2").first;
+    auto leaf1 = rui.getLayout("big leaf1");
+    if (button1->isClicked()) {
+      if (leaf1->isHidden())
+        leaf1->show();
+      else
+        leaf1->hide();
     }
-    if (rui.getWidget("button2").first->isClicked()) {
-      rui.getWidget("button2").first->setEnabled(false);
-      rui.getWidget("button1").first->setEnabled(true);
-      rui.getLayout("big leaf1")->hide();
-      rui.getLayout("big leaf2")->show();
+    if (button2->isClicked()) {
+      if (button1->isEnabled())
+        button1->setEnabled(false);
+      else
+        button1->setEnabled(true);
     }
 
     rui.render();
