@@ -13,27 +13,15 @@ void LeafLayout::render(RuiMonitor &monitor) const {
   }
 }
 
+std::pair<std::shared_ptr<BaseWidget>, bool>
+LeafLayout::getWidget(const std::string &slug) const {
+  if (this->widget->getSlug() == slug)
+    return std::make_pair(this->widget, this->hidden);
+  return std::make_pair(nullptr, false);
+}
+
 void LeafLayout::handleClick(int mouseX, int mouseY) {
   if (hidden)
     return;
   widget->handleClick(mouseX, mouseY);
-}
-
-bool LeafLayout::isClicked(const std::string &slug) {
-  if (!widget->isEnabled())
-    return false;
-  if (widget->getType() == WIDGET_BUTTON && widget->getSlug() == slug) {
-    auto button = std::dynamic_pointer_cast<ButtonWidget>(widget);
-    return button->isClicked();
-  }
-  return false;
-}
-
-bool LeafLayout::setEnabledWidget(const std::string &slug, bool enabled) {
-  if (widget->getType() == WIDGET_BUTTON && widget->getSlug() == slug) {
-    auto button = std::dynamic_pointer_cast<ButtonWidget>(widget);
-    button->setEnabled(enabled);
-    return true;
-  }
-  return false;
 }

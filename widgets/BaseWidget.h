@@ -15,12 +15,14 @@ enum WidgetType {
   WIDGET_IMAGE,
 };
 
+class LeafLayout;
+
 class BaseWidget {
+
+  friend class LeafLayout;
+
 public:
   BaseWidget(const std::string &slug) : slug(slug) { type = WIDGET_UNKNOWN; }
-
-  virtual void draw(RuiMonitor &) = 0;
-  virtual void handleClick(int, int) = 0;
 
   void setPositionPixel(const Rect &positionPixel) {
     this->positionPixel = positionPixel;
@@ -29,12 +31,21 @@ public:
   virtual const WidgetType &getType() const { return this->type; }
   const std::string &getSlug() const { return this->slug; }
 
+  // Returns whether the button was clicked or not
+  // and sets the "clicked" variable to false.
+  virtual bool isClicked() final;
+
   bool isEnabled() const { return this->enabled; }
   void setEnabled(bool enabled) { this->enabled = enabled; }
 
 protected:
+  virtual void draw(RuiMonitor &) = 0;
+  virtual void handleClick(int, int) = 0;
+
   WidgetType type;
   std::string slug;
+
+  bool clicked = false;
 
   bool enabled = true;
 

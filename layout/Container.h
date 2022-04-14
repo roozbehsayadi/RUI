@@ -17,11 +17,12 @@ public:
     type = LAYOUT_UNKNOWN;
   }
 
+  virtual std::pair<std::shared_ptr<BaseWidget>, bool>
+  getWidget(const std::string &) const override;
+
   virtual void handleClick(int, int) override;
-  virtual bool isClicked(const std::string &) override;
 
   virtual bool setLayoutHidden(const std::string &, bool) override;
-  virtual bool setEnabledWidget(const std::string &, bool) override;
 
   void addChild(std::shared_ptr<BaseLayout> child) {
     children.push_back(child);

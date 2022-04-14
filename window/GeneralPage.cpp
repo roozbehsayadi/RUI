@@ -45,14 +45,11 @@ void GeneralPage::handleEvents(SDL_Event &event) {
   }
 }
 
-bool GeneralPage::isClicked(const std::string &slug) {
-  return grid->isClicked(slug);
+std::pair<std::shared_ptr<BaseWidget>, bool>
+GeneralPage::getWidget(const std::string &slug) const {
+  return grid->getWidget(slug);
 }
 
 bool GeneralPage::setLayoutHidden(const std::string &slug, bool hidden) {
   return grid->setLayoutHidden(slug, hidden);
-}
-
-bool GeneralPage::setEnabledWidget(const std::string &slug, bool enabled) {
-  return grid->setEnabledWidget(slug, enabled);
 }

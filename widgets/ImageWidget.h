@@ -12,12 +12,12 @@ public:
     this->type = WIDGET_IMAGE;
   }
 
+  void changeImagePath(const std::string &imagePath);
+
+protected:
   virtual void draw(RuiMonitor &monitor) override;
   virtual void handleClick(int, int) override{};
 
-  void changeImagePath(const std::string &imagePath);
-
-private:
   SDL_Texture *imageTexture = nullptr;
   std::string imagePath;
 };

@@ -6,6 +6,7 @@
 
 #include "monitor/RuiMonitor.h"
 #include "utils/Rect.h"
+#include "widgets/BaseWidget.h"
 
 enum LayoutType {
   LAYOUT_UNKNOWN,
@@ -25,11 +26,12 @@ public:
 
   virtual void render(RuiMonitor &) const = 0;
 
+  virtual std::pair<std::shared_ptr<BaseWidget>, bool>
+  getWidget(const std::string &) const = 0;
+
   virtual void handleClick(int, int) = 0;
-  virtual bool isClicked(const std::string &) = 0;
 
   virtual bool setLayoutHidden(const std::string &, bool);
-  virtual bool setEnabledWidget(const std::string &, bool) = 0;
 
   void setPositionPixel(const Rect &positionPixel) {
     this->positionPixel = positionPixel;

@@ -26,22 +26,21 @@ void RUI::render() {
   }
 }
 
-bool RUI::isClicked(const std::string &slug) {
-  for (auto *window : windows)
-    if (window->isClicked(slug))
-      return true;
-  return false;
+std::pair<std::shared_ptr<BaseWidget>, bool>
+RUI::getWidget(const std::string &slug) const {
+  for (auto *window : windows) {
+    auto returnValue = window->getWidget(slug);
+    auto widget = returnValue.first;
+    auto hidden = returnValue.second;
+    if (widget != nullptr)
+      return returnValue;
+  }
+  return std::make_pair(nullptr, false);
 }
 
 void RUI::setLayoutHidden(const std::string &slug, bool hidden) {
   for (auto *window : windows)
     if (window->setLayoutHidden(slug, hidden))
-      return;
-}
-
-void RUI::setEnabledWidget(const std::string &slug, bool enabled) {
-  for (auto *window : windows)
-    if (window->setEnabledWidget(slug, enabled))
       return;
 }
 

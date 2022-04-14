@@ -16,21 +16,15 @@ public:
     color = {0, 255, 0};
   }
 
-  virtual void draw(RuiMonitor &monitor) override;
-  virtual void handleClick(int, int) override;
-
-  // Returns whether the button was clicked or not
-  // and sets the "clicked" variable to false.
-  virtual bool isClicked() final;
-
   void setCaption(const std::string &caption) { this->caption = caption; }
 
   const std::string &getCaption() const { return this->caption; }
 
-private:
-  std::string caption;
+protected:
+  virtual void draw(RuiMonitor &monitor) override;
+  virtual void handleClick(int, int) override;
 
-  bool clicked = false;
+  std::string caption;
 
   Color color;
 };

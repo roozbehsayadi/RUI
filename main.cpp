@@ -25,7 +25,7 @@ int main() {
   rui.addWindow(&page);
   rui.addWindow(&page2);
 
-  rui.setEnabledWidget("button2", false);
+  rui.getWidget("button2").first->setEnabled(false);
 
   rui.render();
   bool quit = false;
@@ -33,15 +33,15 @@ int main() {
     quit = rui.handleEvents();
 
     // do your stuff here. for example:
-    if (rui.isClicked("button1")) {
-      rui.setEnabledWidget("button1", false);
-      rui.setEnabledWidget("button2", true);
+    if (rui.getWidget("button1").first->isClicked()) {
+      rui.getWidget("button1").first->setEnabled(false);
+      rui.getWidget("button2").first->setEnabled(true);
       rui.setLayoutHidden("big leaf1", false);
       rui.setLayoutHidden("big leaf2", true);
     }
-    if (rui.isClicked("button2")) {
-      rui.setEnabledWidget("button2", false);
-      rui.setEnabledWidget("button1", true);
+    if (rui.getWidget("button2").first->isClicked()) {
+      rui.getWidget("button2").first->setEnabled(false);
+      rui.getWidget("button1").first->setEnabled(true);
       rui.setLayoutHidden("big leaf1", true);
       rui.setLayoutHidden("big leaf2", false);
     }

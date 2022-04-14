@@ -3,6 +3,17 @@
 
 #include "utils/Geometry.h"
 
+std::pair<std::shared_ptr<BaseWidget>, bool>
+Container::getWidget(const std::string &slug) const {
+  for (auto &child : children) {
+    auto returnedWidget = child->getWidget(slug);
+    if (returnedWidget.first != nullptr)
+      return std::make_pair(returnedWidget.first,
+                            returnedWidget.second | this->hidden);
+  }
+  return std::make_pair<std::shared_ptr<BaseWidget>, bool>(nullptr, false);
+}
+
 void Container::handleClick(int mouseX, int mouseY) {
   if (hidden)
     return;
@@ -12,28 +23,12 @@ void Container::handleClick(int mouseX, int mouseY) {
     }
 }
 
-bool Container::isClicked(const std::string &slug) {
-  for (auto &child : children) {
-    if (child->isClicked(slug))
-      return true;
-  }
-  return false;
-}
-
 bool Container::setLayoutHidden(const std::string &slug, bool hidden) {
   if (this->BaseLayout::setLayoutHidden(slug, hidden)) {
     return true;
   }
   for (auto &child : children) {
     if (child->setLayoutHidden(slug, hidden))
-      return true;
-  }
-  return false;
-}
-
-bool Container::setEnabledWidget(const std::string &slug, bool enabled) {
-  for (auto &child : children) {
-    if (child->setEnabledWidget(slug, enabled))
       return true;
   }
   return false;

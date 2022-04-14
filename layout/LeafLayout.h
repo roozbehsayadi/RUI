@@ -20,10 +20,10 @@ public:
 
   virtual void render(RuiMonitor &) const override;
 
-  virtual void handleClick(int, int) override;
-  virtual bool isClicked(const std::string &) override;
+  virtual std::pair<std::shared_ptr<BaseWidget>, bool>
+  getWidget(const std::string &) const override;
 
-  virtual bool setEnabledWidget(const std::string &, bool) override;
+  virtual void handleClick(int, int) override;
 
   void setWidget(std::shared_ptr<BaseWidget> widget) { this->widget = widget; }
 

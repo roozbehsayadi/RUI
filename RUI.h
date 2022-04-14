@@ -1,11 +1,15 @@
 #ifndef __RUI_H
 #define __RUI_H
 
+#include <memory>
+#include <utility>
 #include <vector>
 
 #include "SDL2/SDL.h"
 
 #include "window/GeneralPage.h"
+
+class BaseWidget;
 
 class RUI {
 
@@ -14,9 +18,11 @@ public:
   bool handleEvents();
   void render();
 
-  bool isClicked(const std::string &);
+  /// return the widget + if it is hidden
+  std::pair<std::shared_ptr<BaseWidget>, bool>
+  getWidget(const std::string &) const;
+
   void setLayoutHidden(const std::string &, bool);
-  void setEnabledWidget(const std::string &, bool);
 
 private:
   bool isAllWindowsClosed() const;
