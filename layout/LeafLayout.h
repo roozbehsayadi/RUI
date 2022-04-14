@@ -23,6 +23,11 @@ public:
   virtual std::pair<std::shared_ptr<BaseWidget>, bool>
   getWidget(const std::string &) const override;
 
+  virtual std::shared_ptr<BaseLayout> getLayout(const std::string &) const {
+    // has no children
+    return nullptr;
+  }
+
   virtual void handleClick(int, int) override;
 
   void setWidget(std::shared_ptr<BaseWidget> widget) { this->widget = widget; }

@@ -29,6 +29,8 @@ public:
   virtual std::pair<std::shared_ptr<BaseWidget>, bool>
   getWidget(const std::string &) const = 0;
 
+  virtual std::shared_ptr<BaseLayout> getLayout(const std::string &) const = 0;
+
   virtual void handleClick(int, int) = 0;
 
   virtual bool setLayoutHidden(const std::string &, bool);

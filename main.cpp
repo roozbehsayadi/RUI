@@ -36,14 +36,14 @@ int main() {
     if (rui.getWidget("button1").first->isClicked()) {
       rui.getWidget("button1").first->setEnabled(false);
       rui.getWidget("button2").first->setEnabled(true);
-      rui.setLayoutHidden("big leaf1", false);
-      rui.setLayoutHidden("big leaf2", true);
+      rui.getLayout("big leaf1")->show();
+      rui.getLayout("big leaf2")->hide();
     }
     if (rui.getWidget("button2").first->isClicked()) {
       rui.getWidget("button2").first->setEnabled(false);
       rui.getWidget("button1").first->setEnabled(true);
-      rui.setLayoutHidden("big leaf1", true);
-      rui.setLayoutHidden("big leaf2", false);
+      rui.getLayout("big leaf1")->hide();
+      rui.getLayout("big leaf2")->show();
     }
 
     rui.render();

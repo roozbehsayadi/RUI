@@ -29,6 +29,8 @@ public:
   std::pair<std::shared_ptr<BaseWidget>, bool>
   getWidget(const std::string &) const;
 
+  std::shared_ptr<BaseLayout> getLayout(const std::string &) const;
+
   bool setLayoutHidden(const std::string &, bool);
 
   RuiMonitor &getMonitor() { return this->monitor; }

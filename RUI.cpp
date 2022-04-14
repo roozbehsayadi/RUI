@@ -38,6 +38,15 @@ RUI::getWidget(const std::string &slug) const {
   return std::make_pair(nullptr, false);
 }
 
+std::shared_ptr<BaseLayout> RUI::getLayout(const std::string &slug) const {
+  for (auto *window : windows) {
+    auto returnValue = window->getLayout(slug);
+    if (returnValue != nullptr)
+      return returnValue;
+  }
+  return nullptr;
+}
+
 void RUI::setLayoutHidden(const std::string &slug, bool hidden) {
   for (auto *window : windows)
     if (window->setLayoutHidden(slug, hidden))

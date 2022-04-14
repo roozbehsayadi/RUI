@@ -50,6 +50,11 @@ GeneralPage::getWidget(const std::string &slug) const {
   return grid->getWidget(slug);
 }
 
+std::shared_ptr<BaseLayout>
+GeneralPage::getLayout(const std::string &slug) const {
+  return grid->getLayout(slug);
+}
+
 bool GeneralPage::setLayoutHidden(const std::string &slug, bool hidden) {
   return grid->setLayoutHidden(slug, hidden);
 }

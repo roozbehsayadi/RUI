@@ -22,6 +22,8 @@ public:
   std::pair<std::shared_ptr<BaseWidget>, bool>
   getWidget(const std::string &) const;
 
+  std::shared_ptr<BaseLayout> getLayout(const std::string &slug) const;
+
   void setLayoutHidden(const std::string &, bool);
 
 private:
