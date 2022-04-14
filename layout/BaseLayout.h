@@ -15,7 +15,7 @@ enum LayoutType {
   LAYOUT_LEAF,
 };
 
-class BaseLayout {
+class BaseLayout : std::enable_shared_from_this<BaseLayout> {
 public:
   BaseLayout(const std::string &slug) : BaseLayout(slug, 0.0, 0.0) {}
   BaseLayout(const std::string &slug, double width, double height,
