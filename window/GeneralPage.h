@@ -38,6 +38,7 @@ public:
 
 private:
   RuiMonitor monitor;
+  int mouseX = -1, mouseY = -1;
 
   std::shared_ptr<Container> grid;
 

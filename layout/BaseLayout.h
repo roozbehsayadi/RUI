@@ -31,7 +31,15 @@ public:
 
   virtual std::shared_ptr<BaseLayout> getLayout(const std::string &) const = 0;
 
+  // TODO make it return if anything happened.
+  // if not, the layout itself can handle click.
+  // maybe by having a similar function to isClicked()?
   virtual void handleClick(int, int) = 0;
+  // xWheel, yWheel, x of mouse, y of mouse.
+  // Returns if scrolling happened. Returns
+  // true even if the layout have reached its
+  // end and nothing actually scrolled.
+  virtual bool handleScroll(int, int, int, int) = 0;
 
   // Return trimmed rect + if it must be shown at all
   virtual const std::pair<Rect, bool> trimRect(const Rect &) const;
@@ -73,6 +81,7 @@ protected:
   double xMargin, yMargin; // percentage (out of 1)
   Rect positionPixel;
   bool hidden = false;
+  int initialDistance = 0; // used in scrolling
 };
 
 #endif // __BASE_LAYOUT_H

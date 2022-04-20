@@ -3,6 +3,7 @@
 
 #include "Container.h"
 #include "monitor/RuiMonitor.h"
+#include "utils/Geometry.h"
 #include "utils/Rect.h"
 
 class ColumnLayout : public Container {
@@ -14,6 +15,8 @@ public:
       : Container(slug, width, height, xPad, yPad, xMargin, yMargin) {
     type = LAYOUT_COLUMN;
   }
+
+  virtual bool handleScroll(int, int, int, int) override;
 
   virtual void render(RuiMonitor &) const override;
 };

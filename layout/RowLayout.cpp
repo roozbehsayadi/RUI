@@ -1,10 +1,21 @@
 
 #include "RowLayout.h"
 
+bool RowLayout::handleScroll(int wheelX, int wheelY, int mouseX, int mouseY) {
+  bool somethingAffected =
+      this->Container::handleScroll(wheelX, wheelY, mouseX, mouseY);
+  if (!somethingAffected && children.size() != 0 &&
+      Geometry::isPointInsideRect(mouseX, mouseY, positionPixel)) {
+    this->initialDistance += wheelX;
+    somethingAffected = true;
+  }
+  return somethingAffected;
+}
+
 void RowLayout::render(RuiMonitor &monitor) const {
   if (!this->hidden) {
     monitor.drawRectangle(positionPixel, {255, 0, 0});
-    double currentX = 0;
+    double currentX = this->initialDistance;
     for (auto i = 0u; i < children.size(); i++) {
       auto cell = children.at(i);
       if (cell->isHidden())
