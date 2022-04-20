@@ -7,13 +7,14 @@ bool RowLayout::handleScroll(int wheelX, int wheelY, int mouseX, int mouseY) {
   if (!somethingAffected && children.size() != 0 &&
       Geometry::isPointInsideRect(mouseX, mouseY, positionPixel)) {
     if (this->scrollable) {
-      this->initialDistance += wheelX;
+      this->initialDistance += wheelX * Container::scrollAmount;
       somethingAffected = true;
     }
   }
   return somethingAffected;
 }
 
+// TODO refactor this!!!
 void RowLayout::render(RuiMonitor &monitor) {
   if (!this->hidden) {
     monitor.drawRectangle(positionPixel, {255, 0, 0});

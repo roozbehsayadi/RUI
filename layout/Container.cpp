@@ -3,6 +3,8 @@
 
 #include "utils/Geometry.h"
 
+int Container::scrollAmount = 30;
+
 std::pair<std::shared_ptr<BaseWidget>, bool>
 Container::getWidget(const std::string &slug) const {
   for (auto &child : children) {

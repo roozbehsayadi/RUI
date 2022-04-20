@@ -36,6 +36,7 @@ protected:
   std::vector<std::shared_ptr<BaseLayout>> children;
 
   bool scrollable = false;
+  static int scrollAmount;
 };
 
 #endif // __CONTAINER_H
