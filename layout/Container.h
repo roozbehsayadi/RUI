@@ -30,10 +30,12 @@ public:
     children.push_back(child);
   }
 
-  virtual void render(RuiMonitor &) const override;
+  virtual void render(RuiMonitor &) override;
 
 protected:
   std::vector<std::shared_ptr<BaseLayout>> children;
+
+  bool scrollable = false;
 };
 
 #endif // __CONTAINER_H

@@ -1,7 +1,7 @@
 
 #include "LeafLayout.h"
 
-void LeafLayout::render(RuiMonitor &monitor) const {
+void LeafLayout::render(RuiMonitor &monitor) {
   if (!this->hidden) {
     monitor.drawRectangle(positionPixel, {255, 0, 0});
     // TODO handle if the widget was null?

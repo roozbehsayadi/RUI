@@ -40,14 +40,15 @@ bool Container::handleScroll(int wheelX, int wheelY, int mouseX, int mouseY) {
     return false;
   bool somethingAffected = false;
   if (Geometry::isPointInsideRect(mouseX, mouseY, positionPixel)) {
-    for (auto &child : children)
+    for (auto &child : children) {
       somethingAffected |= child->handleScroll(wheelX, wheelY, mouseX, mouseY);
+    }
   }
 
   return somethingAffected;
 }
 
-void Container::render(RuiMonitor &monitor) const {
+void Container::render(RuiMonitor &monitor) {
   if (!this->hidden) {
     monitor.drawRectangle(positionPixel, {255, 0, 0});
     for (auto child : children) {

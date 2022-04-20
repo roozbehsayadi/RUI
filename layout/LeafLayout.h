@@ -18,7 +18,7 @@ public:
     type = LAYOUT_LEAF;
   }
 
-  virtual void render(RuiMonitor &) const override;
+  virtual void render(RuiMonitor &) override;
 
   virtual std::pair<std::shared_ptr<BaseWidget>, bool>
   getWidget(const std::string &) const override;

@@ -18,7 +18,7 @@ public:
 
   virtual bool handleScroll(int, int, int, int) override;
 
-  virtual void render(RuiMonitor &) const override;
+  virtual void render(RuiMonitor &) override;
 };
 
 #endif // __ROW_LAYOUT_H

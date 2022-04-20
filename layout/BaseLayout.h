@@ -15,7 +15,14 @@ enum LayoutType {
   LAYOUT_LEAF,
 };
 
+class ColumnLayout;
+class RowLayout;
+
+// TODO remove this parent class
 class BaseLayout : std::enable_shared_from_this<BaseLayout> {
+  friend class ColumnLayout;
+  friend class RowLayout;
+
 public:
   BaseLayout(const std::string &slug) : BaseLayout(slug, 0.0, 0.0) {}
   BaseLayout(const std::string &slug, double width, double height,
@@ -24,7 +31,7 @@ public:
       : slug(slug), width(width), height(height), xPad(xPad), yPad(yPad),
         xMargin(xMargin), yMargin(yMargin) {}
 
-  virtual void render(RuiMonitor &) const = 0;
+  virtual void render(RuiMonitor &) = 0;
 
   virtual std::pair<std::shared_ptr<BaseWidget>, bool>
   getWidget(const std::string &) const = 0;

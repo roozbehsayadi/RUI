@@ -7,13 +7,15 @@ bool ColumnLayout::handleScroll(int wheelX, int wheelY, int mouseX,
       this->Container::handleScroll(wheelX, wheelY, mouseX, mouseY);
   if (!somethingAffected && children.size() != 0 &&
       Geometry::isPointInsideRect(mouseX, mouseY, positionPixel)) {
-    this->initialDistance += wheelY;
-    somethingAffected = true;
+    if (this->scrollable) {
+      this->initialDistance += wheelY;
+      somethingAffected = true;
+    }
   }
   return somethingAffected;
 }
 
-void ColumnLayout::render(RuiMonitor &monitor) const {
+void ColumnLayout::render(RuiMonitor &monitor) {
   if (!this->hidden) {
     monitor.drawRectangle(positionPixel, {255, 0, 0});
     double currentY = this->initialDistance;
@@ -37,6 +39,12 @@ void ColumnLayout::render(RuiMonitor &monitor) const {
         monitor.drawRectangle(temp.first, {255, 0, 0});
         cell->render(monitor);
       }
+    }
+    if (children.size() != 0) {
+      auto lastChildPosition = children.at(children.size() - 1)->positionPixel;
+      double childrenTotalHeight = lastChildPosition.y + lastChildPosition.h -
+                                   initialDistance - positionPixel.y;
+      scrollable = childrenTotalHeight > positionPixel.h;
     }
   }
 }
