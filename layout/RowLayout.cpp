@@ -17,10 +17,13 @@ void RowLayout::render(RuiMonitor &monitor) const {
           cell->getWidth() * positionPixel.w,
           cell->getHeight() * positionPixel.h};
       cell->setPositionPixel(cellRect);
-      monitor.drawRectangle(cellRect, {255, 0, 0});
       currentX += cellRect.w + positionPixel.w * cell->getXMargin() * 2 +
                   positionPixel.w * this->getXPad() * 2;
-      cell->render(monitor);
+      auto temp = this->trimRect(cellRect);
+      if (temp.second) {
+        monitor.drawRectangle(temp.first, {255, 0, 0});
+        cell->render(monitor);
+      }
     }
   }
 }

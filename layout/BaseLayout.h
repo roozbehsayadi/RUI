@@ -33,6 +33,9 @@ public:
 
   virtual void handleClick(int, int) = 0;
 
+  // Return trimmed rect + if it must be shown at all
+  virtual const std::pair<Rect, bool> trimRect(const Rect &) const;
+
   void setPositionPixel(const Rect &positionPixel) {
     this->positionPixel = positionPixel;
   }

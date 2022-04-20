@@ -18,12 +18,12 @@ int main() {
   GeneralPage page("main_1", "rui");
   fillPage(page, "1", "img1");
 
-  GeneralPage page2("main_2", "rui2");
-  fillPage(page2, "2", "img2");
+  // GeneralPage page2("main_2", "rui2");
+  // fillPage(page2, "2", "img2");
 
   RUI rui;
   rui.addWindow(&page);
-  rui.addWindow(&page2);
+  // rui.addWindow(&page2);
 
   rui.render();
   bool quit = false;
@@ -31,8 +31,8 @@ int main() {
     quit = rui.handleEvents();
 
     // do your stuff here. for example:
-    auto button1 = rui.getWidget("button1").first,
-         button2 = rui.getWidget("button2").first;
+    auto button1 = rui.getWidget("button1").first;
+    //  button2 = rui.getWidget("button2").first;
     auto leaf1 = rui.getLayout("big leaf1");
     if (button1->isClicked()) {
       if (leaf1->isHidden())
@@ -40,12 +40,17 @@ int main() {
       else
         leaf1->hide();
     }
-    if (button2->isClicked()) {
-      if (button1->isEnabled())
-        button1->setEnabled(false);
+    if (button1->isClicked())
+      if (leaf1->isHidden())
+        leaf1->show();
       else
-        button1->setEnabled(true);
-    }
+        leaf1->hide();
+    // if (button2->isClicked()) {
+    //   if (button1->isEnabled())
+    //     button1->setEnabled(false);
+    //   else
+    //     button1->setEnabled(true);
+    // }
 
     rui.render();
   }
@@ -61,6 +66,8 @@ void fillPage(GeneralPage &page, const std::string &index,
                                        0.10, 0.10, 0.05);
   auto c = std::make_shared<ColumnLayout>("c1" + index, 0.20, 0.30, 0.0, 0.0,
                                           0.04, 0.25);
+  auto cTemp = std::make_shared<ColumnLayout>("c_temp" + index, 0.3, 0.3, 0.0,
+                                              0.0, 0.04, 0.25);
   c->addChild(std::make_shared<RowLayout>("row dakheli" + index, 0.80, 0.90,
                                           0.0, 0.0, 0.10, 0.05));
   r->addChild(c);
@@ -73,6 +80,7 @@ void fillPage(GeneralPage &page, const std::string &index,
   auto button = std::make_shared<ButtonWidget>("button" + index, "Button");
   l->setWidget(button);
   r->addChild(l);
+  r->addChild(cTemp);
   grid->addChild(r);
 
   auto bigColumn = std::make_shared<ColumnLayout>("big column" + index, 0.80,
