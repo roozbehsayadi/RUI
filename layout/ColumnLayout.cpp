@@ -19,7 +19,7 @@ void ColumnLayout::render(RuiMonitor &monitor) const {
       cell->setPositionPixel(cellRect);
       monitor.drawRectangle(cellRect, {255, 0, 0});
       currentY += cellRect.h + positionPixel.h * cell->getYMargin() * 2 +
-                  positionPixel.h * this->getYPad();
+                  positionPixel.h * this->getYPad() * 2;
       cell->render(monitor);
     }
   }
