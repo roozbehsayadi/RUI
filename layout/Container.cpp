@@ -3,7 +3,7 @@
 
 #include "utils/Geometry.h"
 
-int Container::scrollAmount = 30;
+const int Container::SCROLL_SPEED = 30;
 
 std::pair<std::shared_ptr<BaseWidget>, bool>
 Container::getWidget(const std::string &slug) const {
@@ -37,13 +37,13 @@ void Container::handleClick(int mouseX, int mouseY) {
     }
 }
 
-bool Container::handleScroll(int wheelX, int wheelY, int mouseX, int mouseY) {
+bool Container::handleScroll(int scrollAmount, int mouseX, int mouseY) {
   if (hidden)
     return false;
   bool somethingAffected = false;
   if (Geometry::isPointInsideRect(mouseX, mouseY, positionPixel)) {
     for (auto &child : children) {
-      somethingAffected |= child->handleScroll(wheelX, wheelY, mouseX, mouseY);
+      somethingAffected |= child->handleScroll(scrollAmount, mouseX, mouseY);
     }
   }
 

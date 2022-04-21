@@ -16,7 +16,7 @@ public:
     type = LAYOUT_COLUMN;
   }
 
-  virtual bool handleScroll(int, int, int, int) override;
+  virtual bool handleScroll(int, int, int) override;
 
   virtual void render(RuiMonitor &) override;
 };

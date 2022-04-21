@@ -24,7 +24,7 @@ public:
   getLayout(const std::string &) const override;
 
   virtual void handleClick(int, int) override;
-  virtual bool handleScroll(int, int, int, int) override;
+  virtual bool handleScroll(int, int, int) override;
 
   void addChild(std::shared_ptr<BaseLayout> child) {
     children.push_back(child);
@@ -36,7 +36,7 @@ protected:
   std::vector<std::shared_ptr<BaseLayout>> children;
 
   bool scrollable = false;
-  static int scrollAmount;
+  const static int SCROLL_SPEED;
 };
 
 #endif // __CONTAINER_H

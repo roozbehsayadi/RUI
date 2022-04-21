@@ -29,7 +29,7 @@ public:
   }
 
   virtual void handleClick(int, int) override;
-  virtual bool handleScroll(int, int, int, int) override { return false; }
+  virtual bool handleScroll(int, int, int) override { return false; }
 
   void setWidget(std::shared_ptr<BaseWidget> widget) { this->widget = widget; }
 

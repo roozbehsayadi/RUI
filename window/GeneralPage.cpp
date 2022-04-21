@@ -45,7 +45,7 @@ void GeneralPage::handleEvents(SDL_Event &event) {
   } else if (event.type == SDL_MOUSEMOTION) {
     SDL_GetMouseState(&mouseX, &mouseY);
   } else if (event.type == SDL_MOUSEWHEEL) {
-    grid->handleScroll(event.wheel.x, event.wheel.y, mouseX, mouseY);
+    grid->handleScroll(event.wheel.y, mouseX, mouseY);
   }
 }
 

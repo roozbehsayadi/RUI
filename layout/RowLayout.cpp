@@ -1,13 +1,13 @@
 
 #include "RowLayout.h"
 
-bool RowLayout::handleScroll(int wheelX, int wheelY, int mouseX, int mouseY) {
+bool RowLayout::handleScroll(int scrollAmount, int mouseX, int mouseY) {
   bool somethingAffected =
-      this->Container::handleScroll(wheelX, wheelY, mouseX, mouseY);
+      this->Container::handleScroll(scrollAmount, mouseX, mouseY);
   if (!somethingAffected && children.size() != 0 &&
       Geometry::isPointInsideRect(mouseX, mouseY, positionPixel)) {
     if (this->scrollable) {
-      this->initialDistance += wheelX * Container::scrollAmount;
+      this->initialDistance += scrollAmount * Container::SCROLL_SPEED;
       somethingAffected = true;
     }
   }
