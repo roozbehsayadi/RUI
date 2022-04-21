@@ -19,6 +19,9 @@ public:
   virtual bool handleScroll(int, int, int) override;
 
   virtual void render(RuiMonitor &) override;
+
+private:
+  int availableScrollSpaceUp = 0, availableScrollSpaceDown = 0;
 };
 
 #endif // __COLUMN_LAYOUT_H

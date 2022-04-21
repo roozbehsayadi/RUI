@@ -7,7 +7,10 @@ bool RowLayout::handleScroll(int scrollAmount, int mouseX, int mouseY) {
   if (!somethingAffected && children.size() != 0 &&
       Geometry::isPointInsideRect(mouseX, mouseY, positionPixel)) {
     if (this->scrollable) {
-      this->initialDistance += scrollAmount * Container::SCROLL_SPEED;
+      if ((scrollAmount < 0 && availableScrollSpaceLeft != 0) ||
+          (scrollAmount > 0 && availableScrollSpaceRight != 0)) {
+        this->initialDistance += scrollAmount * Container::SCROLL_SPEED;
+      }
       somethingAffected = true;
     }
   }
@@ -41,9 +44,21 @@ void RowLayout::render(RuiMonitor &monitor) {
     }
     if (children.size() != 0) {
       auto lastChildPosition = children.at(children.size() - 1)->positionPixel;
-      double childrenTotalWidget = lastChildPosition.x + lastChildPosition.w -
-                                   initialDistance - positionPixel.x;
-      scrollable = childrenTotalWidget > positionPixel.w;
+      lastChildPosition.x +=
+          children.at(children.size() - 1)->getXMargin() * positionPixel.w;
+      double childrenTotalWidth = lastChildPosition.x + lastChildPosition.w -
+                                  initialDistance - positionPixel.x;
+      scrollable = childrenTotalWidth > positionPixel.w;
+      if (initialDistance < 0)
+        availableScrollSpaceRight = -initialDistance;
+      else
+        availableScrollSpaceRight = 0;
+      if (lastChildPosition.x + lastChildPosition.w >
+          positionPixel.x + positionPixel.w)
+        availableScrollSpaceLeft = (lastChildPosition.x + lastChildPosition.w) -
+                                   (positionPixel.x + positionPixel.w);
+      else
+        availableScrollSpaceLeft = 0;
     }
   }
 }

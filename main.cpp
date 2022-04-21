@@ -87,10 +87,23 @@ void fillPage(GeneralPage &page, const std::string &index,
                                                   0.60, 0.05, 0.05, 0.1, 0.05);
   auto l2 = std::make_shared<LeafLayout>("big leaf" + index, 0.90, 0.90, 0.0,
                                          0.0, 0.0, 0.0);
-  bigColumn->addChild(l2);
 
   auto img = std::make_shared<ImageWidget>(imageSlug, "assets/images/" +
                                                           imageSlug + ".png");
   l2->setWidget(img);
+  bigColumn->addChild(l2);
+
   grid->addChild(bigColumn);
+
+  auto bigColumn2 = std::make_shared<ColumnLayout>("big column 2" + index, 0.80,
+                                                   0.60, 0.05, 0.05, 0.1, 0.05);
+  auto l3 = std::make_shared<LeafLayout>("big leaf 2" + index, 0.90, 0.90, 0.0,
+                                         0.0, 0.0, 0.0);
+
+  auto img2 = std::make_shared<ImageWidget>(
+      imageSlug + "2", "assets/images/" + imageSlug + ".png");
+  l3->setWidget(img2);
+  bigColumn2->addChild(l3);
+
+  grid->addChild(bigColumn2);
 }

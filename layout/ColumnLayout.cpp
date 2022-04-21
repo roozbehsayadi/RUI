@@ -7,7 +7,10 @@ bool ColumnLayout::handleScroll(int scrollAmount, int mouseX, int mouseY) {
   if (!somethingAffected && children.size() != 0 &&
       Geometry::isPointInsideRect(mouseX, mouseY, positionPixel)) {
     if (this->scrollable) {
-      this->initialDistance += scrollAmount * Container::SCROLL_SPEED;
+      if ((scrollAmount < 0 && availableScrollSpaceUp != 0) ||
+          (scrollAmount > 0 && availableScrollSpaceDown != 0)) {
+        this->initialDistance += scrollAmount * Container::SCROLL_SPEED;
+      }
       somethingAffected = true;
     }
   }
@@ -31,7 +34,6 @@ void ColumnLayout::render(RuiMonitor &monitor) {
           cell->getWidth() * positionPixel.w,
           cell->getHeight() * positionPixel.h};
       cell->setPositionPixel(cellRect);
-      // TODO chera in akharesh *2 nadare vali oon yeki dare?
       currentY += cellRect.h + positionPixel.h * cell->getYMargin() * 2 +
                   positionPixel.h * this->getYPad() * 2;
       auto temp = this->trimRect(cellRect);
@@ -42,9 +44,21 @@ void ColumnLayout::render(RuiMonitor &monitor) {
     }
     if (children.size() != 0) {
       auto lastChildPosition = children.at(children.size() - 1)->positionPixel;
+      lastChildPosition.y +=
+          children.at(children.size() - 1)->getYMargin() * positionPixel.h;
       double childrenTotalHeight = lastChildPosition.y + lastChildPosition.h -
                                    initialDistance - positionPixel.y;
       scrollable = childrenTotalHeight > positionPixel.h;
+      if (initialDistance < 0)
+        availableScrollSpaceDown = -initialDistance;
+      else
+        availableScrollSpaceDown = 0;
+      if (lastChildPosition.y + lastChildPosition.h >
+          positionPixel.y + positionPixel.h)
+        availableScrollSpaceUp = (lastChildPosition.y + lastChildPosition.h) -
+                                 (positionPixel.y + positionPixel.h);
+      else
+        availableScrollSpaceUp = 0;
     }
   }
 }
