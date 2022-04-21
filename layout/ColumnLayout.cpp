@@ -6,11 +6,13 @@ bool ColumnLayout::handleScroll(int scrollAmount, int mouseX, int mouseY) {
       this->Container::handleScroll(scrollAmount, mouseX, mouseY);
   if (!somethingAffected && children.size() != 0 &&
       Geometry::isPointInsideRect(mouseX, mouseY, positionPixel)) {
-    if (this->scrollable) {
-      if ((scrollAmount < 0 && availableScrollSpaceUp != 0) ||
-          (scrollAmount > 0 && availableScrollSpaceDown != 0)) {
-        this->initialDistance += scrollAmount * Container::SCROLL_SPEED;
-      }
+    if (scrollable) {
+      if (scrollAmount < 0 && availableScrollSpaceUp != 0)
+        initialDistance += scrollAmount * std::min(availableScrollSpaceUp,
+                                                   Container::SCROLL_SPEED);
+      else if (scrollAmount > 0 && availableScrollSpaceDown != 0)
+        initialDistance += scrollAmount * std::min(availableScrollSpaceDown,
+                                                   Container::SCROLL_SPEED);
       somethingAffected = true;
     }
   }
