@@ -33,8 +33,6 @@ public:
 
   virtual void handleClick(int, int) = 0;
 
-  virtual bool setLayoutHidden(const std::string &, bool);
-
   void setPositionPixel(const Rect &positionPixel) {
     this->positionPixel = positionPixel;
   }

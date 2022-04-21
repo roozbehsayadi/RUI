@@ -3,14 +3,6 @@
 
 #include "utils/Geometry.h"
 
-bool BaseLayout::setLayoutHidden(const std::string &slug, bool hidden) {
-  if (this->slug == slug) {
-    this->hidden = hidden;
-    return true;
-  }
-  return false;
-}
-
 Rect BaseLayout::getRectInPixels(const Rect &rect, int xPadParent,
                                  int yPadParent) const {
   Rect returnValue{rect.x + xPadParent * rect.w + xMargin * rect.w,

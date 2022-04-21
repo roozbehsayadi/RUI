@@ -25,8 +25,6 @@ public:
 
   virtual void handleClick(int, int) override;
 
-  virtual bool setLayoutHidden(const std::string &, bool) override;
-
   void addChild(std::shared_ptr<BaseLayout> child) {
     children.push_back(child);
   }

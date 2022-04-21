@@ -35,17 +35,6 @@ void Container::handleClick(int mouseX, int mouseY) {
     }
 }
 
-bool Container::setLayoutHidden(const std::string &slug, bool hidden) {
-  if (this->BaseLayout::setLayoutHidden(slug, hidden)) {
-    return true;
-  }
-  for (auto &child : children) {
-    if (child->setLayoutHidden(slug, hidden))
-      return true;
-  }
-  return false;
-}
-
 void Container::render(RuiMonitor &monitor) const {
   if (!this->hidden) {
     monitor.drawRectangle(positionPixel, {255, 0, 0});

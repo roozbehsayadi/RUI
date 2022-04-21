@@ -24,8 +24,6 @@ public:
 
   std::shared_ptr<BaseLayout> getLayout(const std::string &slug) const;
 
-  void setLayoutHidden(const std::string &, bool);
-
 private:
   bool isAllWindowsClosed() const;
 

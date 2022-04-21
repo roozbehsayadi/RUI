@@ -31,8 +31,6 @@ public:
 
   std::shared_ptr<BaseLayout> getLayout(const std::string &) const;
 
-  bool setLayoutHidden(const std::string &, bool);
-
   RuiMonitor &getMonitor() { return this->monitor; }
   std::shared_ptr<Container> getGrid() { return this->grid; }
 

@@ -49,12 +49,6 @@ std::shared_ptr<BaseLayout> RUI::getLayout(const std::string &slug) const {
   return nullptr;
 }
 
-void RUI::setLayoutHidden(const std::string &slug, bool hidden) {
-  for (auto *window : windows)
-    if (window->setLayoutHidden(slug, hidden))
-      return;
-}
-
 bool RUI::isAllWindowsClosed() const {
   bool allWindowsClosed = true;
   for (auto *window : windows)
