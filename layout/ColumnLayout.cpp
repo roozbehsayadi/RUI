@@ -39,7 +39,8 @@ void ColumnLayout::render(RuiMonitor &monitor, const Rect &showableArea) {
                   positionPixel.h * this->getYPad() * 2;
       auto temp = Geometry::trimRect(showableArea, cellRect);
       if (temp.second) {
-        monitor.drawRectangle(temp.first, {255, 0, 0});
+        if (children.at(i)->type != LAYOUT_LEAF)
+          monitor.drawRectangle(temp.first, {255, 0, 0});
         cell->render(monitor, temp.first);
       }
     }
