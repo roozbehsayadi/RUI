@@ -1,6 +1,8 @@
 
 #include "Container.h"
 
+#include <algorithm>
+
 #include "utils/Geometry.h"
 
 const int Container::SCROLL_SPEED = 30;
@@ -63,5 +65,31 @@ void Container::render(RuiMonitor &monitor, const Rect &showableArea) {
       child->setPositionPixel(childRect);
       child->render(monitor, showableArea);
     }
+  }
+}
+
+std::vector<std::shared_ptr<BaseLayout>> Container::getVisibleChildren() {
+  std::vector<std::shared_ptr<BaseLayout>> visibleChildren;
+  std::copy_if(
+      children.begin(), children.end(), std::back_inserter(visibleChildren),
+      [](std::shared_ptr<BaseLayout> child) { return !child->isHidden(); });
+  return visibleChildren;
+}
+
+void Container::setScrollableAndScrollSpace(int availableLength, int &thisWay,
+                                            int &thatWay) {
+  auto visibleChildren = getVisibleChildren();
+  if (visibleChildren.size() != 0) {
+    auto childrenTotalLength = totalChildrenLength(visibleChildren);
+    scrollable = childrenTotalLength > availableLength;
+    if (initialDistance < 0)
+      thatWay = -initialDistance;
+    else
+      thatWay = 0;
+    auto lastChild = visibleChildren.at(visibleChildren.size() - 1);
+    if (getLayoutEnd(lastChild, availableLength) > this->getLayoutEnd())
+      thisWay = getLayoutEnd(lastChild, availableLength) - this->getLayoutEnd();
+    else
+      thisWay = 0;
   }
 }

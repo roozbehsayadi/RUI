@@ -46,29 +46,28 @@ void ColumnLayout::render(RuiMonitor &monitor, const Rect &showableArea) {
         cell->render(monitor, temp.first);
       }
     }
-    std::vector<std::shared_ptr<BaseLayout>> visibleChildren;
-    std::copy_if(
-        children.begin(), children.end(), std::back_inserter(visibleChildren),
-        [](std::shared_ptr<BaseLayout> child) { return !child->isHidden(); });
-    if (visibleChildren.size() != 0) {
-      auto lastChildPosition =
-          visibleChildren.at(visibleChildren.size() - 1)->positionPixel;
-      lastChildPosition.y +=
-          visibleChildren.at(visibleChildren.size() - 1)->getYMargin() *
-          positionPixel.h;
-      double childrenTotalHeight = lastChildPosition.y + lastChildPosition.h -
-                                   initialDistance - positionPixel.y;
-      scrollable = childrenTotalHeight > positionPixel.h;
-      if (initialDistance < 0)
-        availableScrollSpaceDown = -initialDistance;
-      else
-        availableScrollSpaceDown = 0;
-      if (lastChildPosition.y + lastChildPosition.h >
-          positionPixel.y + positionPixel.h)
-        availableScrollSpaceUp = (lastChildPosition.y + lastChildPosition.h) -
-                                 (positionPixel.y + positionPixel.h);
-      else
-        availableScrollSpaceUp = 0;
-    }
+    this->setScrollableAndScrollSpace(positionPixel.h, availableScrollSpaceUp,
+                                      availableScrollSpaceDown);
   }
+}
+
+double ColumnLayout::totalChildrenLength(
+    std::vector<std::shared_ptr<BaseLayout>> &children) const {
+  if (children.size() != 0) {
+    auto lastChild = children.at(children.size() - 1);
+    auto lastChildPosition = lastChild->positionPixel;
+    lastChildPosition.y += lastChild->getYMargin() * positionPixel.h;
+    return lastChildPosition.y + lastChildPosition.h - initialDistance -
+           positionPixel.y;
+  } else
+    return 0.0;
+}
+
+double ColumnLayout::getLayoutEnd(std::shared_ptr<BaseLayout> &l,
+                                  int parentLength) const {
+  return l->positionPixel.y + l->positionPixel.h + l->yMargin * parentLength;
+}
+
+double ColumnLayout::getLayoutEnd(int parentLength) const {
+  return positionPixel.y + positionPixel.h + parentLength * yMargin;
 }

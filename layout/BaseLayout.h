@@ -15,11 +15,12 @@ enum LayoutType {
   LAYOUT_LEAF,
 };
 
+class Container;
 class ColumnLayout;
 class RowLayout;
 
-// TODO remove this parent class
-class BaseLayout : std::enable_shared_from_this<BaseLayout> {
+class BaseLayout {
+  friend class Container;
   friend class ColumnLayout;
   friend class RowLayout;
 
@@ -77,6 +78,9 @@ public:
 protected:
   Rect getRectInPixels(const Rect &, int, int) const;
   Rect getChildRectPixels(const Rect &, std::shared_ptr<BaseLayout>) const;
+
+  virtual double getLayoutEnd(std::shared_ptr<BaseLayout> &, int = 0) const = 0;
+  virtual double getLayoutEnd(int = 0) const = 0;
 
   std::string slug;
 

@@ -8,6 +8,7 @@
 struct Rect {
   double x, y, w, h;
 
+  // Easy cast to SDL_Rect
   operator SDL_Rect() const;
 };
 

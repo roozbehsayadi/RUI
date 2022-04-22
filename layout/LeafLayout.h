@@ -1,8 +1,8 @@
 #ifndef __LEAF_LAYOUT_H
 #define __LEAF_LAYOUT_H
 
-#include <memory>
 #include <algorithm>
+#include <memory>
 
 #include "BaseLayout.h"
 
@@ -35,6 +35,14 @@ public:
   void setWidget(std::shared_ptr<BaseWidget> widget) { this->widget = widget; }
 
   const BaseWidget &getWidget() const { return *widget; }
+
+protected:
+  // These two below function imply bad design!
+  virtual double getLayoutEnd(std::shared_ptr<BaseLayout> &,
+                              int = 0) const override {
+    return 0.0;
+  }
+  virtual double getLayoutEnd(int = 0) const override { return 0.0; }
 
 private:
   std::shared_ptr<BaseWidget> widget;

@@ -22,6 +22,14 @@ public:
 
   virtual void render(RuiMonitor &, const Rect &) override;
 
+protected:
+  virtual double totalChildrenLength(
+      std::vector<std::shared_ptr<BaseLayout>> &) const override;
+
+  virtual double getLayoutEnd(std::shared_ptr<BaseLayout> &,
+                              int = 0) const override;
+  virtual double getLayoutEnd(int = 0) const override;
+
 private:
   int availableScrollSpaceUp = 0, availableScrollSpaceDown = 0;
 };

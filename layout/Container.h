@@ -35,6 +35,15 @@ public:
 protected:
   std::vector<std::shared_ptr<BaseLayout>> children;
 
+  std::vector<std::shared_ptr<BaseLayout>> getVisibleChildren();
+  virtual double
+  totalChildrenLength(std::vector<std::shared_ptr<BaseLayout>> &) const = 0;
+
+  virtual double getLayoutEnd(std::shared_ptr<BaseLayout> &, int = 0) const = 0;
+  virtual double getLayoutEnd(int = 0) const = 0;
+
+  void setScrollableAndScrollSpace(int, int &, int &);
+
   bool scrollable = false;
   const static int SCROLL_SPEED;
 };
