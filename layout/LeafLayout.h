@@ -2,6 +2,7 @@
 #define __LEAF_LAYOUT_H
 
 #include <memory>
+#include <algorithm>
 
 #include "BaseLayout.h"
 

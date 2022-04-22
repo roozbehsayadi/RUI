@@ -1,6 +1,8 @@
 #ifndef __COLUMN_LAYOUT_H
 #define __COLUMN_LAYOUT_H
 
+#include <algorithm>
+
 #include "Container.h"
 #include "monitor/RuiMonitor.h"
 #include "utils/Geometry.h"

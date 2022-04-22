@@ -1,6 +1,8 @@
 
 #include "RowLayout.h"
 
+#include <algorithm>
+
 bool RowLayout::handleScroll(int scrollAmount, int mouseX, int mouseY) {
   bool somethingAffected =
       this->Container::handleScroll(scrollAmount, mouseX, mouseY);
@@ -44,10 +46,16 @@ void RowLayout::render(RuiMonitor &monitor, const Rect &showableArea) {
         cell->render(monitor, temp.first);
       }
     }
-    if (children.size() != 0) {
-      auto lastChildPosition = children.at(children.size() - 1)->positionPixel;
+    std::vector<std::shared_ptr<BaseLayout>> visibleChildren;
+    std::copy_if(
+        children.begin(), children.end(), std::back_inserter(visibleChildren),
+        [](std::shared_ptr<BaseLayout> child) { return !child->isHidden(); });
+    if (visibleChildren.size() != 0) {
+      auto lastChildPosition =
+          visibleChildren.at(visibleChildren.size() - 1)->positionPixel;
       lastChildPosition.x +=
-          children.at(children.size() - 1)->getXMargin() * positionPixel.w;
+          visibleChildren.at(visibleChildren.size() - 1)->getXMargin() *
+          positionPixel.w;
       double childrenTotalWidth = lastChildPosition.x + lastChildPosition.w -
                                   initialDistance - positionPixel.x;
       scrollable = childrenTotalWidth > positionPixel.w;
