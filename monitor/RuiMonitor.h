@@ -10,8 +10,8 @@
 #include "SDL2/SDL_ttf.h"
 
 #include "utils/Color.h"
-#include "utils/Rect.h"
 #include "utils/Geometry.h"
+#include "utils/Rect.h"
 
 class GeneralPage;
 
@@ -39,7 +39,8 @@ public:
 
   void drawRectangle(const Rect &, const Color &);
   void drawText(const Rect &, const Rect &, const Color &, const std::string &);
-  void drawImage(const Rect &, const Rect &, SDL_Texture *&, const std::string &);
+  void drawImage(const Rect &, const Rect &, SDL_Texture *&,
+                 const std::string &);
 
 private:
   SDL_Window *window;

@@ -93,9 +93,10 @@ void RuiMonitor::drawText(const Rect &rect, const Rect &showableArea,
                   double(textSurface->w), double(textSurface->h)};
   auto trimmedTargetRect = Geometry::trimRect(targetRect, showableArea).first;
 
-  SDL_Rect trimmedSDLRect = {
-      int(trimmedTargetRect.x - targetRect.x), int(trimmedTargetRect.y - targetRect.y),
-      int(trimmedTargetRect.w), int(trimmedTargetRect.h)};
+  SDL_Rect trimmedSDLRect = {int(trimmedTargetRect.x - targetRect.x),
+                             int(trimmedTargetRect.y - targetRect.y),
+                             int(trimmedTargetRect.w),
+                             int(trimmedTargetRect.h)};
   SDL_Rect targetSDLRect = trimmedTargetRect;
   SDL_RenderCopy(renderer, textTexture, &trimmedSDLRect, &targetSDLRect);
   SDL_DestroyTexture(textTexture);
