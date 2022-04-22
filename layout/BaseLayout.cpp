@@ -3,16 +3,6 @@
 
 #include "utils/Geometry.h"
 
-const std::pair<Rect, bool> BaseLayout::trimRect(const Rect &rect) const {
-  if (rect.x >= positionPixel.x + positionPixel.w ||
-      positionPixel.x >= rect.x + rect.w)
-    return {{}, false};
-  if (rect.y + rect.h <= positionPixel.y ||
-      positionPixel.y + positionPixel.h <= rect.y)
-    return {{}, false};
-  return {rect, true};
-}
-
 Rect BaseLayout::getRectInPixels(const Rect &rect, int xPadParent,
                                  int yPadParent) const {
   Rect returnValue{rect.x + xPadParent * rect.w + xMargin * rect.w,

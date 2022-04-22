@@ -31,7 +31,8 @@ public:
       : slug(slug), width(width), height(height), xPad(xPad), yPad(yPad),
         xMargin(xMargin), yMargin(yMargin) {}
 
-  virtual void render(RuiMonitor &) = 0;
+  // monitor + showable area of the container
+  virtual void render(RuiMonitor &, const Rect &) = 0;
 
   virtual std::pair<std::shared_ptr<BaseWidget>, bool>
   getWidget(const std::string &) const = 0;
@@ -47,9 +48,6 @@ public:
   // true even if the layout have reached its
   // end and nothing actually scrolled.
   virtual bool handleScroll(int, int, int) = 0;
-
-  // Return trimmed rect + if it must be shown at all
-  virtual const std::pair<Rect, bool> trimRect(const Rect &) const;
 
   void setPositionPixel(const Rect &positionPixel) {
     this->positionPixel = positionPixel;

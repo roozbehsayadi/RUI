@@ -18,7 +18,7 @@ public:
 
   virtual bool handleScroll(int, int, int) override;
 
-  virtual void render(RuiMonitor &) override;
+  virtual void render(RuiMonitor &, const Rect &) override;
 
 private:
   int availableScrollSpaceLeft = 0, availableScrollSpaceRight = 0;

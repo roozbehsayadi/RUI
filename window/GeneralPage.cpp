@@ -11,9 +11,10 @@ GeneralPage::GeneralPage(const std::string &slug, const std::string &caption) {
 
 void GeneralPage::render() {
   auto monitorSize = monitor.getMonitorSize();
-  grid->setPositionPixel(
-      {0.0, 0.0, double(monitorSize.first), double(monitorSize.second)});
-  grid->render(monitor);
+  Rect monitorRect{0.0, 0.0, double(monitorSize.first),
+                   double(monitorSize.second)};
+  grid->setPositionPixel(monitorRect);
+  grid->render(monitor, monitorRect);
 }
 
 void GeneralPage::handleEvents(SDL_Event &event) {

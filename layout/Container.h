@@ -30,7 +30,7 @@ public:
     children.push_back(child);
   }
 
-  virtual void render(RuiMonitor &) override;
+  virtual void render(RuiMonitor &, const Rect &) override;
 
 protected:
   std::vector<std::shared_ptr<BaseLayout>> children;

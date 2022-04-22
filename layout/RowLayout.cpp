@@ -20,9 +20,8 @@ bool RowLayout::handleScroll(int scrollAmount, int mouseX, int mouseY) {
 }
 
 // TODO refactor this!!!
-void RowLayout::render(RuiMonitor &monitor) {
+void RowLayout::render(RuiMonitor &monitor, const Rect &showableArea) {
   if (!this->hidden) {
-    monitor.drawRectangle(positionPixel, {255, 0, 0});
     double currentX = this->initialDistance;
     for (auto i = 0u; i < children.size(); i++) {
       auto cell = children.at(i);
@@ -38,10 +37,10 @@ void RowLayout::render(RuiMonitor &monitor) {
       cell->setPositionPixel(cellRect);
       currentX += cellRect.w + positionPixel.w * cell->getXMargin() * 2 +
                   positionPixel.w * this->getXPad() * 2;
-      auto temp = this->trimRect(cellRect);
+      auto temp = Geometry::trimRect(showableArea, cellRect);
       if (temp.second) {
         monitor.drawRectangle(temp.first, {255, 0, 0});
-        cell->render(monitor);
+        cell->render(monitor, temp.first);
       }
     }
     if (children.size() != 0) {

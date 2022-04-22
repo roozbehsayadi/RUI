@@ -50,7 +50,7 @@ bool Container::handleScroll(int scrollAmount, int mouseX, int mouseY) {
   return somethingAffected;
 }
 
-void Container::render(RuiMonitor &monitor) {
+void Container::render(RuiMonitor &monitor, const Rect &showableArea) {
   if (!this->hidden) {
     monitor.drawRectangle(positionPixel, {255, 0, 0});
     for (auto child : children) {
@@ -61,7 +61,7 @@ void Container::render(RuiMonitor &monitor) {
                      positionPixel.w * child->getWidth(),
                      positionPixel.h * child->getHeight()};
       child->setPositionPixel(childRect);
-      child->render(monitor);
+      child->render(monitor, showableArea);
     }
   }
 }
