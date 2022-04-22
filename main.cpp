@@ -75,6 +75,8 @@ void fillPage(GeneralPage &page, const std::string &index,
                                              0.04, 0.05));
   r->addChild(std::make_shared<ColumnLayout>("c3" + index, 0.20, 0.60, 0.0, 0.0,
                                              0.04, 0.20));
+  r->addChild(std::make_shared<ColumnLayout>("c4" + index, 0.20, 0.60, 0.0, 0.0,
+                                             0.04, 0.20));
   auto l = std::make_shared<LeafLayout>("leaf" + index, 0.10, 0.50, 0.1, 0.2,
                                         0.025, 0.25);
   auto button = std::make_shared<ButtonWidget>("button" + index, "Button");

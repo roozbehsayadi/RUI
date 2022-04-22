@@ -3,9 +3,9 @@
 
 #include "utils/Geometry.h"
 
-void ButtonWidget::draw(RuiMonitor &monitor) {
-  monitor.drawRectangle(positionPixel, color);
-  monitor.drawText(positionPixel, color, caption);
+void ButtonWidget::draw(RuiMonitor &monitor, const Rect &showableArea) {
+  monitor.drawRectangle(showableArea, color);
+  monitor.drawText(positionPixel, showableArea, color, caption);
 }
 
 void ButtonWidget::handleClick(int mouseX, int mouseY) {

@@ -79,23 +79,31 @@ void RuiMonitor::drawRectangle(const Rect &rect, const Color &color) {
   SDL_RenderDrawRectF(renderer, &temp);
 }
 
-void RuiMonitor::drawText(const Rect &rect, const Color &color,
-                          const std::string &text) {
+// TODO refactor maybe?
+void RuiMonitor::drawText(const Rect &rect, const Rect &showableArea,
+                          const Color &color, const std::string &text) {
   SDL_Color temp{color.getRed(), color.getGreen(), color.getBlue(), 255};
   int fontSize = getFontSizeToFit(rect, text);
   SDL_Surface *textSurface =
       TTF_RenderText_Blended(font[fontSize], text.c_str(), temp);
   SDL_Texture *textTexture =
       SDL_CreateTextureFromSurface(renderer, textSurface);
-  SDL_Rect targetRect{int(rect.x + fabs(rect.w - textSurface->w) / 2),
-                      int(rect.y + fabs(rect.h - textSurface->h) / 2),
-                      textSurface->w, textSurface->h};
-  SDL_RenderCopy(renderer, textTexture, NULL, &targetRect);
+  Rect targetRect{rect.x + fabs(rect.w - textSurface->w) / 2,
+                  rect.y + fabs(rect.h - textSurface->h) / 2,
+                  double(textSurface->w), double(textSurface->h)};
+  auto trimmedTargetRect = Geometry::trimRect(targetRect, showableArea).first;
+
+  SDL_Rect trimmedSDLRect = {
+      int(trimmedTargetRect.x - targetRect.x), int(trimmedTargetRect.y - targetRect.y),
+      int(trimmedTargetRect.w), int(trimmedTargetRect.h)};
+  SDL_Rect targetSDLRect = trimmedTargetRect;
+  SDL_RenderCopy(renderer, textTexture, &trimmedSDLRect, &targetSDLRect);
   SDL_DestroyTexture(textTexture);
   SDL_FreeSurface(textSurface);
 }
 
-void RuiMonitor::drawImage(const Rect &rect, SDL_Texture *&texture,
+void RuiMonitor::drawImage(const Rect &rect, const Rect &showableArea,
+                           SDL_Texture *&texture,
                            const std::string &imagePath) {
   if (texture == nullptr) {
     texture = IMG_LoadTexture(renderer, imagePath.c_str());
@@ -105,8 +113,16 @@ void RuiMonitor::drawImage(const Rect &rect, SDL_Texture *&texture,
       return;
     }
   }
-  SDL_Rect targetRect{int(rect.x), int(rect.y), int(rect.w), int(rect.h)};
-  SDL_RenderCopy(renderer, texture, NULL, &targetRect);
+  auto trimmedTargetRect = Geometry::trimRect(rect, showableArea).first;
+  SDL_Point temp;
+  SDL_QueryTexture(texture, NULL, NULL, &temp.x, &temp.y);
+  SDL_Rect trimmedSDLRect = {
+      int((trimmedTargetRect.x - rect.x) * temp.x / rect.w),
+      int((trimmedTargetRect.y - rect.y) * temp.y / rect.h),
+      int((trimmedTargetRect.w * temp.x) / rect.w),
+      int((trimmedTargetRect.h * temp.y) / rect.h)};
+  SDL_Rect targetSDLRect = trimmedTargetRect;
+  SDL_RenderCopy(renderer, texture, &trimmedSDLRect, &targetSDLRect);
 }
 
 bool RuiMonitor::initializeFonts() {

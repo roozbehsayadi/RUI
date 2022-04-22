@@ -39,7 +39,7 @@ public:
   void setEnabled(bool enabled) { this->enabled = enabled; }
 
 protected:
-  virtual void draw(RuiMonitor &) = 0;
+  virtual void draw(RuiMonitor &, const Rect &) = 0;
   virtual void handleClick(int, int) = 0;
 
   WidgetType type;

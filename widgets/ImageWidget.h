@@ -15,7 +15,7 @@ public:
   void changeImagePath(const std::string &imagePath);
 
 protected:
-  virtual void draw(RuiMonitor &monitor) override;
+  virtual void draw(RuiMonitor &monitor, const Rect &) override;
   virtual void handleClick(int, int) override{};
 
   SDL_Texture *imageTexture = nullptr;

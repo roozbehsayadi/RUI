@@ -21,7 +21,7 @@ public:
   const std::string &getCaption() const { return this->caption; }
 
 protected:
-  virtual void draw(RuiMonitor &monitor) override;
+  virtual void draw(RuiMonitor &monitor, const Rect &) override;
   virtual void handleClick(int, int) override;
 
   std::string caption;
