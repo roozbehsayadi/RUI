@@ -128,7 +128,7 @@ void RuiMonitor::drawImage(const Rect &rect, const Rect &showableArea,
 
 bool RuiMonitor::initializeFonts() {
   for (int i = 1; i < 100; i++) {
-    this->font[i] = TTF_OpenFont("assets/fonts/FreeMono.ttf", i);
+    this->font[i] = TTF_OpenFont("assets/fonts/FreeMonoBold.ttf", i);
     if (this->font[i] == NULL)
       return false;
   }
