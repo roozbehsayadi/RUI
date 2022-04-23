@@ -38,6 +38,7 @@ public:
   void delay(int);
 
   void drawRectangle(const Rect &, const Color &);
+  void drawBox(const Rect &, const Color &);
   void drawText(const Rect &, const Rect &, const Color &, const std::string &);
   void drawImage(const Rect &, const Rect &, SDL_Texture *&,
                  const std::string &);

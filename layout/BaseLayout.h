@@ -63,6 +63,7 @@ public:
 
   void hide() { this->hidden = true; }
   void show() { this->hidden = false; }
+  void setHidden(bool hidden) { this->hidden = hidden; }
 
   const std::string &getSlug() const { return this->slug; }
 

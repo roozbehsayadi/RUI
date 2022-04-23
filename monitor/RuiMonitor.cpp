@@ -75,8 +75,15 @@ void RuiMonitor::delay(int milisecond) { SDL_Delay(milisecond); }
 void RuiMonitor::drawRectangle(const Rect &rect, const Color &color) {
   SDL_SetRenderDrawColor(renderer, color.getRed(), color.getGreen(),
                          color.getBlue(), color.getAlpha());
-  SDL_FRect temp{float(rect.x), float(rect.y), float(rect.w), float(rect.h)};
+  SDL_FRect temp = rect;
   SDL_RenderDrawRectF(renderer, &temp);
+}
+
+void RuiMonitor::drawBox(const Rect &rect, const Color &color) {
+  SDL_SetRenderDrawColor(renderer, color.getRed(), color.getGreen(),
+                         color.getBlue(), color.getAlpha());
+  SDL_FRect temp = rect;
+  SDL_RenderFillRectF(renderer, &temp);
 }
 
 // TODO refactor maybe?

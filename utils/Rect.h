@@ -8,8 +8,9 @@
 struct Rect {
   double x, y, w, h;
 
-  // Easy cast to SDL_Rect
+  // Easy cast to SDL_Rect and SDL_FRect
   operator SDL_Rect() const;
+  operator SDL_FRect() const;
 };
 
 std::ostream &operator<<(std::ostream &, const Rect &);

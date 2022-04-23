@@ -31,7 +31,7 @@ public:
   virtual const WidgetType &getType() const { return this->type; }
   const std::string &getSlug() const { return this->slug; }
 
-  // Returns whether the button was clicked or not
+  // Returns whether the widget was clicked or not
   // and sets the "clicked" variable to false.
   virtual bool isClicked() final;
 
