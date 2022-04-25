@@ -1,6 +1,6 @@
 .PHONY: all run clean lines
 
-all: build/main.o build/RUI.o build/GeneralPage.o build/RuiMonitor.o build/BaseLayout.o build/ColumnLayout.o build/Container.o build/LeafLayout.o build/RowLayout.o build/Color.o build/Rect.o build/Geometry.o build/BaseWidget.o build/ButtonWidget.o build/ImageWidget.o build/CheckboxWidget.o
+all: build/main.o build/RUI.o build/GeneralPage.o build/RuiMonitor.o build/BaseLayout.o build/ColumnLayout.o build/Container.o build/LeafLayout.o build/RowLayout.o build/Color.o build/Rect.o build/Geometry.o build/BaseWidget.o build/ButtonWidget.o build/ImageWidget.o build/CheckboxWidget.o build/RadioButtonWidget.o
 	g++ -Ibuild build/*.o -o build/RUI.out -Wall -g -O2 -std=c++2a -lSDL2 -lSDL2_ttf -lSDL2_image
 run:
 	./build/RUI.out
@@ -36,6 +36,8 @@ build/ImageWidget.o: widgets/ImageWidget.h widgets/ImageWidget.cpp
 	g++ -c -I. -o build/ImageWidget.o widgets/ImageWidget.cpp
 build/CheckboxWidget.o: widgets/CheckboxWidget.h widgets/CheckboxWidget.cpp
 	g++ -c -I. -o build/CheckboxWidget.o widgets/CheckboxWidget.cpp 
+build/RadioButtonWidget.o: widgets/RadioButtonWidget.h widgets/RadioButtonWidget.cpp
+	g++ -c -I. -o build/RadioButtonWidget.o widgets/RadioButtonWidget.cpp
 clean:
 	rm -rf build/*.o build/*.gch build/*.out
 lines:
