@@ -24,9 +24,7 @@ class BaseWidget {
 public:
   BaseWidget(const std::string &slug) : slug(slug) { type = WIDGET_UNKNOWN; }
 
-  void setPositionPixel(const Rect &positionPixel) {
-    this->positionPixel = positionPixel;
-  }
+  void setPositionPixel(const Rect &positionPixel) { this->positionPixel = positionPixel; }
 
   virtual const WidgetType &getType() const { return this->type; }
   const std::string &getSlug() const { return this->slug; }

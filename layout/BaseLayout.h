@@ -26,17 +26,14 @@ class BaseLayout {
 
 public:
   BaseLayout(const std::string &slug) : BaseLayout(slug, 0.0, 0.0) {}
-  BaseLayout(const std::string &slug, double width, double height,
-             double xPad = 0.0, double yPad = 0.0, double xMargin = 0.0,
-             double yMargin = 0.0)
-      : slug(slug), width(width), height(height), xPad(xPad), yPad(yPad),
-        xMargin(xMargin), yMargin(yMargin) {}
+  BaseLayout(const std::string &slug, double width, double height, double xPad = 0.0, double yPad = 0.0,
+             double xMargin = 0.0, double yMargin = 0.0)
+      : slug(slug), width(width), height(height), xPad(xPad), yPad(yPad), xMargin(xMargin), yMargin(yMargin) {}
 
   // monitor + showable area of the container
   virtual void render(RuiMonitor &, const Rect &) = 0;
 
-  virtual std::pair<std::shared_ptr<BaseWidget>, bool>
-  getWidget(const std::string &) const = 0;
+  virtual std::pair<std::shared_ptr<BaseWidget>, bool> getWidget(const std::string &) const = 0;
 
   virtual std::shared_ptr<BaseLayout> getLayout(const std::string &) const = 0;
 
@@ -50,9 +47,7 @@ public:
   // end and nothing actually scrolled.
   virtual bool handleScroll(int, int, int) = 0;
 
-  void setPositionPixel(const Rect &positionPixel) {
-    this->positionPixel = positionPixel;
-  }
+  void setPositionPixel(const Rect &positionPixel) { this->positionPixel = positionPixel; }
 
   void setWidth(double width) { this->width = width; }
   void setHeight(double height) { this->height = height; }

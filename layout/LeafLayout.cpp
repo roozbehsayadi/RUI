@@ -4,16 +4,14 @@
 void LeafLayout::render(RuiMonitor &monitor, const Rect &showableArea) {
   if (!this->hidden) {
     // TODO handle if the widget was null?
-    widget->setPositionPixel({positionPixel.x + xPad * positionPixel.w,
-                              positionPixel.y + yPad * positionPixel.h,
+    widget->setPositionPixel({positionPixel.x + xPad * positionPixel.w, positionPixel.y + yPad * positionPixel.h,
                               positionPixel.w - 2 * xPad * positionPixel.w,
                               positionPixel.h - 2 * yPad * positionPixel.h});
     widget->draw(monitor, showableArea);
   }
 }
 
-std::pair<std::shared_ptr<BaseWidget>, bool>
-LeafLayout::getWidget(const std::string &slug) const {
+std::pair<std::shared_ptr<BaseWidget>, bool> LeafLayout::getWidget(const std::string &slug) const {
   if (this->widget->getSlug() == slug)
     return std::make_pair(this->widget, this->hidden);
   return std::make_pair(nullptr, false);

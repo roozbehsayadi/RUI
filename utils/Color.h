@@ -18,8 +18,7 @@ public:
   // input number.
   void setColor(unsigned char);
   // Sets the color to the inputs, obviously.
-  void setColor(unsigned char, unsigned char, unsigned char,
-                unsigned char = 255);
+  void setColor(unsigned char, unsigned char, unsigned char, unsigned char = 255);
 
   unsigned char getRed() const;
   unsigned char getGreen() const;

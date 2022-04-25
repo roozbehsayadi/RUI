@@ -7,10 +7,8 @@
 
 template <typename T> class RadioButtonWidget : public BaseWidget {
 public:
-  RadioButtonWidget(const std::string &slug, T &variable,
-                    const std::string &label, const T &valueToAssign)
-      : BaseWidget(slug), variable(variable), label(label),
-        valueToAssign(valueToAssign) {}
+  RadioButtonWidget(const std::string &slug, T &variable, const std::string &label, const T &valueToAssign)
+      : BaseWidget(slug), variable(variable), label(label), valueToAssign(valueToAssign) {}
 
 protected:
   virtual void draw(RuiMonitor &, const Rect &) override;

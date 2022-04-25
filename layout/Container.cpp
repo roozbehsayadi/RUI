@@ -7,19 +7,16 @@
 
 const int Container::SCROLL_SPEED = 30;
 
-std::pair<std::shared_ptr<BaseWidget>, bool>
-Container::getWidget(const std::string &slug) const {
+std::pair<std::shared_ptr<BaseWidget>, bool> Container::getWidget(const std::string &slug) const {
   for (auto &child : children) {
     auto returnedWidget = child->getWidget(slug);
     if (returnedWidget.first != nullptr)
-      return std::make_pair(returnedWidget.first,
-                            returnedWidget.second | this->hidden);
+      return std::make_pair(returnedWidget.first, returnedWidget.second | this->hidden);
   }
   return std::make_pair<std::shared_ptr<BaseWidget>, bool>(nullptr, false);
 }
 
-std::shared_ptr<BaseLayout>
-Container::getLayout(const std::string &slug) const {
+std::shared_ptr<BaseLayout> Container::getLayout(const std::string &slug) const {
   for (auto &child : children) {
     if (child->getSlug() == slug)
       return child;
@@ -56,12 +53,9 @@ void Container::render(RuiMonitor &monitor, const Rect &showableArea) {
   if (!this->hidden) {
     monitor.drawRectangle(positionPixel, {255, 0, 0});
     for (auto child : children) {
-      Rect childRect{positionPixel.x + positionPixel.w * xPad +
-                         positionPixel.w * child->getXMargin(),
-                     positionPixel.y + positionPixel.h * yPad +
-                         positionPixel.h * child->getYMargin(),
-                     positionPixel.w * child->getWidth(),
-                     positionPixel.h * child->getHeight()};
+      Rect childRect{positionPixel.x + positionPixel.w * xPad + positionPixel.w * child->getXMargin(),
+                     positionPixel.y + positionPixel.h * yPad + positionPixel.h * child->getYMargin(),
+                     positionPixel.w * child->getWidth(), positionPixel.h * child->getHeight()};
       child->setPositionPixel(childRect);
       child->render(monitor, showableArea);
     }
@@ -70,14 +64,12 @@ void Container::render(RuiMonitor &monitor, const Rect &showableArea) {
 
 std::vector<std::shared_ptr<BaseLayout>> Container::getVisibleChildren() {
   std::vector<std::shared_ptr<BaseLayout>> visibleChildren;
-  std::copy_if(
-      children.begin(), children.end(), std::back_inserter(visibleChildren),
-      [](std::shared_ptr<BaseLayout> child) { return !child->isHidden(); });
+  std::copy_if(children.begin(), children.end(), std::back_inserter(visibleChildren),
+               [](std::shared_ptr<BaseLayout> child) { return !child->isHidden(); });
   return visibleChildren;
 }
 
-void Container::setScrollableAndScrollSpace(int availableLength, int &thisWay,
-                                            int &thatWay) {
+void Container::setScrollableAndScrollSpace(int availableLength, int &thisWay, int &thatWay) {
   auto visibleChildren = getVisibleChildren();
   if (visibleChildren.size() != 0) {
     auto childrenTotalLength = totalChildrenLength(visibleChildren);

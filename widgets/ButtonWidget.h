@@ -10,8 +10,7 @@
 
 class ButtonWidget : public BaseWidget {
 public:
-  ButtonWidget(const std::string &slug, const std::string &caption)
-      : BaseWidget(slug), caption(caption) {
+  ButtonWidget(const std::string &slug, const std::string &caption) : BaseWidget(slug), caption(caption) {
     type = WIDGET_BUTTON;
     color = {0, 255, 0};
   }

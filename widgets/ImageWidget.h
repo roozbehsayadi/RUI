@@ -7,8 +7,7 @@
 
 class ImageWidget : public BaseWidget {
 public:
-  ImageWidget(const std::string &slug, const std::string &imagePath)
-      : BaseWidget(slug), imagePath(imagePath) {
+  ImageWidget(const std::string &slug, const std::string &imagePath) : BaseWidget(slug), imagePath(imagePath) {
     this->type = WIDGET_IMAGE;
   }
 

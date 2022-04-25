@@ -28,8 +28,7 @@ void RUI::render() {
   }
 }
 
-std::pair<std::shared_ptr<BaseWidget>, bool>
-RUI::getWidget(const std::string &slug) const {
+std::pair<std::shared_ptr<BaseWidget>, bool> RUI::getWidget(const std::string &slug) const {
   for (auto *window : windows) {
     auto returnValue = window->getWidget(slug);
     auto widget = returnValue.first;

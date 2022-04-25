@@ -11,8 +11,7 @@ GeneralPage::GeneralPage(const std::string &slug, const std::string &caption) {
 
 void GeneralPage::render() {
   auto monitorSize = monitor.getMonitorSize();
-  Rect monitorRect{0.0, 0.0, double(monitorSize.first),
-                   double(monitorSize.second)};
+  Rect monitorRect{0.0, 0.0, double(monitorSize.first), double(monitorSize.second)};
   grid->setPositionPixel(monitorRect);
   grid->render(monitor, monitorRect);
 }
@@ -50,12 +49,8 @@ void GeneralPage::handleEvents(SDL_Event &event) {
   }
 }
 
-std::pair<std::shared_ptr<BaseWidget>, bool>
-GeneralPage::getWidget(const std::string &slug) const {
+std::pair<std::shared_ptr<BaseWidget>, bool> GeneralPage::getWidget(const std::string &slug) const {
   return grid->getWidget(slug);
 }
 
-std::shared_ptr<BaseLayout>
-GeneralPage::getLayout(const std::string &slug) const {
-  return grid->getLayout(slug);
-}
+std::shared_ptr<BaseLayout> GeneralPage::getLayout(const std::string &slug) const { return grid->getLayout(slug); }

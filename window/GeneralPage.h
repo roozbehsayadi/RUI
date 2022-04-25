@@ -26,8 +26,7 @@ public:
   // and returns on SDL_QUIT event.
   void handleEvents(SDL_Event &);
 
-  std::pair<std::shared_ptr<BaseWidget>, bool>
-  getWidget(const std::string &) const;
+  std::pair<std::shared_ptr<BaseWidget>, bool> getWidget(const std::string &) const;
 
   std::shared_ptr<BaseLayout> getLayout(const std::string &) const;
 

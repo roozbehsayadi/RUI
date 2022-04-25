@@ -7,8 +7,7 @@
 
 class CheckboxWidget : public BaseWidget {
 public:
-  CheckboxWidget(const std::string &slug, bool &variable,
-                 const std::string &label)
+  CheckboxWidget(const std::string &slug, bool &variable, const std::string &label)
       : BaseWidget(slug), label(label), variable(variable) {}
 
 protected:
