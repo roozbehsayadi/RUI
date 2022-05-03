@@ -1,6 +1,7 @@
 #ifndef __GENERAL_PAGE_H
 #define __GENERAL_PAGE_H
 
+#include <set>
 #include <string>
 #include <utility>
 
@@ -26,6 +27,8 @@ public:
   // and returns on SDL_QUIT event.
   void handleEvents(SDL_Event &);
 
+  std::set<SDL_Keymod> getModifiers() const;
+
   std::pair<std::shared_ptr<BaseWidget>, bool> getWidget(const std::string &) const;
 
   std::shared_ptr<BaseLayout> getLayout(const std::string &) const;
@@ -42,6 +45,8 @@ private:
   std::shared_ptr<Container> grid;
 
   bool shown;
+
+  static void fillModifiers(std::set<SDL_Keymod> &, SDL_Keymod);
 };
 
 #endif //__GENERAL_PAGE_H

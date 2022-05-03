@@ -46,7 +46,14 @@ void GeneralPage::handleEvents(SDL_Event &event) {
     SDL_GetMouseState(&mouseX, &mouseY);
   } else if (event.type == SDL_MOUSEWHEEL) {
     grid->handleScroll(event.wheel.y, mouseX, mouseY);
+  } else if (event.type == SDL_KEYDOWN) {
   }
+}
+
+std::set<SDL_Keymod> GeneralPage::getModifiers() const {
+  static std::set<SDL_Keymod> modifiers;
+  this->fillModifiers(modifiers, SDL_GetModState());
+  return modifiers;
 }
 
 std::pair<std::shared_ptr<BaseWidget>, bool> GeneralPage::getWidget(const std::string &slug) const {
@@ -54,3 +61,13 @@ std::pair<std::shared_ptr<BaseWidget>, bool> GeneralPage::getWidget(const std::s
 }
 
 std::shared_ptr<BaseLayout> GeneralPage::getLayout(const std::string &slug) const { return grid->getLayout(slug); }
+
+void GeneralPage::fillModifiers(std::set<SDL_Keymod> &modifiers, SDL_Keymod sdlModifiers) {
+  modifiers.clear();
+  std::array<SDL_Keymod, 13> allMods{KMOD_NONE, KMOD_LSHIFT, KMOD_RSHIFT,  KMOD_LCTRL, KMOD_RCTRL,
+                                     KMOD_LALT, KMOD_RALT,   KMOD_LGUI,    KMOD_RGUI,  KMOD_NUM,
+                                     KMOD_CAPS, KMOD_MODE,   KMOD_RESERVED};
+  for (auto mod : allMods)
+    if (sdlModifiers & mod)
+      modifiers.insert(mod);
+}
