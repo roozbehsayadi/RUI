@@ -33,6 +33,9 @@ int main() {
   while (!quit) {
     quit = rui.handleEvents();
 
+    auto pressedKey = rui.getPressedKey("main_1");
+    auto modifiers = rui.getKeyboardModifiers("main_1");
+
     // do your stuff here. for example:
     auto button1 = rui.getWidget("button1").first;
     auto buttonLeaf = rui.getLayout("leaf1");

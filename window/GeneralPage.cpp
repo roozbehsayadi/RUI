@@ -4,9 +4,10 @@
 GeneralPage::GeneralPage(const std::string &slug, const std::string &caption) {
   monitor.setCaption(caption);
 
-  grid = std::make_shared<ColumnLayout>(slug, 1.0, 1.0);
+  grid = std::make_shared<ColumnLayout>(slug + "__COLUMN", 1.0, 1.0);
 
   shown = true;
+  this->slug = slug;
 }
 
 void GeneralPage::render() {
@@ -47,8 +48,21 @@ void GeneralPage::handleEvents(SDL_Event &event) {
   } else if (event.type == SDL_MOUSEWHEEL) {
     grid->handleScroll(event.wheel.y, mouseX, mouseY);
   } else if (event.type == SDL_KEYDOWN) {
+    // TODO LATER Pass it to widgets & consume it maybe.
+    auto sym = event.key.keysym.sym;
+    addPressedKey(sym);
   }
 }
+
+char GeneralPage::getPressedKey() {
+  if (pressedKeys.size() == 0)
+    return SDLK_UNKNOWN;
+  auto temp = pressedKeys.front();
+  pressedKeys.pop();
+  return temp;
+}
+
+bool GeneralPage::hasPressedKey() { return (pressedKeys.size() != 0); }
 
 std::set<SDL_Keymod> GeneralPage::getModifiers() const {
   static std::set<SDL_Keymod> modifiers;
@@ -61,6 +75,12 @@ std::pair<std::shared_ptr<BaseWidget>, bool> GeneralPage::getWidget(const std::s
 }
 
 std::shared_ptr<BaseLayout> GeneralPage::getLayout(const std::string &slug) const { return grid->getLayout(slug); }
+
+void GeneralPage::addPressedKey(SDL_Keycode pressedKey) {
+  if (pressedKeys.size() >= 100)
+    pressedKeys.pop();
+  pressedKeys.push(pressedKey);
+}
 
 void GeneralPage::fillModifiers(std::set<SDL_Keymod> &modifiers, SDL_Keymod sdlModifiers) {
   modifiers.clear();

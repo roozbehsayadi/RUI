@@ -1,6 +1,7 @@
 #ifndef __GENERAL_PAGE_H
 #define __GENERAL_PAGE_H
 
+#include <queue>
 #include <set>
 #include <string>
 #include <utility>
@@ -12,6 +13,8 @@
 #include "widgets/BaseWidget.h"
 
 class GeneralPage {
+
+  friend class RUI;
 
 public:
   // Arguments:
@@ -28,6 +31,10 @@ public:
   void handleEvents(SDL_Event &);
 
   std::set<SDL_Keymod> getModifiers() const;
+  // Returns the oldest key pressed.
+  // Does not store more that 100 keys.
+  char getPressedKey();
+  bool hasPressedKey();
 
   std::pair<std::shared_ptr<BaseWidget>, bool> getWidget(const std::string &) const;
 
@@ -39,6 +46,8 @@ public:
   bool isShown() const { return this->shown; }
 
 private:
+  std::string slug;
+
   RuiMonitor monitor;
   int mouseX = -1, mouseY = -1;
 
@@ -47,6 +56,9 @@ private:
   bool shown;
 
   static void fillModifiers(std::set<SDL_Keymod> &, SDL_Keymod);
+  std::queue<SDL_Keycode> pressedKeys;
+
+  void addPressedKey(SDL_Keycode);
 };
 
 #endif //__GENERAL_PAGE_H
