@@ -8,7 +8,9 @@
 class CheckboxWidget : public BaseWidget {
 public:
   CheckboxWidget(const std::string &slug, bool &variable, const std::string &label)
-      : BaseWidget(slug), label(label), variable(variable) {}
+      : BaseWidget(slug), label(label), variable(variable) {
+    type = WIDGET_CHECKBOX;
+  }
 
 protected:
   virtual void draw(RuiMonitor &, const Rect &) override;
