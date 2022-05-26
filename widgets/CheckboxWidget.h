@@ -15,6 +15,7 @@ public:
 protected:
   virtual void draw(RuiMonitor &, const Rect &) override;
   virtual void handleClick(int, int) override;
+  virtual void handleTextInput(char) override {}
 
   std::string label;
   bool &variable;

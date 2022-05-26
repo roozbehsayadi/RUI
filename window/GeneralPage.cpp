@@ -47,10 +47,20 @@ void GeneralPage::handleEvents(SDL_Event &event) {
     SDL_GetMouseState(&mouseX, &mouseY);
   } else if (event.type == SDL_MOUSEWHEEL) {
     grid->handleScroll(event.wheel.y, mouseX, mouseY);
-  } else if (event.type == SDL_KEYDOWN) {
-    // TODO LATER Pass it to widgets & consume it maybe.
+  }
+
+  if (grid->hasFocusedWidget()) {
+    if (event.type == SDL_TEXTINPUT) {
+      grid->handleTextInput(event.text.text[0]);
+    }
+  }
+  if (event.type == SDL_KEYDOWN) {
     auto sym = event.key.keysym.sym;
-    addPressedKey(sym);
+    if (grid->hasFocusedWidget()) {
+      if (sym == SDLK_BACKSPACE)
+        grid->handleTextInput(sym);
+    } else
+      addPressedKey(sym);
   }
 }
 

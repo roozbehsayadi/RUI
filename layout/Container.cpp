@@ -30,6 +30,8 @@ std::shared_ptr<BaseLayout> Container::getLayout(const std::string &slug) const 
 void Container::handleClick(int mouseX, int mouseY) {
   if (hidden)
     return;
+  for (auto &child : children)
+    child->removeFocus();
   if (Geometry::isPointInsideRect(mouseX, mouseY, positionPixel))
     for (auto &child : children) {
       child->handleClick(mouseX, mouseY);
@@ -47,6 +49,24 @@ bool Container::handleScroll(int scrollAmount, int mouseX, int mouseY) {
   }
 
   return somethingAffected;
+}
+
+bool Container::handleTextInput(char key) {
+  if (hidden)
+    return false;
+  for (auto &child : children)
+    if (child->handleTextInput(key))
+      return true;
+  return false;
+}
+
+bool Container::hasFocusedWidget() const {
+  if (hidden)
+    return false;
+  for (auto &child : children)
+    if (child->hasFocusedWidget())
+      return true;
+  return false;
 }
 
 void Container::render(RuiMonitor &monitor, const Rect &showableArea) {
@@ -84,4 +104,9 @@ void Container::setScrollableAndScrollSpace(int availableLength, int &thisWay, i
     else
       thisWay = 0;
   }
+}
+
+void Container::removeFocus() {
+  for (auto &child : children)
+    child->removeFocus();
 }

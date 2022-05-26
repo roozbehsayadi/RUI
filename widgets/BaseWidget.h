@@ -15,6 +15,7 @@ enum WidgetType {
   WIDGET_IMAGE,
   WIDGET_RADIO_BUTTON,
   WIDGET_CHECKBOX,
+  WIDGET_TEXT_INPUT,
 };
 
 class LeafLayout;
@@ -38,9 +39,12 @@ public:
   bool isEnabled() const { return this->enabled; }
   void setEnabled(bool enabled) { this->enabled = enabled; }
 
+  bool isFocused() const { return this->focused; }
+
 protected:
   virtual void draw(RuiMonitor &, const Rect &) = 0;
   virtual void handleClick(int, int) = 0;
+  virtual void handleTextInput(char) = 0;
 
   WidgetType type;
   std::string slug;
@@ -48,6 +52,7 @@ protected:
   bool clicked = false;
 
   bool enabled = true;
+  bool focused = false;
 
   Rect positionPixel;
 };

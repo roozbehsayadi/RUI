@@ -40,12 +40,20 @@ public:
   // TODO make it return if anything happened.
   // if not, the layout itself can handle click.
   // maybe by having a similar function to isClicked()?
+  // returns the slug of a widget if it was focused
+  // on (as a consequence of the handled click).
+  //
   virtual void handleClick(int, int) = 0;
   // mouseWheel, x of mouse, y of mouse.
   // Returns if scrolling happened. Returns
   // true even if the layout have reached its
   // end and nothing actually scrolled.
   virtual bool handleScroll(int, int, int) = 0;
+
+  // Returns true if the layout "consumed" the key press
+  virtual bool handleTextInput(char) = 0;
+
+  virtual bool hasFocusedWidget() const = 0;
 
   void setPositionPixel(const Rect &positionPixel) { this->positionPixel = positionPixel; }
 
@@ -77,6 +85,8 @@ protected:
 
   virtual double getLayoutEnd(std::shared_ptr<BaseLayout> &, int = 0) const = 0;
   virtual double getLayoutEnd(int = 0) const = 0;
+
+  virtual void removeFocus() = 0;
 
   std::string slug;
 

@@ -76,13 +76,27 @@ void RuiMonitor::drawBox(const Rect &rect, const Color &color) {
 }
 
 // TODO refactor maybe?
-void RuiMonitor::drawText(const Rect &rect, const Rect &showableArea, const Color &color, const std::string &text) {
+// TODO UPDATE: definetely
+void RuiMonitor::drawText(const Rect &rect, const Rect &showableArea, const Color &color, const std::string &text,
+                          FontFitMethod fitMethod) {
+  if (text == "")
+    return;
   SDL_Color temp{color.getRed(), color.getGreen(), color.getBlue(), 255};
-  int fontSize = getFontSizeToFit(rect, text);
+  int fontSize = getFontSizeToFit(rect, text, fitMethod);
   SDL_Surface *textSurface = TTF_RenderText_Blended(font[fontSize], text.c_str(), temp);
   SDL_Texture *textTexture = SDL_CreateTextureFromSurface(renderer, textSurface);
-  Rect targetRect{rect.x + fabs(rect.w - textSurface->w) / 2, rect.y + fabs(rect.h - textSurface->h) / 2,
+
+  Rect targetRect;
+  if (fitMethod == FONT_FIT_BOTH)
+    targetRect = {rect.x + fabs(rect.w - textSurface->w) / 2, rect.y + fabs(rect.h - textSurface->h) / 2,
                   double(textSurface->w), double(textSurface->h)};
+  else if (fitMethod == FONT_FIT_VERTICAL) {
+    if (textSurface->w > rect.w)
+      targetRect = {rect.x + rect.w - textSurface->w, rect.y, double(textSurface->w), double(textSurface->h)};
+    else
+      targetRect = {rect.x, rect.y, double(textSurface->w), double(textSurface->h)};
+  }
+
   auto trimmedTargetRect = Geometry::trimRect(targetRect, showableArea).first;
 
   SDL_Rect trimmedSDLRect = {int(trimmedTargetRect.x - targetRect.x), int(trimmedTargetRect.y - targetRect.y),
@@ -121,13 +135,13 @@ bool RuiMonitor::initializeFonts() {
   return true;
 }
 
-int RuiMonitor::getFontSizeToFit(const Rect &rect, const std::string &text) {
+int RuiMonitor::getFontSizeToFit(const Rect &rect, const std::string &text, FontFitMethod fitMethod) {
   // TODO I don't like the way this function works.
   for (int i = 1; i < 100; i++) {
     auto f = this->font[i];
     int w, h;
     TTF_SizeText(f, text.c_str(), &w, &h);
-    if (h > rect.h || w > rect.w)
+    if (fitMethod == FONT_FIT_BOTH && (h > rect.h || w > rect.w) || (fitMethod == FONT_FIT_VERTICAL && (h > rect.h)))
       return std::max(i - 3, 1);
   }
   return 99;

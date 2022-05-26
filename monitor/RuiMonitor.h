@@ -15,6 +15,11 @@
 
 class GeneralPage;
 
+enum FontFitMethod {
+  FONT_FIT_VERTICAL,
+  FONT_FIT_BOTH,
+};
+
 class RuiMonitor {
 
   friend class GeneralPage;
@@ -39,7 +44,7 @@ public:
 
   void drawRectangle(const Rect &, const Color &);
   void drawBox(const Rect &, const Color &);
-  void drawText(const Rect &, const Rect &, const Color &, const std::string &);
+  void drawText(const Rect &, const Rect &, const Color &, const std::string &, FontFitMethod = FONT_FIT_BOTH);
   void drawImage(const Rect &, const Rect &, SDL_Texture *&, const std::string &);
 
 private:
@@ -49,7 +54,7 @@ private:
   std::map<int, TTF_Font *> font;
 
   bool initializeFonts();
-  int getFontSizeToFit(const Rect &, const std::string &);
+  int getFontSizeToFit(const Rect &, const std::string &, FontFitMethod);
 };
 
 #endif // __RUI_MONITOR_H

@@ -23,6 +23,10 @@ public:
   virtual void handleClick(int, int) override;
   virtual bool handleScroll(int, int, int) override;
 
+  virtual bool handleTextInput(char) override;
+
+  virtual bool hasFocusedWidget() const override;
+
   void addChild(std::shared_ptr<BaseLayout> child) { children.push_back(child); }
 
   virtual void render(RuiMonitor &, const Rect &) override;
@@ -35,6 +39,8 @@ protected:
 
   virtual double getLayoutEnd(std::shared_ptr<BaseLayout> &, int = 0) const = 0;
   virtual double getLayoutEnd(int = 0) const = 0;
+
+  virtual void removeFocus() override;
 
   void setScrollableAndScrollSpace(int, int &, int &);
 

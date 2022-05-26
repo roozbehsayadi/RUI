@@ -11,6 +11,7 @@
 #include "widgets/CheckboxWidget.h"
 #include "widgets/ImageWidget.h"
 #include "widgets/RadioButtonWidget.h"
+#include "widgets/TextInputWidget.h"
 #include "window/GeneralPage.h"
 
 void fillPage(GeneralPage &, const std::string &, const std::string &);
@@ -108,6 +109,25 @@ void fillPage(GeneralPage &page, const std::string &index, const std::string &im
   radioColumn->addChild(radioContainer3);
 
   r->addChild(radioColumn);
+
+  auto textInputColumn = std::make_shared<ColumnLayout>("text_input_column", 0.25, 0.8, 0.0, 0.0, 0.03, 0.0);
+
+  auto textContainer1 = std::make_shared<LeafLayout>("leaf_text_1", 0.9, 0.2, 0.0, 0.0, 0.05, 0.05);
+  auto textInput1 = std::make_shared<TextInputWidget>("text_input_1");
+  textContainer1->setWidget(textInput1);
+  textInputColumn->addChild(textContainer1);
+
+  auto textContainer2 = std::make_shared<LeafLayout>("leaf_text_2", 0.9, 0.2, 0.0, 0.0, 0.05, 0.05);
+  auto textInput2 = std::make_shared<TextInputWidget>("text_input_2");
+  textContainer2->setWidget(textInput2);
+  textInputColumn->addChild(textContainer2);
+
+  auto textContainer3 = std::make_shared<LeafLayout>("leaf_text_3", 0.9, 0.2, 0.0, 0.0, 0.05, 0.05);
+  auto textInput3 = std::make_shared<TextInputWidget>("text_input_3");
+  textContainer3->setWidget(textInput3);
+  textInputColumn->addChild(textContainer3);
+
+  r->addChild(textInputColumn);
 
   grid->addChild(r);
 

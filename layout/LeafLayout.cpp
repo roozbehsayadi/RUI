@@ -22,3 +22,15 @@ void LeafLayout::handleClick(int mouseX, int mouseY) {
     return;
   widget->handleClick(mouseX, mouseY);
 }
+
+bool LeafLayout::handleTextInput(char key) {
+  if (widget->getType() == WIDGET_TEXT_INPUT && widget->isFocused()) {
+    widget->handleTextInput(key);
+    return true;
+  }
+  return false;
+}
+
+bool LeafLayout::hasFocusedWidget() const { return widget->isFocused(); }
+
+void LeafLayout::removeFocus() { widget->focused = false; }
