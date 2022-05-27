@@ -12,11 +12,9 @@ public:
     color = {0, 0, 255};
   }
 
-  void setEnabled(bool enabled) {
-    BaseWidget::setEnabled(enabled);
-    if (!enabled)
-      focused = false;
-  }
+  const std::string &getText() const;
+
+  void setEnabled(bool);
 
 protected:
   virtual void draw(RuiMonitor &, const Rect &) override;

@@ -42,9 +42,14 @@ int main() {
     auto buttonLeaf = rui.getLayout("leaf1");
     auto leaf1 = rui.getLayout("big leaf1");
     auto leaf2 = rui.getLayout("big leaf 21");
+
+    auto textInput1 = std::dynamic_pointer_cast<TextInputWidget>(rui.getWidget("text_input_1").first),
+         textInput2 = std::dynamic_pointer_cast<TextInputWidget>(rui.getWidget("text_input_2").first),
+         textInput3 = std::dynamic_pointer_cast<TextInputWidget>(rui.getWidget("text_input_3").first);
     if (button1->isClicked()) {
       showImage1 = true;
       showImage2 = true;
+      std::cout << textInput1->getText() << "\n" << textInput2->getText() << "\n" << textInput3->getText() << std::endl;
     }
     leaf1->setHidden(!showImage1);
     leaf2->setHidden(!showImage2);

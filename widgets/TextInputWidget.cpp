@@ -11,6 +11,14 @@ void TextInputWidget::draw(RuiMonitor &monitor, const Rect &showableArea) {
   monitor.drawText(positionPixel, showableArea, color, text, FONT_FIT_VERTICAL);
 }
 
+const std::string &TextInputWidget::getText() const { return this->text; }
+
+void TextInputWidget::setEnabled(bool enabled) {
+  BaseWidget::setEnabled(enabled);
+  if (!enabled)
+    focused = false;
+}
+
 void TextInputWidget::handleClick(int mouseX, int mouseY) {
   if (!this->enabled)
     return;
