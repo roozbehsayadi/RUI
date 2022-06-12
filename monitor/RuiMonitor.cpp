@@ -55,7 +55,7 @@ std::pair<int, int> RuiMonitor::getMonitorSize() const {
 void RuiMonitor::close() { SDL_DestroyWindow(window); }
 
 void RuiMonitor::clear() {
-  SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+  SDL_SetRenderDrawColor(renderer, 38, 38, 38, 255);
   SDL_RenderClear(renderer);
 }
 
