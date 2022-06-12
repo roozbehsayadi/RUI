@@ -60,6 +60,26 @@ bool Container::handleTextInput(char key) {
   return false;
 }
 
+bool Container::handleDrag(int mouseX, int mouseY) {
+  if (hidden)
+    return false;
+  if (Geometry::isPointInsideRect(mouseX, mouseY, positionPixel)) {
+    for (auto &child : children)
+      if (child->handleDrag(mouseX, mouseY))
+        return true;
+  }
+  return false;
+}
+
+bool Container::handleDrop() {
+  if (hidden)
+    return false;
+  for (auto &child : children)
+    if (child->handleDrop())
+      return true;
+  return false;
+}
+
 bool Container::hasFocusedWidget() const {
   if (hidden)
     return false;

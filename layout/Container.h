@@ -25,6 +25,9 @@ public:
 
   virtual bool handleTextInput(char) override;
 
+  virtual bool handleDrag(int, int) override;
+  virtual bool handleDrop() override;
+
   virtual bool hasFocusedWidget() const override;
 
   void addChild(std::shared_ptr<BaseLayout> child) { children.push_back(child); }

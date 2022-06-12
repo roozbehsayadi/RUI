@@ -53,6 +53,9 @@ public:
   // Returns true if the layout "consumed" the key press
   virtual bool handleTextInput(char) = 0;
 
+  virtual bool handleDrag(int, int) = 0;
+  virtual bool handleDrop() = 0;
+
   virtual bool hasFocusedWidget() const = 0;
 
   void setPositionPixel(const Rect &positionPixel) { this->positionPixel = positionPixel; }

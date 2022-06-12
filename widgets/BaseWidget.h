@@ -16,6 +16,7 @@ enum WidgetType {
   WIDGET_RADIO_BUTTON,
   WIDGET_CHECKBOX,
   WIDGET_TEXT_INPUT,
+  WIDGET_SCREEN,
 };
 
 class LeafLayout;

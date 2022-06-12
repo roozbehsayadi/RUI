@@ -11,11 +11,13 @@
 #include "widgets/CheckboxWidget.h"
 #include "widgets/ImageWidget.h"
 #include "widgets/RadioButtonWidget.h"
+#include "widgets/ScreenWidget.h"
 #include "widgets/TextInputWidget.h"
+#include "widgets/elements/ScreenObject.h"
 #include "window/GeneralPage.h"
 
 void fillPage(GeneralPage &, const std::string &, const std::string &);
-bool showImage1 = true, showImage2 = true, showButton = true, placeholder = false;
+bool showScreen = true, showImage = true, showButton = true, placeholder = false;
 int radioVariable = 1;
 
 int main() {
@@ -47,12 +49,12 @@ int main() {
          textInput2 = std::dynamic_pointer_cast<TextInputWidget>(rui.getWidget("text_input_2").first),
          textInput3 = std::dynamic_pointer_cast<TextInputWidget>(rui.getWidget("text_input_3").first);
     if (button1->isClicked()) {
-      showImage1 = true;
-      showImage2 = true;
+      showScreen = true;
+      showImage = true;
       std::cout << textInput1->getText() << "\n" << textInput2->getText() << "\n" << textInput3->getText() << std::endl;
     }
-    leaf1->setHidden(!showImage1);
-    leaf2->setHidden(!showImage2);
+    leaf1->setHidden(!showScreen);
+    leaf2->setHidden(!showImage);
     buttonLeaf->setHidden(!showButton);
 
     rui.render();
@@ -75,12 +77,12 @@ void fillPage(GeneralPage &page, const std::string &index, const std::string &im
 
   auto checkboxColumn = std::make_shared<ColumnLayout>("checkbox_column" + index, 0.3, 0.8, 0.0, 0.0, 0.04, 0.0);
   auto checkboxContainer1 = std::make_shared<LeafLayout>("checkbox_container_1", 1.0, 0.24, 0.0, 0.0, 0.0, 0.0);
-  auto checkBox1 = std::make_shared<CheckboxWidget>("checkbox_1", showImage1, "show image 1");
+  auto checkBox1 = std::make_shared<CheckboxWidget>("checkbox_1", showScreen, "show screen");
   checkboxContainer1->setWidget(checkBox1);
   checkboxColumn->addChild(checkboxContainer1);
 
   auto checkboxContainer2 = std::make_shared<LeafLayout>("checkbox_container_2", 1.0, 0.24, 0.0, 0.0, 0.0, 0.0);
-  auto checkBox2 = std::make_shared<CheckboxWidget>("checkbox_2", showImage2, "show image 2");
+  auto checkBox2 = std::make_shared<CheckboxWidget>("checkbox_2", showImage, "show image 2");
   checkboxContainer2->setWidget(checkBox2);
   checkboxColumn->addChild(checkboxContainer2);
 
@@ -136,12 +138,20 @@ void fillPage(GeneralPage &page, const std::string &index, const std::string &im
 
   grid->addChild(r);
 
-  auto bigColumn = std::make_shared<ColumnLayout>("big column" + index, 0.80, 0.60, 0.05, 0.05, 0.1, 0.05);
-  auto l2 = std::make_shared<LeafLayout>("big leaf" + index, 0.90, 0.90, 0.0, 0.0, 0.0, 0.0);
+  auto bigColumn = std::make_shared<ColumnLayout>("big column" + index, 0.80, 0.60, 0.0, 0.0, 0.1, 0.05);
+  auto l2 = std::make_shared<LeafLayout>("big leaf" + index, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0);
 
-  auto img = std::make_shared<ImageWidget>(imageSlug, "assets/images/" + imageSlug + ".png");
-  l2->setWidget(img);
+  auto screenWidget = std::make_shared<ScreenWidget>("screen");
+  l2->setWidget(screenWidget);
   bigColumn->addChild(l2);
+
+  Rect tempRect = {50.0, 50.0, 64.0, 64.0};
+  auto screenObject1 = std::make_shared<ScreenObject>("enemy", "assets/images/enemy.png", tempRect);
+  tempRect = {200.0, 200.0, 64.0, 64.0};
+  auto screenObject2 = std::make_shared<ScreenObject>("player", "assets/images/player.png", tempRect);
+
+  screenWidget->insertObject(screenObject1);
+  screenWidget->insertObject(screenObject2);
 
   grid->addChild(bigColumn);
 

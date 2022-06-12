@@ -8,6 +8,7 @@
 
 #include "widgets/BaseWidget.h"
 #include "widgets/ButtonWidget.h"
+#include "widgets/ScreenWidget.h"
 
 class LeafLayout : public BaseLayout {
 public:
@@ -31,6 +32,9 @@ public:
   virtual bool handleScroll(int, int, int) override { return false; }
 
   virtual bool handleTextInput(char) override;
+
+  virtual bool handleDrag(int, int) override;
+  virtual bool handleDrop() override;
 
   virtual bool hasFocusedWidget() const override;
 

@@ -18,6 +18,8 @@ void GeneralPage::render() {
 }
 
 void GeneralPage::handleEvents(SDL_Event &event) {
+  static bool leftMouseDown = false, rightMouseDown = false;
+
   if (event.window.windowID != SDL_GetWindowID(monitor.window))
     return;
   if (event.type == SDL_WINDOWEVENT) {
@@ -42,9 +44,27 @@ void GeneralPage::handleEvents(SDL_Event &event) {
       break;
     }
   } else if (event.type == SDL_MOUSEBUTTONDOWN) {
+
+    if (event.button.button == SDL_BUTTON_LEFT)
+      leftMouseDown = true;
+    else if (event.button.button == SDL_BUTTON_RIGHT)
+      rightMouseDown = true;
+
     grid->handleClick(event.button.x, event.button.y);
+  } else if (event.type == SDL_MOUSEBUTTONUP) {
+
+    if (event.button.button == SDL_BUTTON_LEFT)
+      leftMouseDown = false;
+    else if (event.button.button == SDL_BUTTON_RIGHT)
+      rightMouseDown = false;
+
+    grid->handleDrop();
   } else if (event.type == SDL_MOUSEMOTION) {
     SDL_GetMouseState(&mouseX, &mouseY);
+
+    if (rightMouseDown)
+      grid->handleDrag(mouseX, mouseY);
+
   } else if (event.type == SDL_MOUSEWHEEL) {
     grid->handleScroll(event.wheel.y, mouseX, mouseY);
   }

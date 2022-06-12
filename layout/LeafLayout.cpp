@@ -31,6 +31,32 @@ bool LeafLayout::handleTextInput(char key) {
   return false;
 }
 
+bool LeafLayout::handleDrag(int mouseX, int mouseY) {
+  if (hidden)
+    return false;
+
+  if (Geometry::isPointInsideRect(mouseX, mouseY, positionPixel)) {
+    if (widget->getType() == WIDGET_SCREEN) {
+      auto temp = std::dynamic_pointer_cast<ScreenWidget>(widget);
+      temp->handleDrag(mouseX, mouseY);
+      return true;
+    }
+  }
+  return false;
+}
+
+bool LeafLayout::handleDrop() {
+  if (hidden)
+    return false;
+
+  if (widget->getType() == WIDGET_SCREEN) {
+    auto temp = std::dynamic_pointer_cast<ScreenWidget>(widget);
+    temp->handleDrop();
+    return true;
+  }
+  return false;
+}
+
 bool LeafLayout::hasFocusedWidget() const { return widget->isFocused(); }
 
 void LeafLayout::removeFocus() { widget->focused = false; }
