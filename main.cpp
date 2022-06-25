@@ -31,6 +31,8 @@ int main() {
   rui.addWindow(&page);
   // rui.addWindow(&page2);
 
+  int characterCounter = 0;
+
   rui.render();
   bool quit = false;
   while (!quit) {
@@ -44,14 +46,13 @@ int main() {
     auto buttonLeaf = rui.getLayout("leaf1");
     auto leaf1 = rui.getLayout("big leaf1");
     auto leaf2 = rui.getLayout("big leaf 21");
+    auto screen = std::dynamic_pointer_cast<ScreenWidget>(rui.getWidget("screen").first);
 
-    auto textInput1 = std::dynamic_pointer_cast<TextInputWidget>(rui.getWidget("text_input_1").first),
-         textInput2 = std::dynamic_pointer_cast<TextInputWidget>(rui.getWidget("text_input_2").first),
-         textInput3 = std::dynamic_pointer_cast<TextInputWidget>(rui.getWidget("text_input_3").first);
     if (button1->isClicked()) {
-      showScreen = true;
-      showImage = true;
-      std::cout << textInput1->getText() << "\n" << textInput2->getText() << "\n" << textInput3->getText() << std::endl;
+      Rect tempRect = {300.0, 300.0, 64.0, 64.0};
+      screen->insertObject(std::make_shared<ScreenObject>("character_" + std::to_string(characterCounter),
+                                                          "assets/images/enemy.png", tempRect));
+      characterCounter++;
     }
     leaf1->setHidden(!showScreen);
     leaf2->setHidden(!showImage);

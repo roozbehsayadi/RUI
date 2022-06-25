@@ -25,6 +25,23 @@ void ScreenWidget::draw(RuiMonitor &monitor, const Rect &showableArea) {
 }
 
 void ScreenWidget::handleClick(int mouseX, int mouseY) {
+
+  for (auto &object : objects) {
+
+    auto objectPosition = object->getPositionPixel();
+    Rect temp = {positionPixel.x + objectPosition.x + xShift, positionPixel.y + objectPosition.y + yShift,
+                 objectPosition.w, objectPosition.h};
+
+    if (Geometry::isPointInsideRect(mouseX, mouseY, temp)) {
+      objectSelected = true;
+      selectedObject = &object;
+      selectedObjectToDragOriginalPosition = selectedObject->get()->getPositionPixel();
+      return;
+    }
+  }
+
+  objectSelected = false;
+
   lastClickX = mouseX;
   lastClickY = mouseY;
 }
@@ -37,8 +54,17 @@ void ScreenWidget::handleDrag(int mouseX, int mouseY) {
     lastClickY = mouseY;
   }
 
-  currentXShift = mouseX - lastClickX;
-  currentYShift = mouseY - lastClickY;
+  if (objectSelected) {
+    selectedObject->get()->setPositionPixel({
+        selectedObjectToDragOriginalPosition.x + (mouseX - lastClickX),
+        selectedObjectToDragOriginalPosition.y + (mouseY - lastClickY),
+        selectedObjectToDragOriginalPosition.w,
+        selectedObjectToDragOriginalPosition.h,
+    });
+  } else {
+    currentXShift = mouseX - lastClickX;
+    currentYShift = mouseY - lastClickY;
+  }
 }
 
 void ScreenWidget::handleDrop() {
@@ -50,6 +76,8 @@ void ScreenWidget::handleDrop() {
 
   lastClickX = INT_MIN;
   lastClickY = INT_MIN;
+
+  objectSelected = false;
 }
 
 std::shared_ptr<ScreenObject> ScreenWidget::getObject(const std::string &slug) const {

@@ -40,6 +40,10 @@ private:
   int xShift = 0, yShift = 0;
   Rect boundary;
 
+  bool objectSelected = false;
+  std::shared_ptr<ScreenObject> *selectedObject;
+  Rect selectedObjectToDragOriginalPosition;
+
   int lastClickX = INT_MIN, lastClickY = INT_MIN;
 };
 
