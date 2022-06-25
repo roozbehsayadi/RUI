@@ -12,6 +12,11 @@ class BaseWidget;
 
 class RUI {
 public:
+  static RUI &getInstance();
+
+  RUI(RUI const &) = delete;
+  void operator=(RUI const &) = delete;
+
   void addWindow(GeneralPage *page) { windows[page->slug] = page; }
   bool handleEvents();
   void render();
@@ -25,6 +30,8 @@ public:
   std::shared_ptr<BaseLayout> getLayout(const std::string &slug) const;
 
 private:
+  RUI() {}
+
   bool isAllWindowsClosed() const;
 
   // TODO handle without pointers

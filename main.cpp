@@ -27,26 +27,26 @@ int main() {
   // GeneralPage page2("main_2", "rui2");
   // fillPage(page2, "2", "img2");
 
-  RUI rui;
-  rui.addWindow(&page);
+  // auto rui = RUI::getInstance();
+  RUI::getInstance().addWindow(&page);
   // rui.addWindow(&page2);
 
   int characterCounter = 0;
 
-  rui.render();
+  RUI::getInstance().render();
   bool quit = false;
   while (!quit) {
-    quit = rui.handleEvents();
+    quit = RUI::getInstance().handleEvents();
 
-    auto pressedKey = rui.getPressedKey("main_1");
-    auto modifiers = rui.getKeyboardModifiers("main_1");
+    auto pressedKey = RUI::getInstance().getPressedKey("main_1");
+    auto modifiers = RUI::getInstance().getKeyboardModifiers("main_1");
 
     // do your stuff here. for example:
-    auto button1 = rui.getWidget("button1").first;
-    auto buttonLeaf = rui.getLayout("leaf1");
-    auto leaf1 = rui.getLayout("big leaf1");
-    auto leaf2 = rui.getLayout("big leaf 21");
-    auto screen = std::dynamic_pointer_cast<ScreenWidget>(rui.getWidget("screen").first);
+    auto button1 = RUI::getInstance().getWidget("button1").first;
+    auto buttonLeaf = RUI::getInstance().getLayout("leaf1");
+    auto leaf1 = RUI::getInstance().getLayout("big leaf1");
+    auto leaf2 = RUI::getInstance().getLayout("big leaf 21");
+    auto screen = std::dynamic_pointer_cast<ScreenWidget>(RUI::getInstance().getWidget("screen").first);
 
     if (button1->isClicked()) {
       Rect tempRect = {300.0, 300.0, 64.0, 64.0};
@@ -58,7 +58,7 @@ int main() {
     leaf2->setHidden(!showImage);
     buttonLeaf->setHidden(!showButton);
 
-    rui.render();
+    RUI::getInstance().render();
   }
 
   return EXIT_SUCCESS;

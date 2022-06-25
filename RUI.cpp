@@ -3,6 +3,11 @@
 
 #include <iostream>
 
+RUI &RUI::getInstance() {
+  static RUI instance;
+  return instance;
+}
+
 bool RUI::handleEvents() {
   bool quit = false;
   static SDL_Event event;
