@@ -1,6 +1,6 @@
 .PHONY: all run clean lines
 
-all: build/main.o build/RUI.o build/GeneralPage.o build/RuiMonitor.o build/BaseLayout.o build/ColumnLayout.o build/Container.o build/LeafLayout.o build/RowLayout.o build/Color.o build/Rect.o build/Geometry.o build/BaseWidget.o build/ButtonWidget.o build/ImageWidget.o build/CheckboxWidget.o build/RadioButtonWidget.o build/TextInputWidget.o build/ScreenWidget.o build/ScreenObject.o
+all: build/main.o build/RUI.o build/GeneralPage.o build/RuiMonitor.o build/BaseLayout.o build/ColumnLayout.o build/Container.o build/LeafLayout.o build/RowLayout.o build/Color.o build/Rect.o build/Geometry.o build/BaseWidget.o build/ButtonWidget.o build/ImageWidget.o build/CheckboxWidget.o build/RadioButtonWidget.o build/TextInputWidget.o build/ScreenWidget.o build/ScreenObject.o build/RuiSettings.o
 	g++ -Ibuild build/*.o -o build/RUI.out -Wall -g -O2 -std=c++2a -lSDL2 -lSDL2_ttf -lSDL2_image
 run:
 	./build/RUI.out
@@ -44,6 +44,8 @@ build/ScreenWidget.o: widgets/ScreenWidget.h widgets/ScreenWidget.cpp
 	g++ -std=c++2a -c -I. -o build/ScreenWidget.o widgets/ScreenWidget.cpp
 build/ScreenObject.o: widgets/elements/ScreenObject.h widgets/elements/ScreenObject.cpp
 	g++ -std=c++2a -c -I. -o build/ScreenObject.o widgets/elements/ScreenObject.cpp
+build/RuiSettings.o: RuiSettings.h RuiSettings.cpp
+	g++ -std=c++2a -c -I. -o build/RuiSettings.o RuiSettings.cpp
 clean:
 	rm -rf build/*.o build/*.gch build/*.out
 lines:

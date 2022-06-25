@@ -5,6 +5,7 @@
 #include <memory>
 
 #include "BaseLayout.h"
+#include "RuiSettings.h"
 #include "monitor/RuiMonitor.h"
 
 class Container : public BaseLayout {

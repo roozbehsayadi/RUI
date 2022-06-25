@@ -11,12 +11,19 @@ RUI &RUI::getInstance() {
 bool RUI::handleEvents() {
   bool quit = false;
   static SDL_Event event;
+  windowsToRender.clear();
+
   if (SDL_PollEvent(&event)) {
     if (event.type == SDL_QUIT) {
       quit = true;
     }
-    for (auto it : windows)
+    for (auto it : windows) {
       it.second->handleEvents(event);
+      if (RuiSettings::mustRender) {
+        windowsToRender.push_back(it.first);
+        RuiSettings::mustRender = false;
+      }
+    }
   }
   if (windows.size() > 1 && isAllWindowsClosed()) {
     quit = true;
@@ -25,11 +32,21 @@ bool RUI::handleEvents() {
 }
 
 void RUI::render() {
-  for (auto it : windows) {
-    auto window = it.second;
-    window->clear();
-    window->render();
-    window->update();
+  if (firstRender) {
+    for (auto it : windows) {
+      auto window = it.second;
+      window->clear();
+      window->render();
+      window->update();
+    }
+    firstRender = false;
+  } else if (windowsToRender.size() != 0) {
+    for (auto slug : windowsToRender) {
+      windows[slug]->clear();
+      windows[slug]->render();
+      windows[slug]->update();
+    }
+    windowsToRender.clear();
   }
 }
 

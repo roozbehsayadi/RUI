@@ -4,6 +4,7 @@
 #include <memory>
 #include <vector>
 
+#include "RuiSettings.h"
 #include "monitor/RuiMonitor.h"
 #include "utils/Rect.h"
 #include "widgets/BaseWidget.h"
@@ -67,9 +68,9 @@ public:
   void setXMargin(double xMargin) { this->xMargin = xMargin; }
   void setYMargin(double yMargin) { this->yMargin = yMargin; }
 
-  void hide() { this->hidden = true; }
-  void show() { this->hidden = false; }
-  void setHidden(bool hidden) { this->hidden = hidden; }
+  void hide() { this->setHidden(true); }
+  void show() { this->setHidden(false); }
+  void setHidden(bool);
 
   const std::string &getSlug() const { return this->slug; }
 

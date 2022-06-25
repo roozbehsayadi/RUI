@@ -21,11 +21,16 @@ void LeafLayout::handleClick(int mouseX, int mouseY) {
   if (hidden)
     return;
   widget->handleClick(mouseX, mouseY);
+
+  // TODO maybe make this more specific
+  // by moving it into the widgets
+  RuiSettings::mustRender = true;
 }
 
 bool LeafLayout::handleTextInput(char key) {
   if (widget->getType() == WIDGET_TEXT_INPUT && widget->isFocused()) {
     widget->handleTextInput(key);
+    RuiSettings::mustRender = true;
     return true;
   }
   return false;
@@ -39,6 +44,7 @@ bool LeafLayout::handleDrag(int mouseX, int mouseY) {
     if (widget->getType() == WIDGET_SCREEN) {
       auto temp = std::dynamic_pointer_cast<ScreenWidget>(widget);
       temp->handleDrag(mouseX, mouseY);
+      RuiSettings::mustRender = true;
       return true;
     }
   }
@@ -52,6 +58,7 @@ bool LeafLayout::handleDrop() {
   if (widget->getType() == WIDGET_SCREEN) {
     auto temp = std::dynamic_pointer_cast<ScreenWidget>(widget);
     temp->handleDrop();
+    RuiSettings::mustRender = true;
     return true;
   }
   return false;

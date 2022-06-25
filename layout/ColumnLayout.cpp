@@ -14,6 +14,10 @@ bool ColumnLayout::handleScroll(int scrollAmount, int mouseX, int mouseY) {
       somethingAffected = true;
     }
   }
+
+  if (somethingAffected)
+    RuiSettings::mustRender = true;
+
   return somethingAffected;
 }
 

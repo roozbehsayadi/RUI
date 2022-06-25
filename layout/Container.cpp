@@ -48,6 +48,9 @@ bool Container::handleScroll(int scrollAmount, int mouseX, int mouseY) {
     }
   }
 
+  if (somethingAffected)
+    RuiSettings::mustRender = true;
+
   return somethingAffected;
 }
 

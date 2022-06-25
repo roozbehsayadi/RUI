@@ -37,6 +37,9 @@ private:
   // TODO handle without pointers
   std::map<std::string, GeneralPage *> windows;
   // std::vector<GeneralPage *> windows;
+
+  std::vector<std::string> windowsToRender;
+  bool firstRender = true;
 };
 
 #endif // __RUI_H

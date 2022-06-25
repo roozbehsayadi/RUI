@@ -6,6 +6,7 @@
 
 #include "BaseLayout.h"
 
+#include "RuiSettings.h"
 #include "widgets/BaseWidget.h"
 #include "widgets/ButtonWidget.h"
 #include "widgets/ScreenWidget.h"
