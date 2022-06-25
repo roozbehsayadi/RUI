@@ -3,6 +3,8 @@
 
 #include "utils/Geometry.h"
 
+const double BaseLayout::SCROLLABLE_EPSILON = 0.05;
+
 Rect BaseLayout::getRectInPixels(const Rect &rect, int xPadParent, int yPadParent) const {
   Rect returnValue{rect.x + xPadParent * rect.w + xMargin * rect.w, rect.y + yPadParent * rect.h + yMargin * rect.h,
                    width * rect.w, height * rect.h};

@@ -93,7 +93,7 @@ void Container::setScrollableAndScrollSpace(int availableLength, int &thisWay, i
   auto visibleChildren = getVisibleChildren();
   if (visibleChildren.size() != 0) {
     auto childrenTotalLength = totalChildrenLength(visibleChildren);
-    scrollable = childrenTotalLength > availableLength;
+    scrollable = childrenTotalLength > availableLength * (1 + BaseLayout::SCROLLABLE_EPSILON);
     if (initialDistance < 0)
       thatWay = -initialDistance;
     else

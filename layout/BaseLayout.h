@@ -97,6 +97,8 @@ protected:
   Rect positionPixel;
   bool hidden = false;
   int initialDistance = 0; // used in scrolling
+
+  static const double SCROLLABLE_EPSILON;
 };
 
 #endif // __BASE_LAYOUT_H
