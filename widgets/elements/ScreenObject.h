@@ -9,11 +9,13 @@
 class ScreenObject {
 public:
   ScreenObject(const std::string &slug, const std::string &imagePath, const Rect &positionPixel)
-      : slug(slug), imagePath(imagePath), positionPixel(positionPixel) {}
+      : slug(slug), imagePath(imagePath) {
+    setPositionPixel(positionPixel);
+  }
 
-  void draw(const Rect &, RuiMonitor &, const Rect &);
+  virtual void draw(const Rect &, RuiMonitor &, const Rect &);
 
-  void setPositionPixel(const Rect &positionPixel) { this->positionPixel = positionPixel; }
+  void setPositionPixel(const Rect &positionPixel);
   void changeImagePath(const std::string &);
 
   const Rect &getPositionPixel() const { return this->positionPixel; }
@@ -28,6 +30,7 @@ protected:
 
   std::string imagePath;
 
+  bool fullWidth = false, fullHeight = false;
   SDL_Texture *imageTexture = nullptr;
 };
 

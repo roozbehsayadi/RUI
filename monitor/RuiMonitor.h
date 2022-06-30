@@ -4,6 +4,7 @@
 #include <iostream>
 #include <map>
 #include <string>
+#include <utility>
 
 #include "SDL2/SDL.h"
 #include "SDL2/SDL_image.h"
@@ -45,7 +46,7 @@ public:
   void drawRectangle(const Rect &, const Color &);
   void drawBox(const Rect &, const Color &);
   void drawText(const Rect &, const Rect &, const Color &, const std::string &, FontFitMethod = FONT_FIT_BOTH);
-  void drawImage(const Rect &, const Rect &, SDL_Texture *&, const std::string &);
+  std::pair<double, double> drawImage(const Rect &, const Rect &, SDL_Texture *&, const std::string &);
 
 private:
   SDL_Window *window;

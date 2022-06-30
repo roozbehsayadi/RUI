@@ -107,14 +107,15 @@ void RuiMonitor::drawText(const Rect &rect, const Rect &showableArea, const Colo
   SDL_FreeSurface(textSurface);
 }
 
-// if rect's width or height is negative, the image's width will be its original
-void RuiMonitor::drawImage(const Rect &rect, const Rect &showableArea, SDL_Texture *&texture,
-                           const std::string &imagePath) {
+// if rect's width or height is negative, the image's width/ height will be its original.
+// original image's width and height will be returned. Negative values indicate errors.
+std::pair<double, double> RuiMonitor::drawImage(const Rect &rect, const Rect &showableArea, SDL_Texture *&texture,
+                                                const std::string &imagePath) {
   if (texture == nullptr) {
     texture = IMG_LoadTexture(renderer, imagePath.c_str());
     if (!texture) {
       std::cerr << "Could not open image " + imagePath + ". Error: " << IMG_GetError() << "\n";
-      return;
+      return {-1.0, -1.0};
     }
   }
   SDL_Point temp;
@@ -136,6 +137,8 @@ void RuiMonitor::drawImage(const Rect &rect, const Rect &showableArea, SDL_Textu
   };
   SDL_Rect targetSDLRect = trimmedTargetRect;
   SDL_RenderCopy(renderer, texture, &trimmedSDLRect, &targetSDLRect);
+
+  return {processedRect.w, processedRect.h};
 }
 
 bool RuiMonitor::initializeFonts() {
