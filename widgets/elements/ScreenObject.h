@@ -19,7 +19,7 @@ public:
   const Rect &getPositionPixel() const { return this->positionPixel; }
   const std::string &getSlug() const { return this->slug; }
 
-private:
+protected:
   std::string slug;
   int level;
 

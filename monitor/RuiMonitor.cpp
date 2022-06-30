@@ -107,6 +107,7 @@ void RuiMonitor::drawText(const Rect &rect, const Rect &showableArea, const Colo
   SDL_FreeSurface(textSurface);
 }
 
+// if rect's width or height is negative, the image's width will be its original
 void RuiMonitor::drawImage(const Rect &rect, const Rect &showableArea, SDL_Texture *&texture,
                            const std::string &imagePath) {
   if (texture == nullptr) {
@@ -116,12 +117,23 @@ void RuiMonitor::drawImage(const Rect &rect, const Rect &showableArea, SDL_Textu
       return;
     }
   }
-  auto trimmedTargetRect = Geometry::trimRect(rect, showableArea).first;
   SDL_Point temp;
   SDL_QueryTexture(texture, NULL, NULL, &temp.x, &temp.y);
+
+  Rect processedRect = rect;
+  if (rect.w < 0)
+    processedRect.w = temp.x;
+  if (rect.h < 0)
+    processedRect.h = temp.y;
+
+  auto trimmedTargetRect = Geometry::trimRect(processedRect, showableArea).first;
+
   SDL_Rect trimmedSDLRect = {
-      int((trimmedTargetRect.x - rect.x) * temp.x / rect.w), int((trimmedTargetRect.y - rect.y) * temp.y / rect.h),
-      int((trimmedTargetRect.w * temp.x) / rect.w), int((trimmedTargetRect.h * temp.y) / rect.h)};
+      int((trimmedTargetRect.x - processedRect.x) * temp.x / processedRect.w),
+      int((trimmedTargetRect.y - processedRect.y) * temp.y / processedRect.h),
+      int((trimmedTargetRect.w * temp.x) / processedRect.w),
+      int((trimmedTargetRect.h * temp.y) / processedRect.h),
+  };
   SDL_Rect targetSDLRect = trimmedTargetRect;
   SDL_RenderCopy(renderer, texture, &trimmedSDLRect, &targetSDLRect);
 }
