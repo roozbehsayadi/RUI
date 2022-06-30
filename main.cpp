@@ -49,7 +49,7 @@ int main() {
     auto screen = std::dynamic_pointer_cast<ScreenWidget>(RUI::getInstance().getWidget("screen").first);
 
     if (button1->isClicked()) {
-      Rect tempRect = {300.0, 300.0, 64.0, 64.0};
+      Rect tempRect = {300.0, 300.0, -1.0, -1.0};
       screen->insertObject(std::make_shared<ScreenObject>("character_" + std::to_string(characterCounter),
                                                           "assets/images/enemy.png", tempRect));
       characterCounter++;
@@ -146,9 +146,9 @@ void fillPage(GeneralPage &page, const std::string &index, const std::string &im
   l2->setWidget(screenWidget);
   bigColumn->addChild(l2);
 
-  Rect tempRect = {50.0, 50.0, 64.0, 64.0};
+  Rect tempRect = {50.0, 50.0, -1.0, -1.0};
   auto screenObject1 = std::make_shared<ScreenObject>("enemy", "assets/images/enemy.png", tempRect);
-  tempRect = {200.0, 200.0, 64.0, 64.0};
+  tempRect = {200.0, 200.0, -1.0, -1.0};
   auto screenObject2 = std::make_shared<ScreenObject>("player", "assets/images/player.png", tempRect);
 
   screenWidget->insertObject(screenObject1);
