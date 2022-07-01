@@ -105,6 +105,21 @@ void Container::render(RuiMonitor &monitor, const Rect &showableArea) {
   }
 }
 
+void Container::removeChild(const std::string &slug) {
+  for (auto i = 0u; i < children.size(); i++) {
+    auto child = children.at(i);
+
+    if (child->getSlug() == slug) {
+      children.erase(children.begin() + i);
+      return;
+    }
+    if (child->type == LAYOUT_COLUMN || child->type == LAYOUT_ROW) {
+      auto temp = std::dynamic_pointer_cast<Container>(child);
+      temp->removeChild(slug);
+    }
+  }
+}
+
 std::vector<std::shared_ptr<BaseLayout>> Container::getVisibleChildren() {
   std::vector<std::shared_ptr<BaseLayout>> visibleChildren;
   std::copy_if(children.begin(), children.end(), std::back_inserter(visibleChildren),

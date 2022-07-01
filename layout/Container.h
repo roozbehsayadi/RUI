@@ -32,6 +32,7 @@ public:
   virtual bool hasFocusedWidget() const override;
 
   void addChild(std::shared_ptr<BaseLayout> child) { children.push_back(child); }
+  void removeChild(const std::string &);
 
   virtual void render(RuiMonitor &, const Rect &) override;
 
