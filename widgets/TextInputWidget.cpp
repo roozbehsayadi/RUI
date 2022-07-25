@@ -3,12 +3,13 @@
 
 void TextInputWidget::draw(RuiMonitor &monitor, const Rect &showableArea) {
   if (focused) {
-    Color tempColor = color;
-    tempColor.setAlpha(200);
+    Color tempColor = boxColor;
+    tempColor.setRed(tempColor.getRed() + 150);
+    tempColor.setRed(tempColor.getGreen() + 150);
     monitor.drawRectangle(showableArea, tempColor);
   } else
-    monitor.drawRectangle(showableArea, color);
-  monitor.drawText(positionPixel, showableArea, color, text, FONT_FIT_VERTICAL);
+    monitor.drawRectangle(showableArea, boxColor);
+  monitor.drawText(positionPixel, showableArea, textColor, text, FONT_FIT_VERTICAL);
 }
 
 const std::string &TextInputWidget::getText() const { return this->text; }
