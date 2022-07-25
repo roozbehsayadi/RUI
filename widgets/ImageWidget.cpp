@@ -10,4 +10,5 @@ void ImageWidget::draw(RuiMonitor &monitor, const Rect &showableArea) {
 void ImageWidget::changeImagePath(const std::string &imagePath) {
   SDL_DestroyTexture(imageTexture);
   imageTexture = nullptr;
+  this->imagePath = imagePath;
 }
