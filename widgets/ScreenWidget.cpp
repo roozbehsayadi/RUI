@@ -33,6 +33,9 @@ void ScreenWidget::draw(RuiMonitor &monitor, const Rect &showableArea) {
 
 void ScreenWidget::handleClick(int mouseX, int mouseY) {
 
+  if (!Geometry::isPointInsideRect(mouseX, mouseY, positionPixel))
+    return;
+
   for (auto &object : objects) {
 
     auto objectPosition = object->getPositionPixel();
