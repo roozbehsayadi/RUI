@@ -97,7 +97,18 @@ void ScreenWidget::insertObject(std::shared_ptr<ScreenObject> object) { this->ob
 void ScreenWidget::removeObject(const std::string &slug) {
   for (auto it = objects.begin(); it != objects.end(); it++) {
     if (it->get()->getSlug() == slug) {
-      objects.erase(it);
+      it = objects.erase(it);
+      break;
+    }
+  }
+}
+
+void ScreenWidget::removeSelectedObject() {
+  if (!objectSelected)
+    return;
+  for (auto it = objects.begin(); it != objects.end(); it++) {
+    if (it->get()->getSlug() == selectedObject->get()->getSlug()) {
+      it = objects.erase(it);
       break;
     }
   }

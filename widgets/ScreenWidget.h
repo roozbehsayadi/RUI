@@ -28,6 +28,7 @@ public:
 
   void insertObject(std::shared_ptr<ScreenObject>);
   void removeObject(const std::string &);
+  void removeSelectedObject();
 
   void bringObjectToFront(const std::string &);
   void bringObjectToFrontAllTheWay(const std::string &);
