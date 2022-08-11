@@ -24,8 +24,8 @@ void ScreenWidget::draw(RuiMonitor &monitor, const Rect &showableArea) {
     object->draw(shiftedPositionPixel, monitor, showableArea);
     if (objectSelected && object->getSlug() == selectedObject->get()->getSlug()) {
       Rect tempRect = object->getPositionPixel();
-      tempRect.x += positionPixel.x;
-      tempRect.y += positionPixel.y;
+      tempRect.x += shiftedPositionPixel.x;
+      tempRect.y += shiftedPositionPixel.y;
       monitor.drawRectangle(tempRect, {255, 255, 255});
     }
   }
@@ -95,11 +95,21 @@ std::shared_ptr<ScreenObject> ScreenWidget::getObject(const std::string &slug) c
   return nullptr;
 }
 
+std::pair<const std::string &, bool> ScreenWidget::getSelectedObjectSlug() const {
+  if (!objectSelected)
+    return {"", false};
+  return {selectedObject->get()->getSlug(), true};
+}
+
 void ScreenWidget::insertObject(std::shared_ptr<ScreenObject> object) { this->objects.push_back(object); }
 
 void ScreenWidget::removeObject(const std::string &slug) {
   for (auto it = objects.begin(); it != objects.end(); it++) {
     if (it->get()->getSlug() == slug) {
+      if (objectSelected && selectedObject->get()->getSlug() == slug) {
+        objectSelected = false;
+        selectedObject = nullptr;
+      }
       it = objects.erase(it);
       break;
     }
@@ -111,6 +121,9 @@ void ScreenWidget::removeSelectedObject() {
     return;
   for (auto it = objects.begin(); it != objects.end(); it++) {
     if (it->get()->getSlug() == selectedObject->get()->getSlug()) {
+      objectSelected = false;
+      selectedObject = nullptr;
+
       it = objects.erase(it);
       break;
     }
