@@ -94,6 +94,15 @@ std::shared_ptr<ScreenObject> ScreenWidget::getObject(const std::string &slug) c
 
 void ScreenWidget::insertObject(std::shared_ptr<ScreenObject> object) { this->objects.push_back(object); }
 
+void ScreenWidget::removeObject(const std::string &slug) {
+  for (auto it = objects.begin(); it != objects.end(); it++) {
+    if (it->get()->getSlug() == slug) {
+      objects.erase(it);
+      break;
+    }
+  }
+}
+
 void ScreenWidget::bringObjectToFront(const std::string &slug) {
   if (objects.size() <= 1)
     return;
