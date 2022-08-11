@@ -20,8 +20,15 @@ void ScreenWidget::draw(RuiMonitor &monitor, const Rect &showableArea) {
       positionPixel.w,
       positionPixel.h,
   };
-  for (auto &object : objects)
+  for (auto &object : objects) {
     object->draw(shiftedPositionPixel, monitor, showableArea);
+    if (objectSelected && object->getSlug() == selectedObject->get()->getSlug()) {
+      Rect tempRect = object->getPositionPixel();
+      tempRect.x += positionPixel.x;
+      tempRect.y += positionPixel.y;
+      monitor.drawRectangle(tempRect, {255, 255, 255});
+    }
+  }
 }
 
 void ScreenWidget::handleClick(int mouseX, int mouseY) {
@@ -76,8 +83,6 @@ void ScreenWidget::handleDrop() {
 
   lastClickX = INT_MIN;
   lastClickY = INT_MIN;
-
-  objectSelected = false;
 }
 
 std::shared_ptr<ScreenObject> ScreenWidget::getObject(const std::string &slug) const {
