@@ -34,6 +34,8 @@ public:
   void addChild(std::shared_ptr<BaseLayout> child) { children.push_back(child); }
   void removeChild(const std::string &);
 
+  int getNumberOfChildren() const { return this->children.size(); }
+
   virtual void render(RuiMonitor &, const Rect &) override;
 
 protected:
