@@ -25,8 +25,12 @@ public:
   void handleDrop();
 
   std::shared_ptr<ScreenObject> getObject(const std::string &) const;
+  // slug + valid
+  std::pair<const std::string &, bool> getSelectedObjectSlug() const;
 
   void insertObject(std::shared_ptr<ScreenObject>);
+  void removeObject(const std::string &);
+  void removeSelectedObject();
 
   void bringObjectToFront(const std::string &);
   void bringObjectToFrontAllTheWay(const std::string &);

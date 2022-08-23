@@ -21,6 +21,8 @@ public:
   const Rect &getPositionPixel() const { return this->positionPixel; }
   const std::string &getSlug() const { return this->slug; }
 
+  bool operator==(const ScreenObject &other) { return this->getSlug() == other.getSlug(); }
+
 protected:
   std::string slug;
   int level;

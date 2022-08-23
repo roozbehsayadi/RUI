@@ -20,11 +20,21 @@ void ScreenWidget::draw(RuiMonitor &monitor, const Rect &showableArea) {
       positionPixel.w,
       positionPixel.h,
   };
-  for (auto &object : objects)
+  for (auto &object : objects) {
     object->draw(shiftedPositionPixel, monitor, showableArea);
+    if (objectSelected && object->getSlug() == selectedObject->get()->getSlug()) {
+      Rect tempRect = object->getPositionPixel();
+      tempRect.x += shiftedPositionPixel.x;
+      tempRect.y += shiftedPositionPixel.y;
+      monitor.drawRectangle(tempRect, {255, 255, 255});
+    }
+  }
 }
 
 void ScreenWidget::handleClick(int mouseX, int mouseY) {
+
+  if (!Geometry::isPointInsideRect(mouseX, mouseY, positionPixel))
+    return;
 
   for (auto &object : objects) {
 
@@ -76,8 +86,6 @@ void ScreenWidget::handleDrop() {
 
   lastClickX = INT_MIN;
   lastClickY = INT_MIN;
-
-  objectSelected = false;
 }
 
 std::shared_ptr<ScreenObject> ScreenWidget::getObject(const std::string &slug) const {
@@ -87,7 +95,40 @@ std::shared_ptr<ScreenObject> ScreenWidget::getObject(const std::string &slug) c
   return nullptr;
 }
 
+std::pair<const std::string &, bool> ScreenWidget::getSelectedObjectSlug() const {
+  if (!objectSelected)
+    return {"", false};
+  return {selectedObject->get()->getSlug(), true};
+}
+
 void ScreenWidget::insertObject(std::shared_ptr<ScreenObject> object) { this->objects.push_back(object); }
+
+void ScreenWidget::removeObject(const std::string &slug) {
+  for (auto it = objects.begin(); it != objects.end(); it++) {
+    if (it->get()->getSlug() == slug) {
+      if (objectSelected && selectedObject->get()->getSlug() == slug) {
+        objectSelected = false;
+        selectedObject = nullptr;
+      }
+      it = objects.erase(it);
+      break;
+    }
+  }
+}
+
+void ScreenWidget::removeSelectedObject() {
+  if (!objectSelected)
+    return;
+  for (auto it = objects.begin(); it != objects.end(); it++) {
+    if (it->get()->getSlug() == selectedObject->get()->getSlug()) {
+      objectSelected = false;
+      selectedObject = nullptr;
+
+      it = objects.erase(it);
+      break;
+    }
+  }
+}
 
 void ScreenWidget::bringObjectToFront(const std::string &slug) {
   if (objects.size() <= 1)
