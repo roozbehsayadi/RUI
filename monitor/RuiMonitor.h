@@ -39,7 +39,7 @@ public:
 
   void close();
 
-  void clear();
+  void clear(Color = {38, 38, 38, 255});
   void update();
   void delay(int);
 
